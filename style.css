@@ -1,0 +1,20 @@
+html {
+	min-height: 100%;
+}
+body {
+	height: 100vh;
+	background: #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 8rem;
+	font-family: 'Rubik';
+	font-weight: bolder;
+}
+div {
+	color: #fff;
+}
+.flip:hover {
+	transition: all ease-in-out 1s 0.1s;
+	transform: scaleX(-1);
+}

@@ -1,0 +1,10 @@
+{
+  "name": "oncoto",
+  "version": "0.0.1",
+  "description": "Jogo de geolocalização ",
+  "main": "index.js",
+  "repository": "https://github.com/magujun/oncoto",
+  "author": "Marcelo Guimarães Junior",
+  "license": "MIT",
+  "private": false
+}
