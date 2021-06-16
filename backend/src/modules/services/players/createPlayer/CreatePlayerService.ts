@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
-import { IPlayersRepository } from '@modules/players/repositories/IPlayersRepository';
-import { ICreatePlayerDTO } from '@modules/players/DTOs/ICreatePlayerDTO';
+import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
+import { ICreatePlayerDTO } from '@src/modules/infra/DTOs/ICreatePlayerDTO';
 import { AppError } from '@shared/errors/AppError';
 
 @injectable()

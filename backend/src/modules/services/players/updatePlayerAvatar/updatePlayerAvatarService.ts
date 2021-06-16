@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IPlayersRepository } from '@modules/players/repositories/IPlayersRepository';
+import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { IStorageProvider } from '@src/shared/container/providers/storageProvider/IStorageProvider';
 
 interface IRequest {

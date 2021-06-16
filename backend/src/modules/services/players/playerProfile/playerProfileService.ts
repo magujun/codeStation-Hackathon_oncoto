@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IPlayersRepository } from '../../repositories/IPlayersRepository';
-import { IPlayerProfileResponseDTO } from '../../DTOs/IPlayerProfileResponseDTO';
-import { PlayerProfileMap } from '../../mapper/playerProfileMap';
+import { IPlayersRepository } from '../../../infra/typeorm/repositories/IPlayersRepository';
+import { IPlayerProfileResponseDTO } from '../../../infra/DTOs/IPlayerProfileResponseDTO';
+import { PlayerProfileMap } from '../../../infra/mapper/playerProfileMap';
 
 @injectable()
 class PlayerProfileService {

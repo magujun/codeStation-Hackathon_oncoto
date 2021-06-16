@@ -1,5 +1,5 @@
-import { ICreatePlayerDTO } from '../DTOs/ICreatePlayerDTO';
-import { Player } from '../../infra/typeorm/entities/Player';
+import { ICreatePlayerDTO } from '../../DTOs/ICreatePlayerDTO';
+import { Player } from '../entities/Player';
 
 interface IPlayersRepository {
 	create({ playerId, provider }: ICreatePlayerDTO): Promise<void>;

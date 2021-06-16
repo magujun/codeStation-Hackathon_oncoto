@@ -3,8 +3,8 @@ import { Router } from 'express';
 
 // import uploadConfig from '@config/upload';
 
-import { CreatePlayerController } from '@modules/players/services/createPlayer/CreatePlayerController';
-import { PlayerProfileController } from '@modules/players/services/playerProfile/playerProfileController';
+import { CreatePlayerController } from '@src/modules/services/players/createPlayer/CreatePlayerController';
+import { PlayerProfileController } from '@src/modules/services/players/playerProfile/playerProfileController';
 // import { UpdatePlayerAvatarController } from '@modules/players/services/updatePlayerAvatar/updatePlayerAvatarController';
 
 const playersRoutes = Router();

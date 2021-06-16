@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreatePlayerDTO } from '@modules/players/DTOs/ICreatePlayerDTO';
-import { IPlayersRepository } from '@modules/players/repositories/IPlayersRepository';
+import { ICreatePlayerDTO } from '@src/modules/infra/DTOs/ICreatePlayerDTO';
+import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { Player } from '../entities/Player';
 
 class PlayersRepository implements IPlayersRepository {
