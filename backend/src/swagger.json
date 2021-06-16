@@ -1,0 +1,154 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "codeStation-Hackathon_oncoto",
+		"description": "Jogo de geolocalização",
+		"version": "0.0.1",
+		"contact": {
+			"email": "oncoto.dev@gmail.com"
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			},
+			"Players": {
+				"type": "object",
+				"properties": {
+					"nick": {
+						"type": "string"
+					},
+					"playerId": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"paths": {
+		"/player": {
+			"post": {
+				"tags": ["Player"],
+				"summary": "Create player",
+				"description": "Create a new player",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/Players"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Created"
+					},
+					"500": {
+						"description": "Player already exists!"
+					}
+				}
+			},
+			"get": {
+				"tags": ["Games"],
+				"summary": "List games",
+				"description": "List player's games",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"description": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/location/import": {
+			"post": {
+				"tags": ["Locations"],
+				"summary": "Import locations",
+				"description": "Import new locations from .CSV file",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string",
+										"format": "binary"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Uploaded"
+					}
+				}
+			}
+		},
+		"/sessions": {
+			"post": {
+				"tags": ["Game"],
+				"summary": "Player authentication",
+				"description": "Authenticate player",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"400": {
+						"description": "Invalid player ID!"
+					}
+				}
+			}
+		}
+	}
+}

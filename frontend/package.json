@@ -1,7 +1,11 @@
 {
   "name": "oncoto",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Jogo de geolocalização",
+  "repository": "https://github.com/magujun/codeStation-Hackathon_oncoto",
+  "author": "Equipe Sanchéz, Smith & Co.",
+  "license": "MIT",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
