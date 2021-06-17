@@ -6,7 +6,7 @@
 	"author": "Equipe Sanchéz, Smith & Co.",
 	"email": "oncoto.dev@gmail.com",
 	"license": "MIT",
-	"private": false,
+	"private": true,
 	"scripts": {
 		"dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
 		"location": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/config/findLocation.ts",

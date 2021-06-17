@@ -5,7 +5,7 @@
   "repository": "https://github.com/magujun/codeStation-Hackathon_oncoto",
   "author": "Equipe Sanchéz, Smith & Co.",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
