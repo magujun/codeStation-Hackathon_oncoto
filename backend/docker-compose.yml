@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  database:
+    image: postgres
+    container_name: database-oncoto
+    restart: always
+    env_file:
+      - ./.env-docker
+    ports:
+      - 65432:5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_MULTIPLE_DATABASES="database-oncoto","database-oncoto_test"
+    volumes:
+      - pgdata:/data/postgres
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  pgdata:
+    driver: local

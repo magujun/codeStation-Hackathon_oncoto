@@ -22,8 +22,8 @@ playersRoutes.get('/profile', playerProfileController.handle);
 // 	updatePlayerAvatarController.handle
 // );
 // playersRoutes.patch(
-// 	'/player',
-// 	updatePlayerNickController.handle
+// 	'/update',
+// 	updatePlayerProfileController.handle
 // );
 
 export { playersRoutes };

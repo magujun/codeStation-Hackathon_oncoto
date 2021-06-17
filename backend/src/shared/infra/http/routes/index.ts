@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { playersRoutes } from './PlayersRoutes';
 // import { locationsRoutes } from './LocationsRoutes';
 // import { gamesRoutes } from './GamesRoutes';
-// import { RankingsRoutes } from './RankingsRoutes';
+// import { rankingsRoutes } from './RankingsRoutes';
 
 const router = Router();
 
