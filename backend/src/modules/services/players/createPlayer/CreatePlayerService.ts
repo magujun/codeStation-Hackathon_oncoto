@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe';
+
 import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { ICreatePlayerDTO } from '@src/modules/infra/DTOs/ICreatePlayerDTO';
-import { AppError } from '@shared/errors/AppError';
+import { AppError } from '@src/shared/errors/AppError';
 
 @injectable()
 class CreatePlayerService {
@@ -14,7 +15,7 @@ class CreatePlayerService {
 			playerId
 		);
 		if (playerAlreadyExists) {
-			throw new AppError('Player already exists!');
+			throw new AppError('Returning user, have fun!', 200);
 		}
 		await this.playersRepository.create({
 			playerId,

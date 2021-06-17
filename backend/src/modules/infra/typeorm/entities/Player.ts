@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
 import { Expose } from 'class-transformer';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity('players')
 class Player {
@@ -13,7 +13,7 @@ class Player {
 	@Column()
 	provider: string;
 	@Column()
-	avatar: string;
+	avatar?: string;
 	@CreateDateColumn()
 	createDate: Date;
 	@CreateDateColumn()

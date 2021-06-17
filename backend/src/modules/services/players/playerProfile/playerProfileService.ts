@@ -10,8 +10,8 @@ class PlayerProfileService {
 		@inject('PlayersRepository')
 		private playersRepository: IPlayersRepository
 	) {}
-	async execute(id: string): Promise<IPlayerProfileResponseDTO> {
-		const player = await this.playersRepository.findByPlayerId(id);
+	async execute(playerId: string): Promise<IPlayerProfileResponseDTO> {
+		const player = await this.playersRepository.findByPlayerId(playerId);
 		return PlayerProfileMap.toDTO(player);
 	}
 }

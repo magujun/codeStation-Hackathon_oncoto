@@ -5,11 +5,11 @@ module.exports = {
 	username: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
-	synchronize: true,
+	synchronize: false,
 	logging: false,
 	entities: ['./src/modules/**/entities/*.ts'],
-	migrations: ['./src/shared/infra/typeorm/migrations'],
+	migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
 	cli: {
-		migrationsDir: 'dist/src/migration',
+		migrationsDir: './src/shared/infra/typeorm/migrations',
 	},
 };
