@@ -24,7 +24,6 @@ class PlayersRepository implements IPlayersRepository {
 			id,
 			avatar,
 		});
-		console.log(player);
 		await this.repository.save(player);
 	}
 	async findByPlayerId(playerId: string): Promise<Player> {

@@ -6,11 +6,11 @@ class CreatePlayerController {
 	async handle(request: Request, response: Response): Promise<Response> {
 		const { playerId, provider } = request.body;
 		const createPlayerService = container.resolve(CreatePlayerService);
-		const newPlayer = await createPlayerService.execute({
+		await createPlayerService.execute({
 			playerId,
 			provider,
 		});
-		return response.status(201).send(newPlayer);
+		return response.status(201).json('New player created!').send();
 	}
 }
 
