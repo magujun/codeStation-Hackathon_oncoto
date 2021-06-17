@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "server": "json-server --watch db.json --port 3004"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.3",
@@ -34,6 +35,7 @@
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.11",
     "babel-jest": "^27.0.2",
+    "json-server": "^0.16.3",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   }
