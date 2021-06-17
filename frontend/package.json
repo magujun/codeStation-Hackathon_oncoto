@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "server": "json-server --watch db.json --port 3004"
+    "server": "json-server --watch db.json --port 4321"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.3",
