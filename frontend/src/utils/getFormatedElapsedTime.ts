@@ -1,6 +1,6 @@
 import { differenceInSeconds } from 'date-fns';
 
-export function getFormatedTimeInterval(start: Date, end: Date): string {
+export function getFormatedElapsedTime(start: Date, end: Date): string {
   const lapsedSeconds = differenceInSeconds(end, start);
 
   const minutes = Math.floor(lapsedSeconds / 60);
