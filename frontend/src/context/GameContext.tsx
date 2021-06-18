@@ -6,6 +6,11 @@ type Answers = {
   userAnswer: string;
 }
 
+type EndGameInput = {
+  answers: Answers;
+  countdownTime?: string;
+}
+
 type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
 export interface GameContextData {
@@ -14,9 +19,8 @@ export interface GameContextData {
   endTime: string;
   difficultyLevel: DifficultyLevel;
   handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
-  handleEndGame: (time: string) => void;
+  handleEndGame: (endGameInput: EndGameInput) => void;
   handleStartTime: (time: string) => void;
-  handleSubmitAnswer: () => void;
 }
 
 interface GameProviderProps {
@@ -40,12 +44,16 @@ export function GameProvider({ children }: GameProviderProps) {
     Router.push('/games');
   }, []);
 
-  const handleEndGame = useCallback((time: string) => {
-    setEndTime(time)
-  }, []);
+  const handleEndGame = useCallback((endGameInput: EndGameInput) => {
+    const currentTime = endGameInput.countdownTime ?? JSON.stringify(new Date());
+    setEndTime(currentTime);
 
-  const handleSubmitAnswer = useCallback(() => {
-    // TODO
+    // Calculate lapsed time
+
+    // API POST
+
+    // Redirect to '/summary'
+
   }, []);
 
   return (
@@ -56,8 +64,7 @@ export function GameProvider({ children }: GameProviderProps) {
       startTime,
       handleStartTime,
       handleStartNewGame,
-      handleEndGame,
-      handleSubmitAnswer
+      handleEndGame
     }}>
       {children}
     </GameContext.Provider>
