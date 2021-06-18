@@ -1,59 +1,85 @@
 import React from 'react';
-import { useSession, signIn, signOut } from 'next-auth/client';
-import { Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
-
-function Login() {
-  const [session, loading] = useSession();
-
-  console.log(session);
-
-  if (session) {
-    return (
-      <Stack spacing={8}>
-        <Text>Signed in as {session.user.email}</Text>
-        <Button
-          bg="blue.800"
-          color="white"
-          _hover={{
-            color: 'blue.800',
-            bg: 'white',
-            borderColor: 'blue.800',
-            border: '1px solid',
-          }}
-          onClick={() => signOut()}
-        >
-          Sign out
-        </Button>
-      </Stack>
-    );
-  }
-  return (
-    <Stack spacing={8}>
-      <Text>Not signed in</Text>
-      <Button
-        bg="blue.800"
-        color="white"
-        _hover={{
-          color: 'blue.800',
-          bg: 'white',
-          borderColor: 'blue.800',
-          border: '1px solid',
-        }}
-        onClick={() => signIn('google')}
-      >
-        Sign in
-      </Button>
-    </Stack>
-  );
-}
+import Head from 'next/head';
+import { getSession, signIn } from 'next-auth/client';
+import { Box, Button, Stack, Text } from '@chakra-ui/react';
+import { FaGoogle } from 'react-icons/fa';
+import Logo from '../components/Logo';
+import Card from '../components/Card';
+import { GetServerSideProps } from 'next';
 
 export default function Home() {
   return (
-    <Container>
-      <Stack spacing={8}>
-        <Heading>oncoto</Heading>
-        <Login />
-      </Stack>
-    </Container>
+    <div>
+      <Head>
+        <title>oncoto</title>
+      </Head>
+      <main>
+        <Box
+          width="100%"
+          height={500}
+          bgColor="blue.200"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            width={500}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            flexDir="column"
+          >
+            <Stack spacing="20" alignItems="center" justifyContent="center">
+              <Logo />
+              <Text fontWeight="bold" fontSize="1.5rem" color="white.200">
+                Explore o mundo
+              </Text>
+              <Button
+                size="lg"
+                bg="white.200"
+                w={400}
+                color="blue.200"
+                _hover={{
+                  color: 'white.200',
+                  bg: 'blue.200',
+                  borderColor: 'white.200',
+                  border: '1px solid',
+                }}
+                onClick={() => signIn('google')}
+                rightIcon={<FaGoogle />}
+              >
+                Entre para jogar
+              </Button>
+            </Stack>
+          </Box>
+        </Box>
+        <Stack
+          direction={['column', 'column', 'column', 'row']}
+          mt={100}
+          spacing={20}
+        >
+          <Card text="Escolha um nível" image="" />
+          <Card text="Viaje pelo mundo" image="" />
+          <Card text="Esteja entre os 50 melhores" image="" />
+        </Stack>
+      </main>
+    </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  };
+};
