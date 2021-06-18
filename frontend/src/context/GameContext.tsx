@@ -23,6 +23,7 @@ export interface GameContextData {
   endTime: Date;
   difficultyLevel: DifficultyLevel;
   elapsedTime: string;
+  distance: number;
   handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
   handleEndGame: (endGameInput: EndGameInput) => void;
   handleStartTime: (time: Date) => void;
@@ -40,10 +41,11 @@ export function GameProvider({ children }: GameProviderProps) {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState('');
+  const [distance, setDistance] = useState(0);
   const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
 
   const handleStartTime = useCallback((time: Date) => {
-    setStartTime(time)
+    setStartTime(time);
   }, []);
 
   const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
@@ -79,6 +81,7 @@ export function GameProvider({ children }: GameProviderProps) {
 
   return (
     <GameContext.Provider value={{
+      distance,
       elapsedTime,
       userGoalPoint,
       userGuessPoint,
