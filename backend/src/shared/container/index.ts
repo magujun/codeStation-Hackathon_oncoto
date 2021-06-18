@@ -2,7 +2,7 @@ import { container } from 'tsyringe';
 // import '@shared/container/providers';
 
 import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
-import { PlayersRepository } from '@modules/infra/typeorm/repositories/PlayersRepository';
+import { PlayersRepository } from '@src/modules/infra/typeorm/repositories/PlayersRepository';
 
 // import { IGamesRepository } from '@modules/games/repositories/IGamesRepository';
 // import { GamesRepository } from '@modules/games/infra/typeorm/repositories/GamesRepository';
