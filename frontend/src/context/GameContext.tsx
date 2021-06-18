@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useCallback, useState } from 'react';
+import Router from 'next/router';
 
 type Answers = {
   correctAnswer: string;
@@ -12,8 +13,8 @@ export interface GameContextData {
   startTime: string;
   endTime: string;
   difficultyLevel: DifficultyLevel;
-  handleStartNewGame: () => void;
-  handleEndGame: () => void;
+  handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
+  handleEndGame: (time: string) => void;
   handleSubmitAnswer: () => void;
 }
 
@@ -29,12 +30,17 @@ export function GameProvider({ children }: GameProviderProps) {
   const [endTime, setEndTime] = useState('');
   const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
 
-  const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
-    // TODO
+  const handleStartTime = useCallback((time: string) => {
+    setStartTime(time)
   }, []);
 
-  const handleEndGame = useCallback(() => {
-    // TODO
+  const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
+    setDifficultyLevel(difficultyLevelInput);
+    Router.push('/games');
+  }, []);
+
+  const handleEndGame = useCallback((time: string) => {
+    setEndTime(time)
   }, []);
 
   const handleSubmitAnswer = useCallback(() => {
