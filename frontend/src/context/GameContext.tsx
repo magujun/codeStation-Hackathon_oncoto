@@ -21,7 +21,7 @@ interface GameProviderProps {
 
 export const GameContext = createContext({} as GameContextData);
 
-export function GameProvider({ children }) {
+export function GameProvider({ children }: GameProviderProps) {
   const [answers, setAnswers] = useState<Answers>(null);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
