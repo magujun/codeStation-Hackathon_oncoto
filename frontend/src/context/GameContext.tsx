@@ -9,7 +9,7 @@ type GeoPoint = {
 type EndGameInput = {
   goalPoint: GeoPoint;
   guessPoint: GeoPoint;
-  endGameTime: string;
+  endGameTime: Date;
 }
 
 type DifficultyLevel = 'easy' | 'medium' | 'hard';
@@ -17,12 +17,12 @@ type DifficultyLevel = 'easy' | 'medium' | 'hard';
 export interface GameContextData {
   userGuessPoint: GeoPoint;
   userGoalPoint: GeoPoint;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   difficultyLevel: DifficultyLevel;
   handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
   handleEndGame: (endGameInput: EndGameInput) => void;
-  handleStartTime: (time: string) => void;
+  handleStartTime: (time: Date) => void;
 }
 
 interface GameProviderProps {
@@ -34,11 +34,11 @@ export const GameContext = createContext({} as GameContextData);
 export function GameProvider({ children }: GameProviderProps) {
   const [userGuessPoint, setUserGuessPoint] = useState<GeoPoint>(null);
   const [userGoalPoint, setUserGoalPoint] = useState<GeoPoint>(null);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
   const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
 
-  const handleStartTime = useCallback((time: string) => {
+  const handleStartTime = useCallback((time: Date) => {
     setStartTime(time)
   }, []);
 
