@@ -10,7 +10,7 @@ type GeoPoint = {
 
 type EndGameInput = {
   goalPoint: GeoPoint;
-  guessPoint: GeoPoint;
+  guessPoint: GeoPoint | undefined;
   endGameTime: Date;
 }
 
@@ -58,7 +58,10 @@ export function GameProvider({ children }: GameProviderProps) {
 
     setEndTime(endGameTime);
     setUserGoalPoint(goalPoint);
-    setUserGuessPoint(guessPoint);
+
+    if (guessPoint) {
+      setUserGuessPoint(guessPoint);
+    }
 
     const formatedElapsedTime = getFormatedElapsedTime(startTime, endGameTime);
 
@@ -69,7 +72,7 @@ export function GameProvider({ children }: GameProviderProps) {
       level: difficultyLevel,
       elapsedTime: formatedElapsedTime,
       locationOrigin: String(goalPoint),
-      locationMarked: String(guessPoint),
+      locationMarked: guessPoint ? String(guessPoint) : '',
       distance: '', // TO-DO
       score: '' // TO-DO
     }
