@@ -1,20 +1,22 @@
 import { createContext, ReactNode, useCallback, useState } from 'react';
 import Router from 'next/router';
 
-type Answers = {
-  correctAnswer: string;
-  userAnswer: string;
+type GeoPoint = {
+  lat: number;
+  long: number;
 }
 
 type EndGameInput = {
-  answers: Answers;
-  countdownTime?: string;
+  goalPoint: GeoPoint;
+  guessPoint: GeoPoint;
+  endGameTime: string;
 }
 
 type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
 export interface GameContextData {
-  answers: Answers;
+  userGuessPoint: GeoPoint;
+  userGoalPoint: GeoPoint;
   startTime: string;
   endTime: string;
   difficultyLevel: DifficultyLevel;
@@ -30,7 +32,8 @@ interface GameProviderProps {
 export const GameContext = createContext({} as GameContextData);
 
 export function GameProvider({ children }: GameProviderProps) {
-  const [answers, setAnswers] = useState<Answers>(null);
+  const [userGuessPoint, setUserGuessPoint] = useState<GeoPoint>(null);
+  const [userGoalPoint, setUserGoalPoint] = useState<GeoPoint>(null);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
@@ -45,9 +48,10 @@ export function GameProvider({ children }: GameProviderProps) {
   }, []);
 
   const handleEndGame = useCallback((endGameInput: EndGameInput) => {
-    const currentTime = endGameInput.countdownTime ?? JSON.stringify(new Date());
-    setEndTime(currentTime);
-
+    const { endGameTime, guessPoint, goalPoint } = endGameInput;
+    setEndTime(endGameTime);
+    setUserGoalPoint(goalPoint);
+    setUserGuessPoint(guessPoint);
     // Calculate lapsed time
 
     // API POST
@@ -58,7 +62,8 @@ export function GameProvider({ children }: GameProviderProps) {
 
   return (
     <GameContext.Provider value={{
-      answers,
+      userGoalPoint,
+      userGuessPoint,
       difficultyLevel,
       endTime,
       startTime,
