@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import Router from 'next/router';
 import { getFormatedElapsedTime } from '../utils/getFormatedElapsedTime';
+import { createContext } from 'use-context-selector';
 // import { api } from '../services/api';
 
 type GeoPoint = {
@@ -33,7 +34,7 @@ interface GameProviderProps {
   children: ReactNode;
 }
 
-export const GameContext = createContext({} as GameContextData);
+export const GameContext = createContext<GameContextData>({} as GameContextData);
 
 export function GameProvider({ children }: GameProviderProps) {
   const [userGuessPoint, setUserGuessPoint] = useState<GeoPoint>(null);
