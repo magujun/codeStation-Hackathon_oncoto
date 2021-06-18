@@ -5,11 +5,13 @@ type Answers = {
   userAnswer: string;
 }
 
+type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
 export interface GameContextData {
   answers: Answers;
   startTime: string;
   endTime: string;
-  difficultyLevel: string;
+  difficultyLevel: DifficultyLevel;
   handleStartNewGame: () => void;
   handleEndGame: () => void;
   handleSubmitAnswer: () => void;
@@ -25,9 +27,9 @@ export function GameProvider({ children }: GameProviderProps) {
   const [answers, setAnswers] = useState<Answers>(null);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [difficultyLevel, setDifficultyLevel] = useState('');
+  const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
 
-  const handleStartNewGame = useCallback(() => {
+  const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
     // TODO
   }, []);
 
