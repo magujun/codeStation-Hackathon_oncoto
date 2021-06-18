@@ -19,7 +19,6 @@ export default NextAuth({
     // TODO: adicionar callback para adicionar usuário
     // https://next-auth.js.org/configuration/options#callbacks
     async signIn(user, account, profile) {
-      console.log(user, account, profile);
       return true;
     },
   },
