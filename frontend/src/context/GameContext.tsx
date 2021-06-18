@@ -15,6 +15,7 @@ export interface GameContextData {
   difficultyLevel: DifficultyLevel;
   handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
   handleEndGame: (time: string) => void;
+  handleStartTime: (time: string) => void;
   handleSubmitAnswer: () => void;
 }
 
@@ -53,6 +54,7 @@ export function GameProvider({ children }: GameProviderProps) {
       difficultyLevel,
       endTime,
       startTime,
+      handleStartTime,
       handleStartNewGame,
       handleEndGame,
       handleSubmitAnswer
