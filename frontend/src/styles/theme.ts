@@ -15,6 +15,7 @@ const config = {
       "200": "#60a9ec",
     },
     gray: {
+      "400": "#969CB2",
       "500": "#626B90",
     },
     red: {
@@ -34,6 +35,10 @@ const config = {
       a: {
         color: props.colorMode === "dark" ? "white.200" : "black.450",
       },
+      ".mask": {
+        webkitMaskImage: 'url("/avatarMask.svg")',
+        maskImage: 'url("/avatarMask.svg")',
+      }
     }),
   },
 };

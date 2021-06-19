@@ -12,9 +12,10 @@ import createConnection from '@shared/infra/typeorm';
 import '@shared/container';
 
 import { router } from './routes';
-import { AppError } from '@shared/errors/AppError';
 import upload from '@src/config/upload';
 import swaggerFile from '@src/swagger.json';
+import { AppError } from '@shared/errors/AppError';
+import { AppResponse } from '@src/shared/responses/AppResponse';
 
 createConnection();
 const app = express();
@@ -25,12 +26,12 @@ app.use(router);
 
 app.get('/', (request, response) => response.json({ message: 'oncoto?' }));
 
-app.use('/player', express.static(`${upload.tmpFolder}/avatar`));
+app.use('/players', express.static(`${upload.tmpFolder}/avatar`));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
-		if (err instanceof AppError) {
+		if (err instanceof AppError || err instanceof AppResponse) {
 			return response.status(err.statusCode).json({
 				message: err.message,
 			});

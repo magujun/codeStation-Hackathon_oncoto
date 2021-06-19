@@ -1,8 +1,7 @@
-import 'dotenv/config';
 import dayjs from 'dayjs';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+import 'dotenv/config';
 import { app } from './app';
 
 dayjs.extend(weekOfYear);

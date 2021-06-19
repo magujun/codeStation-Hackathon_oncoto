@@ -9,11 +9,10 @@ export async function authenticate(
 	next: NextFunction
 ): Promise<void> {
 	const authorization = request.headers.authorization;
-	console.log(authorization);
 	if (!authorization) {
 		throw new AppError('Invalid request!', 401);
 	}
-	const authenticated = await compare(authorization, auth.key);
+	const authenticated = await compare(authorization, auth.front_key);
 	if (!authenticated) {
 		throw new AppError('Invalid request!', 401);
 	}

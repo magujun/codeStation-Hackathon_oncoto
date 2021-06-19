@@ -12,15 +12,15 @@ export class Players1623828652802 implements MigrationInterface {
 						isPrimary: true,
 					},
 					{
-						name: 'nick',
-						type: 'varchar',
-					},
-					{
 						name: 'playerId',
 						type: 'varchar',
 					},
 					{
 						name: 'provider',
+						type: 'varchar',
+					},
+					{
+						name: 'nick',
 						type: 'varchar',
 					},
 					{

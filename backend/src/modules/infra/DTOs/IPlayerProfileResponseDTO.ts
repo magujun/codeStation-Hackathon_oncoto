@@ -4,6 +4,7 @@ interface IPlayerProfileResponseDTO {
 	nick: string;
 	avatar: string;
 	avatar_url(): string;
+	createDate: Date;
 }
 
 export { IPlayerProfileResponseDTO };

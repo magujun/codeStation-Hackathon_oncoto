@@ -10,7 +10,7 @@ class CreatePlayerController {
 			playerId,
 			provider,
 		});
-		return response.status(200).json(player).send();
+		return response.status(201).json(player).send();
 	}
 }
 

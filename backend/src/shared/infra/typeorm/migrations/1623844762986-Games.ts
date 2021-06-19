@@ -12,7 +12,7 @@ export class Games1623844762986 implements MigrationInterface {
 						isPrimary: true,
 					},
 					{
-						name: 'playerId',
+						name: 'player_id',
 						type: 'varchar',
 					},
 					{

@@ -8,14 +8,16 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"dev": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --notify src/shared/infra/http/server.ts ",
+		"dev": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --notify src/shared/infra/http/server.ts",
 		"docker": "docker compose up -d",
-		"start": "npm run docker && npm run dev",
+		"start": "npm run docker && sleep 5 && npm run typeorm:migration && npm run dev",
 		"docker:stop": "docker compose stop",
 		"typeorm": "tsnd -r --notify tsconfig-paths/register ./node_modules/typeorm/cli",
+		"typeorm:migration": "yarn typeorm migration:run ",
 		"test": "NODE_ENV=test jest -i --verbose --detectOpenHandles --forceExit -runInBand"
 	},
 	"dependencies": {
+		"axios": "^0.21.1",
 		"bcryptjs": "^2.4.3",
 		"class-transformer": "^0.4.0",
 		"cors": "^2.8.5",
@@ -34,6 +36,7 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
+		"@types/axios": "^0.14.0",
 		"@types/bcryptjs": "^2.4.2",
 		"@types/cors": "^2.8.10",
 		"@types/express": "^4.17.11",

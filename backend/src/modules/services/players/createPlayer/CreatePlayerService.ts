@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+
 import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { ICreatePlayerDTO } from '@src/modules/infra/DTOs/ICreatePlayerDTO';
 import { Player } from '@src/modules/infra/typeorm/entities/Player';
@@ -15,15 +16,14 @@ class CreatePlayerService {
 			playerId
 		);
 		if (playerAlreadyExists) {
-			const player = await this.playersRepository.findByPlayerId(playerId);
-			throw new AppResponse(player.id);
+			throw new AppResponse('Player already exists!', 200);
 		}
 		await this.playersRepository.create({
 			playerId,
 			provider,
 			nick: playerId,
 		});
-		return this.playersRepository.findByPlayerId(playerId);
+		return await this.playersRepository.findByPlayerId(playerId);
 	}
 }
 

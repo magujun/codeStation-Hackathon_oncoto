@@ -7,7 +7,7 @@ import { rankingsRoutes } from './RankingsRoutes';
 
 const router = Router();
 
-router.use('/player', playersRoutes);
+router.use('/players', playersRoutes);
 router.use('/locations', locationsRoutes);
 router.use('/games', gamesRoutes);
 router.use('/rankings', rankingsRoutes);

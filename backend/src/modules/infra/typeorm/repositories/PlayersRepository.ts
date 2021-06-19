@@ -10,19 +10,11 @@ class PlayersRepository implements IPlayersRepository {
 	constructor() {
 		this.repository = getRepository(Player);
 	}
-	async create({
-		playerId,
-		provider,
-		id,
-		nick,
-		avatar,
-	}: ICreatePlayerDTO): Promise<void> {
+	async create({ playerId, provider, nick }: ICreatePlayerDTO): Promise<void> {
 		const player = this.repository.create({
 			playerId,
 			provider,
 			nick,
-			id,
-			avatar,
 		});
 		await this.repository.save(player);
 	}
