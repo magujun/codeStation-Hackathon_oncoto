@@ -11,7 +11,6 @@ export type ActiveLinkProps = {
 export const ActiveLink = ({ href, text }: ActiveLinkProps) => {
   const { asPath } = useRouter();
   const isActive = asPath.includes(href);
-  console.log(asPath);
 
   return (
     <Box

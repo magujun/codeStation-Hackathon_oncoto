@@ -1,19 +1,157 @@
 {
-  "posts": [
+  "players": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "avatar": "https://lh3.googleusercontent.com/a-/AOh14GguIKUdHYA68DX4lhwx7kb82vbI059VkClte7UN=s96-c",
+      "playerId": "hideki.kyun",
+      "provider": "google",
+      "nick": "Adrian",
+      "id": 2
+    },
+    {
+      "avatar": "https://lh3.googleusercontent.com/a/AATXAJxHFkkWkwgiUl2pVibzCNZkx3Fh6CzjMdmv6mPI=s96-c",
+      "playerId": "oncoto.dev",
+      "provider": "google",
+      "nick": "Oncoto",
+      "id": 3
+    },
+    {
+      "avatar": "https://lh3.googleusercontent.com/a-/AOh14GijfBW7TnSCNfA907Q8LleS4OaCF99g3J8C4E7zsQ=s96-c",
+      "playerId": "adrian.hideki.br",
+      "provider": "google",
+      "nick": "Adrian",
+      "id": 1
     }
   ],
-  "comments": [
+  "pastgames": [
+    {
+      "id": 2,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Médio",
+      "score": 2000,
+      "playerId": 2
+    },
+    {
+      "id": 3,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 3000,
+      "playerId": 3
+    },
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Fácil",
+      "score": 1000,
+      "playerId": 1
+    },
+    {
+      "id": 4,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 5,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 6,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 7,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 8,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 9,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 10,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 11,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 12,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
+    },
+    {
+      "id": 13,
+      "date": "2021-06-19T00:00:00Z",
+      "time": "2021-06-19T00:05:00Z",
+      "level": "Difícil",
+      "score": 5000,
+      "playerId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "ranking": [
+    {
+      "position": 1,
+      "avatar": "https://wl-incrivel.cf.tsp.li/resize/728x/jpg/148/d13/9cfd1e5ce8837705fd263fe6c0.jpg",
+      "nick": "Jorge",
+      "score": 1000
+    },
+    {
+      "position": 2,
+      "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_2_600.jpg",
+      "nick": "Maria",
+      "score": 989
+    },
+    {
+      "position": 3,
+      "avatar": "https://t1.ea.ltmcdn.com/pt/images/4/7/6/cachorros_que_parecem_urso_top_20_22674_600_square.jpg",
+      "nick": "Joana",
+      "score": 745
+    },
+    {
+      "position": 5,
+      "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_4_600.jpg",
+      "nick": "John",
+      "score": 601
+    }
+  ]
 }
