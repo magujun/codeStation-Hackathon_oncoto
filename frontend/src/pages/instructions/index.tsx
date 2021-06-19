@@ -12,7 +12,6 @@ const Instructions = () => {
       </Head>
       <main>
         Instruções
-        <Sidebar />
       </main>
     </div>
   );

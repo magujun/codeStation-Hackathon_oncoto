@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "server": "json-server --watch db.json --port 4321",
+    "server": "json-server --watch db.json --port 4322",
     "test": "jest"
   },
   "dependencies": {
