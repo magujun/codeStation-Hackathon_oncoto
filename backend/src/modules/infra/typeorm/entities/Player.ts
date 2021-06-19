@@ -7,11 +7,11 @@ class Player {
 	@PrimaryColumn()
 	id?: string;
 	@Column()
-	nick?: string;
-	@Column()
 	playerId: string;
 	@Column()
 	provider: string;
+	@Column()
+	nick?: string;
 	@Column()
 	avatar?: string;
 	@CreateDateColumn()
