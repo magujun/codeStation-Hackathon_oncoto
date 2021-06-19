@@ -64,8 +64,9 @@ class LocationsRepository implements ILocationsRepository {
 		});
 		await this.repository.save(location);
 	}
-	findByLocationId(locationId): Promise<Location> {
-		throw new Error('Method not implemented.');
+	async findByPlusCode(plus_code: string): Promise<Location> {
+		const location = await this.repository.findOne({ plus_code });
+		return location;
 	}
 	list(): Promise<Location[]> {
 		throw new Error('Method not implemented.');

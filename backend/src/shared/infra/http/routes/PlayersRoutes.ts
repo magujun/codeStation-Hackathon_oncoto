@@ -18,7 +18,7 @@ const updatePlayerAvatarController = new UpdatePlayerAvatarController();
 // const updatePlayerProfileController = new UpdatePlayerAvatarController();
 
 playersRoutes.post('/', authenticate, createPlayerController.handle);
-playersRoutes.get('/profile', authenticate, playerProfileController.handle);
+playersRoutes.get('/:playerId', authenticate, playerProfileController.handle);
 playersRoutes.patch(
 	'/avatar',
 	authenticate,

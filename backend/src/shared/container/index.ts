@@ -10,8 +10,8 @@ import { GamesRepository } from '@src/modules/infra/typeorm/repositories/GamesRe
 import { IRankingsRepository } from '@src/modules/infra/typeorm/repositories/IRankingsRepository';
 import { RankingsRepository } from '@src/modules/infra/typeorm/repositories/RankingsRepository';
 
-// import { ILocationsRepository } from '@modules/games/repositories/ILocationsRepository';
-// import { LocationsRepository } from '@modules/games/infra/typeorm/repositories/LocationsRepository';
+import { ILocationsRepository } from '@src/modules/infra/typeorm/repositories/ILocationsRepository';
+import { LocationsRepository } from '@src/modules/infra/typeorm/repositories/LocationsRepository';
 
 // IPlayersRepository
 container.registerSingleton<IPlayersRepository>(
@@ -32,7 +32,7 @@ container.registerSingleton<IRankingsRepository>(
 );
 
 // ILocationsRepository
-// container.registerSingleton<ILocationsRepository>(
-// 	'LocationsRepository',
-// 	LocationsRepository
-// );
+container.registerSingleton<ILocationsRepository>(
+	'LocationsRepository',
+	LocationsRepository
+);

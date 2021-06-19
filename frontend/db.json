@@ -20,6 +20,13 @@
       "provider": "google",
       "nick": "Adrian",
       "id": 1
+    },
+    {
+      "avatar": "https://lh3.googleusercontent.com/a-/AOh14Gi1ricsCxH6CFYmFCM3lxSPcH0_6I81AQZ3VhzZ=s96-c",
+      "playerId": "guimaraesjunior.marcelo",
+      "provider": "google",
+      "nick": "Marcelo",
+      "id": 4
     }
   ],
   "pastgames": [
