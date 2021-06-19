@@ -1,15 +1,6 @@
 {
   "players": [
     {
-      "id": 1,
-      "playerId": "adrian.hideki.br",
-      "nick": "Adrian",
-      "provider": "google",
-      "avatar": "https://miroytengo.es/blog/wp-content/uploads/2019/05/mirotytengo-remedios-caseros-para-que-el-perro-no-muerda-los-muebles-4.jpg",
-      "createDate": "2021-06-19T00:00:00Z",
-      "updateDate": "2021-06-19T00:00:00Z"
-    },
-    {
       "avatar": "https://lh3.googleusercontent.com/a-/AOh14GguIKUdHYA68DX4lhwx7kb82vbI059VkClte7UN=s96-c",
       "playerId": "hideki.kyun",
       "provider": "google",
@@ -28,7 +19,7 @@
       "playerId": "adrian.hideki.br",
       "provider": "google",
       "nick": "Adrian",
-      "id": 4
+      "id": 1
     }
   ],
   "pastgames": [

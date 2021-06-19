@@ -32,7 +32,7 @@ export default NextAuth({
       try {
         const resp = await getPlayer(user.email.replace('@gmail.com', ''));
 
-        if (!resp.data.id) {
+        if (!resp.data[0].id) {
           await createPlayer({
             avatar: user.image,
             playerId: user.email.replace('@gmail.com', ''),
