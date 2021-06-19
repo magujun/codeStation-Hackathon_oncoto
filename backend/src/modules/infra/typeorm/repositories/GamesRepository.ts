@@ -10,8 +10,11 @@ class GamesRepository implements IGamesRepository {
 	constructor() {
 		this.repository = getRepository(Game);
 	}
-	async findGameById(id: string): Promise<Game> {
-		const game = await this.repository.findOne(id);
+	async findGameById(player_id: string): Promise<Game> {
+		const game = await this.repository.findOne({
+      where: { player_id },
+      relations: ["player"]
+    });
 		return game;
 	}
 	async create({

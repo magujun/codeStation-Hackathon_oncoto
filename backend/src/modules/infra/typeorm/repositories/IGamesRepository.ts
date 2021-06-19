@@ -11,7 +11,7 @@ interface IGamesRepository {
 		distance,
 		score,
 	}: ICreateGameDTO): Promise<void>;
-	findGameById(id: string): Promise<Game>;
+	findGameById(player_id: string): Promise<Game>;
 	list(): Promise<Game[]>;
 }
 

@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
 export class Games1623844762986 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
@@ -47,9 +47,21 @@ export class Games1623844762986 implements MigrationInterface {
 				],
 			})
 		);
-	}
+    await queryRunner.createForeignKey(
+      "productions",
+       new TableForeignKey({
+        name: "FKGameHistoryPlayed",
+        referencedTableName: "players",
+        referencedColumnNames: ["id"],
+        columnNames: ["player_id"],
+        onDelete: "SET NULL",
+        onUpdate: "CASCADE"
+   })
+  );
+  }
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('games', 'FKGameHistoryPlayed');
 		await queryRunner.dropTable('games');
 	}
 }

@@ -1,11 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Player } from './Player';
 
 @Entity('games')
 class Game {
 	@PrimaryColumn()
 	id?: string;
-	@Column()
+  @JoinColumn({ name: 'player_id' })
+  @ManyToOne(() => Player)
+  player: Player;
+  @Column()
 	player_id: string;
 	@Column()
 	level: string;
