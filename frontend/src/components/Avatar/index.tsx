@@ -1,12 +1,13 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Avatar as ChakraAvatar } from '@chakra-ui/react';
 import Image from 'next/image';
 
 interface AvatarProps {
-  imgUrl: string;
-  altText: string;
+  imgUrl: string | undefined;
+  altText: string | undefined;
+  firstNameInitialLetter: string;
 }
 
-export function Avatar({ altText, imgUrl }: AvatarProps) {
+export function Avatar({ altText, imgUrl, firstNameInitialLetter }: AvatarProps) {
   return (
     <Flex
       width="3rem"
@@ -15,7 +16,11 @@ export function Avatar({ altText, imgUrl }: AvatarProps) {
       alignItems='center'
       className="mask"
     >
-      <Image width={132} height={144} src={imgUrl} alt={altText} objectFit="cover" />
+      {imgUrl ? (
+        <Image width={132} height={144} src={imgUrl} alt={altText} objectFit="cover" />
+      ) : (
+        <ChakraAvatar width={132} height={144} name={firstNameInitialLetter} />
+      )}
     </Flex>
   );
 }
