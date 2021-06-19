@@ -7,12 +7,12 @@ const config = {
       "450": "#312E38"
     },
     white: {
-      "200": "#FCFCFC",
+      "200": "#F3F3F3",
     },
     blue: {
       "900": "#3A50A9",
       "800": "#446FC9",
-      "200": "#9FD1FF",
+      "200": "#60a9ec",
     },
     gray: {
       "500": "#626B90",
@@ -39,5 +39,5 @@ const config = {
   },
 };
 
-const theme = extendTheme({ ...config });
-export default theme;
+export const theme = extendTheme({ ...config });
+

@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
 import { playersRoutes } from './PlayersRoutes';
-// import { locationsRoutes } from './LocationsRoutes';
-// import { gamesRoutes } from './GamesRoutes';
-// import { rankingsRoutes } from './RankingsRoutes';
+import { locationsRoutes } from './LocationsRoutes';
+import { gamesRoutes } from './GamesRoutes';
+import { rankingsRoutes } from './RankingsRoutes';
 
 const router = Router();
 
 router.use('/player', playersRoutes);
-// router.use('/locations', locationsRoutes);
-// router.use('/games', gamesRoutes);
-// router.use('/rankings', rankingsRoutes);
+router.use('/locations', locationsRoutes);
+router.use('/games', gamesRoutes);
+router.use('/rankings', rankingsRoutes);
 
 export { router };
