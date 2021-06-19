@@ -6,7 +6,7 @@ type CardProps = {
   text: string;
 };
 
-const Card = ({ image, text }: CardProps) => {
+export const Card = ({ image, text }: CardProps) => {
   return (
     <Flex width="100%" justifyContent="center" alignItems="center">
       <Flex
@@ -36,5 +36,3 @@ const Card = ({ image, text }: CardProps) => {
     </Flex>
   );
 };
-
-export default Card;

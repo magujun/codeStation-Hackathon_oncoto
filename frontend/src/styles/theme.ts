@@ -7,7 +7,7 @@ const config = {
       "450": "#312E38"
     },
     white: {
-      "200": "#FCFCFC",
+      "200": "#F3F3F3",
     },
     blue: {
       "900": "#3A50A9",
@@ -35,5 +35,5 @@ const config = {
   },
 };
 
-const theme = extendTheme({ ...config });
-export default theme;
+export const theme = extendTheme({ ...config });
+

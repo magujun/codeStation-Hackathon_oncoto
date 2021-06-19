@@ -1,5 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
+import { Sidebar } from '../../components/Sidebar';
+import { GetServerSideProps } from 'next';
+import { withSSRAuth } from '../../utils/withSSRAuth';
 
 const Ranking = () => {
   return (
@@ -9,6 +12,7 @@ const Ranking = () => {
       </Head>
       <main>
         Ranking
+        <Sidebar />
       </main>
     </div>
 
@@ -16,3 +20,11 @@ const Ranking = () => {
 }
 
 export default Ranking;
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(
+  async context => {
+    return {
+      props: {},
+    };
+  },
+);
