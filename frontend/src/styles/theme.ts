@@ -17,6 +17,9 @@ const config = {
     gray: {
       "500": "#626B90",
     },
+    red: {
+      "500": "#834849"
+    }
   },
   styles: {
     fonts: {
