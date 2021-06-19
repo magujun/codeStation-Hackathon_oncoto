@@ -22,13 +22,17 @@ export const ActiveLink = ({ href, text }: ActiveLinkProps) => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      _hover={{
-        color: 'blue.800',
-        transition: 'color 0.5s',
-      }}
     >
       <Link href={href} passHref>
-        <Text as="a" fontWeight="500">
+        <Text
+          _hover={{
+            color: 'blue.800',
+            transition: 'color 0.5s',
+          }}
+          as="a"
+          fontWeight={isActive ? '800' : '500'}
+          color={isActive && 'blue.800'}
+        >
           {text}
         </Text>
       </Link>
