@@ -1,9 +1,7 @@
-import 'dotenv/config';
 import dayjs from 'dayjs';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-import getRandomLocation from '@src/modules/services/locations/FindLocations';
-
+import weekOfYear from 'dayjs/plugin/weekOfYear';
+import 'dotenv/config';
 import { app } from './app';
 
 dayjs.extend(weekOfYear);
@@ -20,5 +18,3 @@ app.listen(PORT, () =>
 		'\n'
 	)
 );
-
-getRandomLocation();

@@ -18,6 +18,7 @@ export class Locations1623844767284 implements MigrationInterface {
 					{
 						name: 'countryCode',
 						type: 'varchar',
+						isNullable: true,
 					},
 					{
 						name: 'lastPlayed',

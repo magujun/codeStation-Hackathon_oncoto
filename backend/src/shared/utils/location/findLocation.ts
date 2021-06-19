@@ -18,17 +18,14 @@ export default async function getRandomStreetView() {
 	const coord = [Math.random() * 180 - 89, Math.random() * 360 - 179];
 	console.log('Test coordinates: ', coord);
 	const api_key = auth.SVS_key;
-	console.log(api_key);
 	const res: StreetViewAPI = await axios.get(
 		`https://maps.googleapis.com/maps/api/streetview/metadata?location=${[
 			...coord,
 		]}&key=${api_key}&radius=50000&source=outdoor`
 	);
 	const response = res.data;
-	console.log('Response: ', response);
 	if (response.status === 'OK') {
 		if (response.copyright.includes('Google')) {
-			console.log('Response: ', response.location);
 			return response;
 		}
 	}

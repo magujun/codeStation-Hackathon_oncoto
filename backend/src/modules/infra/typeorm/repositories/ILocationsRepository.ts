@@ -1,11 +1,10 @@
-import { ICreatePlayerDTO } from '../../DTOs/ICreatePlayerDTO';
-import { Player } from '../entities/Player';
+import { ICreateLocationDTO } from '../../DTOs/ICreateLocationDTO';
+import { Location } from '../entities/Location';
 
-interface IPlayersRepository {
-	create({ playerId, provider }: ICreatePlayerDTO): Promise<void>;
-	findByNick(nick: string): Promise<Player>;
-	findByPlayerId(playerId: string): Promise<Player>;
-	list(): Promise<Player[]>;
+interface ILocationsRepository {
+	create({ locationId, provider }: ICreateLocationDTO): Promise<void>;
+	findByLocationId(locationId: string): Promise<Location>;
+	list(): Promise<Location[]>;
 }
 
-export { IPlayersRepository };
+export { ILocationsRepository };
