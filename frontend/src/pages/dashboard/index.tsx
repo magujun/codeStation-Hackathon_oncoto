@@ -1,9 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { signOut } from 'next-auth/client';
 import { withSSRAuth } from '../../utils/withSSRAuth';
-import { Button } from '@chakra-ui/react';
 
 const Dashboard = () => {
   return (
@@ -13,7 +11,6 @@ const Dashboard = () => {
       </Head>
       <main>
         Dashboard
-        <Button onClick={() => signOut()}>Sair</Button>
       </main>
     </div>
   );

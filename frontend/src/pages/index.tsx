@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { getSession, signIn } from 'next-auth/client';
 import { Box, Button, Stack, Text } from '@chakra-ui/react';
 import { FaGoogle } from 'react-icons/fa';
-import Logo from '../components/Logo';
-import Card from '../components/Card';
+import { Logo } from '../components/Logo';
+import { Card } from '../components/Card';
 import { GetServerSideProps } from 'next';
 
 export default function Home() {
