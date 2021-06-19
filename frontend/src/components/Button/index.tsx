@@ -1,5 +1,5 @@
 import { Button as ChakraUIButton, ButtonProps as ChakraUIButtonProps, Icon as ChakraUIIcon } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 import { IconBaseProps } from "react-icons";
 
 interface ButtonProps extends ChakraUIButtonProps {
@@ -8,7 +8,7 @@ interface ButtonProps extends ChakraUIButtonProps {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-export function Button({ children, icon: Icon, isPrimary = true, ...rest }: ButtonProps) {
+export const Button = memo(({ children, icon: Icon, isPrimary = true, ...rest }: ButtonProps) => {
   if (!isPrimary) {
     return (
       <ChakraUIButton
@@ -45,4 +45,5 @@ export function Button({ children, icon: Icon, isPrimary = true, ...rest }: Butt
       {children}
     </ChakraUIButton>
   );
-}
+});
+

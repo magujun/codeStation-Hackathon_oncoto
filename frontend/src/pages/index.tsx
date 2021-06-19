@@ -16,7 +16,7 @@ export default function Home() {
       <main>
         <Box
           width="100%"
-          height={500}
+          height="50vh"
           bgColor="blue.200"
           display="flex"
           alignItems="center"
