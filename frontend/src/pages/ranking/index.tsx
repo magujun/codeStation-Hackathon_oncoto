@@ -44,16 +44,16 @@ const columns: DatagridColumn[] = [
   },
 ];
 
-const Ranking = () => {
+type RankingProps = {
+  data: OutRanking[];
+};
+
+const Ranking = ({ data } : RankingProps) => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
 
-  const { data } = useQuery(['select-ranking'], () => getRanking(), {
-    staleTime: 60, // 1 minuto
-  });
-
   const rows = useMemo(() =>
-    data?.data
+    data
       .map((row: OutRanking, index) => {
         if (index < page * pageSize && index >= page * pageSize - pageSize) {
           return {
@@ -84,7 +84,7 @@ const Ranking = () => {
           };
         }
       })
-      .filter(row => !!row) ?? [], [data?.data, page]);
+      .filter(row => !!row) ?? [], [data, page]);
 
   return (
     <div>
@@ -106,7 +106,7 @@ const Ranking = () => {
                 templateColumns={'0.10fr 0.90fr'}
               />
               <Pagination
-                totalCountOfRegisters={data?.data.length ?? 0}
+                totalCountOfRegisters={data.length ?? 0}
                 onPageChange={(page: number) => setPage(page)}
                 currentPage={page}
                 registersPerPage={pageSize}
@@ -125,8 +125,12 @@ export default Ranking;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
+    const response = await getRanking();
+
     return {
-      props: {},
+      props: {
+        data: response?.data ?? [],
+      },
     };
   },
 );
