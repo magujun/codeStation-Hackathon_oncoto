@@ -12,7 +12,7 @@ export async function authenticate(
 	if (!authorization) {
 		throw new AppError('Invalid request!', 401);
 	}
-	const authenticated = await compare(authorization, auth.key);
+	const authenticated = await compare(authorization, auth.front_key);
 	if (!authenticated) {
 		throw new AppError('Invalid request!', 401);
 	}

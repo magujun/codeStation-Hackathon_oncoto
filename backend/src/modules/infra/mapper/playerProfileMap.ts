@@ -6,19 +6,21 @@ import { IPlayerProfileResponseDTO } from '../DTOs/IPlayerProfileResponseDTO';
 class PlayerProfileMap {
 	static toDTO({
 		id,
-		nick,
 		playerId,
 		provider,
+		nick,
 		avatar,
 		avatar_url,
+		createDate,
 	}: Player): IPlayerProfileResponseDTO {
 		const player = classToClass({
 			id,
-			nick,
 			playerId,
 			provider,
+			nick,
 			avatar,
 			avatar_url,
+			createDate,
 		});
 		return player;
 	}

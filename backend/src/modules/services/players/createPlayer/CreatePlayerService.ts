@@ -16,15 +16,14 @@ class CreatePlayerService {
 			playerId
 		);
 		if (playerAlreadyExists) {
-			const player = await this.playersRepository.findByPlayerId(playerId);
-			throw new AppResponse(player.id);
+			throw new AppResponse('Player already exists!', 200);
 		}
 		await this.playersRepository.create({
 			playerId,
 			provider,
 			nick: playerId,
 		});
-		return this.playersRepository.findByPlayerId(playerId);
+		return await this.playersRepository.findByPlayerId(playerId);
 	}
 }
 
