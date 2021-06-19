@@ -1,10 +1,11 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity('location')
 class Location {
 	@PrimaryColumn()
-	id?: string;
+	plus_code: string;
+	// indicates an encoded location reference, derived from latitude and longitude.Plus codes can be used as a replacement for street addresses in places where they do not exist(where buildings are not numbered or streets are not named).See https://plus.codes for details.
 	@Column()
 	coordinates: string;
 	@Column()
@@ -57,9 +58,6 @@ class Location {
 	@Column()
 	subpremise?: string;
 	// indicates a first-order entity below a named location, usually a singular building within a collection of buildings with a common name
-	@Column()
-	plus_code?: string;
-	// indicates an encoded location reference, derived from latitude and longitude.Plus codes can be used as a replacement for street addresses in places where they do not exist(where buildings are not numbered or streets are not named).See https://plus.codes for details.
 	@Column()
 	postal_code?: string;
 	// indicates a postal code as used to address postal mail within the country.

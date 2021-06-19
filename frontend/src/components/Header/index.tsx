@@ -2,9 +2,9 @@ import {
   Flex,
   IconButton,
   Icon,
-  useBreakpointValue,
   Box,
 } from '@chakra-ui/react';
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import React from 'react';
 import { RiMenuLine } from 'react-icons/ri';
 import { useSidebar } from '../../hook/useSidebar';
