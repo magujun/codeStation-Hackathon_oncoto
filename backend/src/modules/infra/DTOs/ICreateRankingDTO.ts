@@ -1,6 +1,6 @@
 interface ICreateRankingDTO {
-	game_id: string;
-	player_id: string;
+	gameId: string;
+	playerId: string;
 	level: string;
 	score: number;
 }
