@@ -4,16 +4,24 @@ import { CreateGameService } from './CreateGameService';
 
 class CreateGameController {
 	async handle(request: Request, response: Response): Promise<Response> {
-		const { playerId, level, elapsedTime, locationOrigin, locationMarked, distance, score } = request.body;
+		const {
+			player_id,
+			level,
+			elapsedTime,
+			locationOrigin,
+			locationMarked,
+			distance,
+			score,
+		} = request.body;
 		const createGameService = container.resolve(CreateGameService);
 		await createGameService.execute({
-			playerId,
-      level,
-      elapsedTime,
-      locationOrigin,
-      locationMarked,
-      distance,
-      score
+			player_id,
+			level,
+			elapsedTime,
+			locationOrigin,
+			locationMarked,
+			distance,
+			score,
 		});
 		return response.status(201).json('New game created!').send();
 	}

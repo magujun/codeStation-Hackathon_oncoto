@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+
 import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { ICreatePlayerDTO } from '@src/modules/infra/DTOs/ICreatePlayerDTO';
 import { Player } from '@src/modules/infra/typeorm/entities/Player';

@@ -9,7 +9,6 @@ export async function authenticate(
 	next: NextFunction
 ): Promise<void> {
 	const authorization = request.headers.authorization;
-	console.log(authorization);
 	if (!authorization) {
 		throw new AppError('Invalid request!', 401);
 	}

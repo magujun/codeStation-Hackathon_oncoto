@@ -4,8 +4,8 @@ import { container } from 'tsyringe';
 import { IPlayersRepository } from '@src/modules/infra/typeorm/repositories/IPlayersRepository';
 import { PlayersRepository } from '@src/modules/infra/typeorm/repositories/PlayersRepository';
 
-// import { IGamesRepository } from '@modules/games/repositories/IGamesRepository';
-// import { GamesRepository } from '@modules/games/infra/typeorm/repositories/GamesRepository';
+import { IGamesRepository } from '@src/modules/infra/typeorm/repositories/IGamesRepository';
+import { GamesRepository } from '@src/modules/infra/typeorm/repositories/GamesRepository';
 
 // import { IRankingsRepository } from '@modules/games/repositories/IRankingsRepository';
 // import { RankingsRepository } from '@modules/games/infra/typeorm/repositories/RankingsRepository';
@@ -19,11 +19,11 @@ container.registerSingleton<IPlayersRepository>(
 	PlayersRepository
 );
 
-// IGamesRepository
-// container.registerSingleton<IGamesRepository>(
-// 	'GamesRepository',
-// 	GamesRepository
-// );
+// IGamesRepository;
+container.registerSingleton<IGamesRepository>(
+	'GamesRepository',
+	GamesRepository
+);
 
 // IRankingsRepository
 // container.registerSingleton<IRankingsRepository>(

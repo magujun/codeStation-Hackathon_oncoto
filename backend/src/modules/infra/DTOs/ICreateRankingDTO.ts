@@ -1,7 +1,7 @@
 interface ICreateRankingDTO {
-	gameId: string;
-  playerId: string;
-  level: string;
-  score: number;
+	game_id: string;
+	player_id: string;
+	level: string;
+	score: number;
 }
 export { ICreateRankingDTO };

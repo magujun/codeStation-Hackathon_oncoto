@@ -1,12 +1,12 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
-@Entity('game')
+@Entity('games')
 class Game {
 	@PrimaryColumn()
 	id?: string;
 	@Column()
-	playerId: string;
+	player_id: string;
 	@Column()
 	level: string;
 	@Column()

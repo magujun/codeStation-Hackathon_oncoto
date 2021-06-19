@@ -28,12 +28,12 @@ class PlayersRepository implements IPlayersRepository {
 	}
 	async findByPlayerId(playerId: string): Promise<Player> {
 		// SELECT * FROM players WHERE playerId = "playerId" limit 1
-		const player = await this.repository.findOne({ playerId });
+		const player = await this.repository.findOne(playerId);
 		return player;
 	}
 	async findByNick(nick: string): Promise<Player> {
 		// SELECT * FROM players WHERE nick = "nick" limit 1
-		const player = await this.repository.findOne({ nick });
+		const player = await this.repository.findOne(nick);
 		return player;
 	}
 	// SELECT * FROM players
