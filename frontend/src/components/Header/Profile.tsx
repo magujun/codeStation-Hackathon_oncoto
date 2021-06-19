@@ -1,7 +1,8 @@
 import React from 'react';
-import { Avatar, Box, Flex, IconButton, Text } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 import { useSession, signOut } from 'next-auth/client';
 import { IoExitOutline } from 'react-icons/io5';
+import { Avatar } from '../Avatar';
 
 interface ProfileProps {
   showProfileData?: boolean;
@@ -9,7 +10,7 @@ interface ProfileProps {
 
 export const Profile = ({ showProfileData = true }: ProfileProps) => {
   const [session] = useSession();
-  const userName = session?.user?.name.split(' ')[0] ?? '';
+  const userNameInitialLetter = session?.user?.name.split(' ')[0] ?? '';
 
   const handleSignOutClick = () => {
     signOut();
@@ -19,19 +20,26 @@ export const Profile = ({ showProfileData = true }: ProfileProps) => {
     <Flex align="center">
       {showProfileData && (
         <Box mr="4" textAlign="right">
-          <Text>{userName}</Text>
+          <Text userSelect='none'>{userNameInitialLetter}</Text>
         </Box>
       )}
 
-      <Avatar size="md" name={userName} src={session?.user.image ?? ''} />
+      <Avatar altText={session?.user.name} firstNameInitialLetter={userNameInitialLetter} imgUrl={session?.user.image} />
+
 
       <IconButton
-        variant="ghost"
+        variant="unstyled"
         ml="3"
+        fontSize="1.5rem"
         icon={<IoExitOutline />}
         label="Sair"
         aria-label="Exit"
         onClick={handleSignOutClick}
+        display='inline-flex'
+        _hover={{
+          color: 'blue.800',
+          transition: 'color 0.2s'
+        }}
       />
     </Flex>
   );
