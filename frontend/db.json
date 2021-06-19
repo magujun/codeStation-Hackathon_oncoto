@@ -133,25 +133,43 @@
       "position": 1,
       "avatar": "https://wl-incrivel.cf.tsp.li/resize/728x/jpg/148/d13/9cfd1e5ce8837705fd263fe6c0.jpg",
       "nick": "Jorge",
+      "level": "Difícil",
       "score": 1000
     },
     {
       "position": 2,
       "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_2_600.jpg",
       "nick": "Maria",
+      "level": "Difícil",
       "score": 989
     },
     {
       "position": 3,
       "avatar": "https://t1.ea.ltmcdn.com/pt/images/4/7/6/cachorros_que_parecem_urso_top_20_22674_600_square.jpg",
       "nick": "Joana",
+      "level": "Difícil",
       "score": 745
+    },
+    {
+      "position": 4,
+      "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_4_600.jpg",
+      "nick": "John",
+      "level": "Difícil",
+      "score": 601
     },
     {
       "position": 5,
       "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_4_600.jpg",
-      "nick": "John",
+      "nick": "Michael",
+      "level": "Normal",
       "score": 601
+    },
+    {
+      "position": 6,
+      "avatar": "https://t2.ea.ltmcdn.com/pt/images/9/3/8/img_5_racas_de_cachorros_sem_pelo_20839_paso_4_600.jpg",
+      "nick": "Lenon",
+      "level": "Normal",
+      "score": 801
     }
   ]
 }

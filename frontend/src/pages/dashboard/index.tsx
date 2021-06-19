@@ -11,12 +11,13 @@ import { DatagridColumn } from '../../components/Datagrid/Types';
 import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
 import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
+import { useMemo } from 'react';
 
 const columns: DatagridColumn[] = [
   {
     field: 'date',
     headerName: 'DATA',
-    flex: 1,
+    flex: 0.1,
     align: 'center',
     headerAligin: 'center',
   },
@@ -50,27 +51,30 @@ const Dashboard = () => {
   const [session] = useSession();
 
   const { data, isLoading } = useQuery(
-    'consultar-ranking',
+    ['select-history', session?.playerId],
     () => getGameHistoryPlayer((session?.playerId as string) ?? '0'),
     {
       enabled: !!session?.playerId,
     },
   );
 
-  const rows =
-    data?.data
-      .map((row: OutGameHistory, index) => {
-        if (index < page * pageSize && index >= page * pageSize - pageSize) {
-          return {
-            date: format(new Date(row.date), 'dd/MM/yyyy'),
-            id: row.id,
-            level: row.level,
-            score: row.score,
-            time: format(new Date(row.time), 'hh:mm:ss'),
-          };
-        }
-      })
-      .filter(row => !!row) ?? [];
+  const rows = useMemo(
+    () =>
+      data?.data
+        .map((row: OutGameHistory, index) => {
+          if (index < page * pageSize && index >= page * pageSize - pageSize) {
+            return {
+              date: format(new Date(row.date), 'dd/MM/yyyy'),
+              id: row.id,
+              level: row.level,
+              score: row.score,
+              time: format(new Date(row.time), 'hh:mm:ss'),
+            };
+          }
+        })
+        .filter(row => !!row) ?? [],
+    [data?.data, page],
+  );
 
   return (
     <div>
