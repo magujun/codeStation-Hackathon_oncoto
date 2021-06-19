@@ -3,6 +3,7 @@ import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 import { useSession, signOut } from 'next-auth/client';
 import { IoExitOutline } from 'react-icons/io5';
 import { Avatar } from '../Avatar';
+import { getPlayerNick } from '../../utils/getPlayerNick';
 
 interface ProfileProps {
   showProfileData?: boolean;
@@ -10,7 +11,7 @@ interface ProfileProps {
 
 export const Profile = ({ showProfileData = true }: ProfileProps) => {
   const [session] = useSession();
-  const userNameInitialLetter = session?.user?.name.split(' ')[0] ?? '';
+  const userNameInitialLetter = getPlayerNick(session?.user?.name ?? '');
 
   const handleSignOutClick = () => {
     signOut();

@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import { session } from 'next-auth/client';
 import Providers from 'next-auth/providers';
 import { createPlayer, getPlayer } from '../../../services/player';
+import { getPlayerId, getPlayerNick } from '../../../utils/getPlayerNick';
 
 export default NextAuth({
   providers: [
@@ -17,10 +18,10 @@ export default NextAuth({
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
-    async session(session) {
+    async session(session, user) {
       try {
         const player = await getPlayer(
-          session.user.email.replace('@gmail.com', ''),
+          getPlayerId(session.user.email, 'google'),
         );
 
         return { ...session, playerId: player.data[0].id };
@@ -30,14 +31,14 @@ export default NextAuth({
     },
     async signIn(user, account, profile) {
       try {
-        const resp = await getPlayer(user.email.replace('@gmail.com', ''));
+        const resp = await getPlayer(getPlayerId(user.email, account.provider));
 
         if (!resp?.data[0]?.id) {
           await createPlayer({
             avatar: user.image,
-            playerId: user.email.replace('@gmail.com', ''),
+            playerId: getPlayerId(user.email, account.provider),
             provider: account.provider,
-            nick: user.name.split(' ')[0] ?? user.name,
+            nick: getPlayerNick(user.name),
           });
         }
       } catch (err) {
@@ -45,9 +46,9 @@ export default NextAuth({
         if (err.response.status === 404) {
           const player = await createPlayer({
             avatar: user.image,
-            playerId: user.email.replace('@gmail.com', ''),
+            playerId: getPlayerId(user.email, account.provider),
             provider: account.provider,
-            nick: user.name.split(' ')[0] ?? user.name,
+            nick: getPlayerNick(user.name),
           });
         }
       }
