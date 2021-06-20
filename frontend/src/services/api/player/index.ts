@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { api } from '..';
 
 export type InPlayer = {
@@ -39,7 +39,8 @@ export type OutGetPlayer = {
 
 export const getPlayer = async (playerId: string) => {
   try {
-    const response = await api.get<OutGetPlayer>(`/players/${playerId}`);
+    const response = await api
+      .get<OutGetPlayer>(`/players/${playerId}`);
 
     return response;
   } catch (err) {
@@ -72,7 +73,13 @@ export type OutGameHistory = {
 
 export const getGameHistoryPlayer = async (id: string) => {
   try {
-    const response = await api.get<OutGameHistory[]>(`/players/${id}/games`);
+    const response = await api
+      .get<OutGameHistory[]>(`/players/${id}/games`, {
+        validateStatus: ((status) => status !== 404)
+      })
+      .catch((err: AxiosError) => {
+        return Promise.resolve(err?.response);
+      });
 
     return response;
   } catch (err) {

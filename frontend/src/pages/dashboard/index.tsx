@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Box, Spinner, Text, Flex, VStack } from '@chakra-ui/react';
-import { useQuery } from 'react-query';
+import { Box, Text, Flex, VStack } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { useSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { Datagrid } from '../../components/Datagrid';
 import { DatagridColumn } from '../../components/Datagrid/Types';
@@ -50,39 +49,45 @@ const columns: DatagridColumn[] = [
   },
 ];
 
-const Dashboard = () => {
+type DashboardProps = {
+  data: OutGameHistory[];
+};
+
+const Dashboard = ({ data }: DashboardProps) => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
-  const [session] = useSession();
 
-  const { data, isLoading } = useQuery(
-    ['select-history', session?.playerId],
-    () => getGameHistoryPlayer((session?.playerId as string) ?? '0'),
-    {
-      enabled: !!session?.playerId,
-    },
-  );
-
-  const rows = useMemo(
-    () =>
-      data?.data
-      .sort(function(a,b){
-        return new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime();
-      })
-        .map((row: OutGameHistory, index) => {
-          if (index < page * pageSize && index >= page * pageSize - pageSize) {
-            return {
-              date: format(new Date(row.gameDate), 'dd/MM/yyyy'),
-              id: row.id,
-              level: row.level.charAt(0).toUpperCase() + row.level.slice(1),
-              score: row.score,
-              time: getFormatedTime(row.elapsedTime),
-            };
-          }
-        })
-        .filter(row => !!row) ?? [],
-    [data?.data, page],
-  );
+  const rows = useMemo(() => {
+    if (data?.length > 0) {
+      return (
+        data
+          .sort(function (a, b) {
+            return (
+              new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime()
+            );
+          })
+          .map((row: OutGameHistory, index) => {
+            if (
+              index < page * pageSize &&
+              index >= page * pageSize - pageSize
+            ) {
+              return {
+                date: format(new Date(row.gameDate), 'dd/MM/yyyy'),
+                id: row.id,
+                level: row.level.charAt(0).toUpperCase() + row.level.slice(1),
+                score: row.score,
+                time: getFormatedTime(row.elapsedTime),
+              };
+            }
+          })
+          .filter(row => {
+            return !!row;
+          }) ?? []
+      );
+    } else {
+      return [];
+    }
+  }, [data, page]);
 
   return (
     <>
@@ -117,19 +122,15 @@ const Dashboard = () => {
 
               {rows?.length > 0 ? (
                 <Box w="100%">
-                  {isLoading ? (
-                    <Spinner />
-                  ) : (
-                    <Datagrid
-                      columns={columns}
-                      rows={rows ?? []}
-                      paddingCell={5}
-                      columnId="id"
-                      templateColumns={'0.15fr 0.85fr'}
-                    />
-                  )}
+                  <Datagrid
+                    columns={columns}
+                    rows={rows ?? []}
+                    paddingCell={5}
+                    columnId="id"
+                    templateColumns={'0.15fr 0.85fr'}
+                  />
                   <Pagination
-                    totalCountOfRegisters={data?.data.length ?? 0}
+                    totalCountOfRegisters={data?.length ?? 0}
                     onPageChange={(page: number) => setPage(page)}
                     currentPage={page}
                     registersPerPage={pageSize}
@@ -150,8 +151,14 @@ export default Dashboard;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
+    const { playerId } = await getSession(context);
+
+    const response = await getGameHistoryPlayer((playerId as string) ?? '');
+
     return {
-      props: {},
+      props: {
+        data: response?.data,
+      },
     };
   },
 );
