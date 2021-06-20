@@ -17,7 +17,7 @@ export default function Home() {
         <Box
           width="100%"
           height="100vh"
-          bg="blue.900"
+          bg="linear-gradient(243.26deg, #4997de 11.26%, #2BB4D3 99.35%);"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -38,10 +38,10 @@ export default function Home() {
               <Button
                 bg="white.200"
                 w="100%"
-                color="blue.200"
+                color="blue.800"
                 _hover={{
                   color: 'white.200',
-                  bg: 'blue.200',
+                  bg: 'blue.800',
                   borderColor: 'white.200',
                   border: '1px solid',
                 }}
