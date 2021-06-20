@@ -21,4 +21,4 @@ app.listen(PORT, () =>
 	)
 );
 
-// LoadLocations(1);
+LoadLocations(1);

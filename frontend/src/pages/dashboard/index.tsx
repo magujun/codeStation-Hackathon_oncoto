@@ -87,7 +87,17 @@ const Dashboard = () => {
           <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="8">
 
             <Flex w="100%" alignItems="center" justifyContent="center" >
-              <NewGame />
+              <Box
+                width="100%"
+                backgroundColor="rgba(255, 255, 255, 0.85)"
+                borderColor="rgba(159, 209, 255, 0.2);"
+                borderWidth="1px"
+                borderStyle="solid"
+                borderRadius="2rem"
+                boxShadow="4px 10px 30px rgba(159, 209, 255, 0.1);"
+              >
+                <NewGame />
+              </Box>
             </Flex>
 
             <VStack w="100%" alignItems="center" justifyContent="center" >

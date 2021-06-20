@@ -166,9 +166,6 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
               left="6"
               zIndex="10"
               onClick={handleGuessButtonClick}
-              iconSpacing="2"
-              display="flex"
-              alignItems="center"
             >
               Já sei o lugar
             </Button>
