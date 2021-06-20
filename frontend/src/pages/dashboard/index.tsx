@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
 import { Box, Spinner, Text, Flex, VStack } from '@chakra-ui/react';
@@ -13,8 +13,6 @@ import { Pagination } from '../../components/Pagination';
 import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
-import { Button } from '../../components/Button';
-import { useGameData } from '../../hook/useGameData';
 
 const columns: DatagridColumn[] = [
   {
@@ -52,7 +50,6 @@ const Dashboard = () => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const [session] = useSession();
-  const { onStartNewGame } = useGameData();
 
   const { data, isLoading } = useQuery(
     ['select-history', session?.playerId],
@@ -87,23 +84,11 @@ const Dashboard = () => {
       </Head>
       <main>
         <Container>
-          <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="4">
+          <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="8">
 
             <Flex w="100%" alignItems="center" justifyContent="center" >
               <NewGame />
             </Flex>
-
-            {/* <Box mb="4" display="flex" justifyContent="space-between">
-              <Button mb="8" onClick={() => onStartNewGame('easy')}>
-                Fácil
-            </Button>
-              <Button mb="8" onClick={() => onStartNewGame('medium')}>
-                Médio
-            </Button>
-              <Button mb="8" onClick={() => onStartNewGame('hard')}>
-                Difícil
-            </Button>
-            </Box> */}
 
             <VStack w="100%" alignItems="center" justifyContent="center" >
               <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
