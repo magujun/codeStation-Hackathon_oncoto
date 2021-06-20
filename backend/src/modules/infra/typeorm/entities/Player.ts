@@ -25,10 +25,6 @@ class Player {
 	createDate: Date;
 	@CreateDateColumn()
 	updateDate?: Date;
-	@Expose({ name: 'avatar_url' })
-	avatar_url(): string {
-		return `${process.env.API_URL}/avatar/${this.avatar}`;
-	}
 
 	constructor() {
 		if (!this.id) {

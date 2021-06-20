@@ -10,7 +10,6 @@ class PlayerProfileMap {
 		provider,
 		nick,
 		avatar,
-		avatar_url,
 		createDate,
 	}: Player): IPlayerProfileResponseDTO {
 		const player = classToClass({
@@ -19,7 +18,6 @@ class PlayerProfileMap {
 			provider,
 			nick,
 			avatar,
-			avatar_url,
 			createDate,
 		});
 		return player;
