@@ -7,7 +7,11 @@ import { useGameData } from "../../hook/useGameData";
 
 type difficultyLevel = "easy" | "medium" | "hard";
 
-export function NewGame() {
+interface NewGameProps {
+  alignTitle?: string
+}
+
+export function NewGame({ alignTitle = "flex-start" }: NewGameProps) {
   const [difficultyLevel, setDifficultyLevel] = useState<difficultyLevel>("easy");
 
   const { onStartNewGame } = useGameData();
@@ -25,7 +29,7 @@ export function NewGame() {
       borderRadius="2rem"
       boxShadow="4px 10px 30px rgba(159, 209, 255, 0.1);"
     >
-      <Text fontSize={{ base: "md", sm: "lg", md: "2xl" }} fontWeight={700} alignSelf="flex-start">
+      <Text fontSize={{ base: "md", sm: "lg", md: "2xl" }} fontWeight={700} alignSelf={alignTitle}>
         Escolha um nível de dificuldade <br />
         e inicie um novo jogo:
       </Text>
