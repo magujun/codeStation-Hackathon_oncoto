@@ -23,7 +23,7 @@ export async function LoadLocationData(plusCode: string) {
 		({
 			// HANDLE POSSIBLE MISSING ENTRIES WITH || null and ?: conditionals?
 			plus_code: result.plus_code.global_code, //could also .compound_code
-			coordinates: `${result.geometry.location.lat},${result.geometry.location.lat}`,
+			coordinates: `${result.geometry.location.lat},${result.geometry.location.lng}`,
 			countryCode: findIf(result.address_components, 'country', 'short_name'),
 			street_address: result.formatted_address,
 			route: findIf(result.address_components, 'route', 'long_name'),
