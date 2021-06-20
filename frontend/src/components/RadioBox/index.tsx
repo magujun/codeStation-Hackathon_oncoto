@@ -1,25 +1,64 @@
-import { useRadioGroup, Stack } from "@chakra-ui/react"
-import { useEffect, useState } from "react";
+import { useRadioGroup, HStack, useBreakpointValue } from "@chakra-ui/react"
+import { Dispatch, SetStateAction } from "react";
 import { RadioCard } from './RadioCard';
+import OverflowWrapper from 'react-overflow-wrapper';
 
-export function RadioBox() {
+interface RadioBoxProps {
+  onChangeDifficultyLevel: Dispatch<SetStateAction<string>>;
+}
+
+export function RadioBox({ onChangeDifficultyLevel }: RadioBoxProps) {
+  const isWideScreen = useBreakpointValue({
+    base: false,
+    lg: true
+  });
+
   const options = ["easy", "medium", "hard"];
-  const [active, setActive] = useState("easy");
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "difficultyLevel",
     defaultValue: "easy",
-    onChange: setActive,
+    onChange: onChangeDifficultyLevel,
   });
-
-  useEffect(() => { console.log(active) }, [active])
 
   const group = getRootProps()
 
+  if (!isWideScreen) {
+    return (
+      <OverflowWrapper
+        style={{ overflow: "hidden" }}
+        iconWrapStyle={{
+          left: {
+            height: '100%',
+            backgroundImage: 'linear-gradient(to right, hsl(0, 100%, 100%) 25%, hsla(0, 0%, 0%, 0))',
+            left: '-1px'
+          },
+          right: {
+            height: '100%',
+            backgroundImage: 'linear-gradient(to left, hsl(0, 100%, 100%) 25%, hsla(0, 0%, 0%, 0))',
+            right: '-1px',
+          },
+        }}
+      >
+        <HStack
+          spacing="4"
+          {...group}>
+          {options.map((value) => {
+            const radio = getRadioProps({ value })
+            return (
+              <RadioCard key={value} {...radio}>
+                {value}
+              </RadioCard>
+            )
+          })}
+        </HStack>
+      </OverflowWrapper>
+    )
+  }
+
   return (
-    <Stack
-      spacing={{ base: "4", md: "8", lg: "16" }}
-      flexDirection={{ base: "column", sm: "row" }}
+    <HStack
+      spacing={{ md: "8", lg: "16" }}
       {...group}>
       {options.map((value) => {
         const radio = getRadioProps({ value })
@@ -29,6 +68,6 @@ export function RadioBox() {
           </RadioCard>
         )
       })}
-    </Stack>
+    </HStack>
   )
 }
