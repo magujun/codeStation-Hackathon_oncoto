@@ -70,14 +70,12 @@ class LocationsRepository implements ILocationsRepository {
 	}
 
 	async findRandomLocation(): Promise<Location> {
-		console.log('findrandomlocation');
 		const [randomLocation] = await this.repository.query(
 			`SELECT coordinates FROM locations ORDER BY RANDOM() ASC LIMIT 1`
 		);
 		// const location = await this.repository.queryRunner. getTable('games').
 		// 	.orderBy('RAND()')
 		// 	.getOne();
-		console.log(randomLocation.coordinates);
 		return randomLocation;
 	}
 
