@@ -14,7 +14,6 @@ type Position = {
 };
 
 type DisplayMapProps = {
-  googleMapsApiKey: string;
   goal?: Position;
   guess?: Position;
   center: Position;
@@ -24,7 +23,6 @@ type DisplayMapProps = {
 
 export const DisplayMap = memo(
   ({
-    googleMapsApiKey,
     guess,
     goal,
     center,
@@ -38,29 +36,27 @@ export const DisplayMap = memo(
 
     return (
       <>
-        <LoadScriptNext googleMapsApiKey={googleMapsApiKey}>
-          <GoogleMap
-            data-testid="gmap-display-makers"
-            mapContainerStyle={displayMapContainerStyle}
-            center={centerRef.current}
-            zoom={zoomRef.current}
-            clickableIcons={false}
-            options={{
-              disableDefaultUI: true,
-              clickableIcons: false,
-            }}
-          >
-            {guess?.lat && (
-              <Marker
-                position={guess}
-                icon={guessIcon ? guessIcon : '/images/red_point.svg'}
-              />
-            )}
-            {goal?.lat && (
-              <Marker position={goal} icon="/images/blue_point.svg" />
-            )}
-          </GoogleMap>
-        </LoadScriptNext>
+        <GoogleMap
+          data-testid="gmap-display-makers"
+          mapContainerStyle={displayMapContainerStyle}
+          center={centerRef.current}
+          zoom={zoomRef.current}
+          clickableIcons={false}
+          options={{
+            disableDefaultUI: true,
+            clickableIcons: false,
+          }}
+        >
+          {guess?.lat && (
+            <Marker
+              position={guess}
+              icon={guessIcon ? guessIcon : '/images/red_point.svg'}
+            />
+          )}
+          {goal?.lat && (
+            <Marker position={goal} icon="/images/blue_point.svg" />
+          )}
+        </GoogleMap>
       </>
     );
   },

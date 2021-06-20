@@ -7,7 +7,7 @@ export const getPlayerScore = (
   elapseTime: number,
 ) => {
   const totalTime = getLevelTime(level);
-  const distanceInKm = distance / 1000;
+  const distanceInKm = Math.round(distance / 1000);
   const percentNotUsed =
     totalTime <= 0 ? 0 : (100 - (elapseTime * 1000 * 100) / totalTime) / 100;
 
@@ -17,7 +17,7 @@ export const getPlayerScore = (
     hard: 1,
   };
 
-  const bonus = 1 + levelBonus[level] * percentNotUsed;
+  const bonus = (1 + (levelBonus[level] * percentNotUsed));
 
   var score = 0;
 
@@ -33,12 +33,11 @@ export const getPlayerScore = (
     score = 700;
   } else if (distanceInKm <= 500) {
     score = 500;
-  } else if (distanceInKm > 1000) {
+  } else {
     score = 100;
   }
 
-
-  const finalScore = Math.floor(score * bonus);
+  const finalScore = Math.floor(score * (bonus <= 0 ? 1 : bonus));
 
   if (isNaN(finalScore)) return 0;
 

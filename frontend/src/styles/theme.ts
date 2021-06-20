@@ -35,6 +35,10 @@ const config = {
       a: {
         color: props.colorMode === "dark" ? "white.200" : "black.450",
       },
+      h2: {
+        fontSize: '1.5rem',
+        fontWeight: '600',
+      },
       ".mask": {
         webkitMaskImage: 'url("/avatarMask.svg")',
         maskImage: 'url("/avatarMask.svg")',

@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { BiWorld } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { LoadScriptNext } from '@react-google-maps/api';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { Map } from '../../components/Map';
@@ -26,7 +26,6 @@ type GameProps = {
 };
 
 const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
-  const route = useRouter();
   const { difficultyLevel, onEndGame, onStartTime } = useGameData();
 
   const [showGuessMap, setShowGuessMap] = useState(false);
@@ -38,14 +37,6 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
   useEffect(() => {
     onStartTime(new Date(startDate.current));
   }, []);
-
-  const streetMapHeight = useBreakpointValue({
-    base: 'outline',
-    sm: '80vh',
-    md: '80vh',
-    lg: '80vh',
-    xl: '90vh',
-  });
 
   const guessMapY = useBreakpointValue({
     base: '60%',
@@ -112,63 +103,65 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
         <Box display="flex" alignItems="center">
           <Box w="100%" height="calc(100vh - 80px)">
             <Timer finishDate={finishDate.current} onTimeout={handleTimeout} />
-            <StreetViewMap
-              googleMapsApiKey={googleMapsApiKey}
-              startPoint={startPoint}
-            />
-            <Box
-              height={guessMapY}
-              width={guessMapX}
-              position="fixed"
-              bottom="6"
-              left="6"
-              zIndex="11"
-              bg="white.200"
-              borderRadius="8px"
-              overflow="hidden"
-              display="flex"
-              flexDirection="column"
-              alignItems="flex-end"
-              minHeight="150px"
-              minWidth="100px"
-              hidden={!showGuessMap}
-            >
-              <IconButton
-                icon={<IoMdClose />}
-                aria-label="close-map"
-                variant="ghost"
-                color="red"
-                position="fixed"
-                zIndex="10"
-                fontSize="2rem"
-                onClick={handleCloseMapClick}
-              />
-              <Map
-                googleMapsApiKey={googleMapsApiKey}
-                center={{ lat: 0, lng: 0 }}
-                zoom={1}
-                onGuess={handleGuess}
-              />
-              <Button
-                w="100%"
-                borderTopLeftRadius={0}
-                borderTopRightRadius={0}
-                disabled={!guess?.lat}
-                onClick={handleConfirmarClick}
-              >
-                Confirmar
-              </Button>
-            </Box>
-            <Button
-              leftIcon={<BiWorld />}
-              position="fixed"
-              bottom="6"
-              left="6"
-              zIndex="10"
-              onClick={handleGuessButtonClick}
-            >
-              Já sei o lugar
-            </Button>
+            <LoadScriptNext googleMapsApiKey={googleMapsApiKey}>
+              <>
+                <StreetViewMap
+                  startPoint={startPoint}
+                />
+                <Box
+                  height={guessMapY}
+                  width={guessMapX}
+                  position="fixed"
+                  bottom="6"
+                  left="6"
+                  zIndex="11"
+                  bg="white.200"
+                  borderRadius="8px"
+                  overflow="hidden"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="flex-end"
+                  minHeight="150px"
+                  minWidth="100px"
+                  hidden={!showGuessMap}
+                >
+                  <IconButton
+                    icon={<IoMdClose />}
+                    aria-label="close-map"
+                    variant="ghost"
+                    color="red"
+                    position="fixed"
+                    zIndex="10"
+                    fontSize="2rem"
+                    onClick={handleCloseMapClick}
+                  />
+                  <Map
+                    center={{ lat: 0, lng: 0 }}
+                    zoom={1}
+                    onGuess={handleGuess}
+                  />
+                  <Button
+                    w="100%"
+                    borderTopLeftRadius={0}
+                    borderTopRightRadius={0}
+                    disabled={!guess?.lat}
+                    onClick={handleConfirmarClick}
+                  >
+                    Confirmar
+                  </Button>
+                </Box>
+                <Button
+                  leftIcon={<BiWorld />}
+                  position="fixed"
+                  bottom="6"
+                  left="6"
+                  zIndex="10"
+                  onClick={handleGuessButtonClick}
+                >
+                  Já sei o lugar
+                </Button>
+              </>
+            </LoadScriptNext>
           </Box>
         </Box>
       </main>

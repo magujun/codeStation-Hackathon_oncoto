@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useRef, useState } from 'react';
-import { GoogleMap, Marker, LoadScriptNext } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const mapContainerStyle: React.CSSProperties = {
   width: '100%',
@@ -14,23 +14,17 @@ type Position = {
 };
 
 type MapProps = {
-  googleMapsApiKey: string;
   center: Position;
   zoom?: number;
   onGuess?: (guess: Position) => void;
 };
 
 export const Map = memo(
-  ({
-    googleMapsApiKey,
-    onGuess,
-    center,
-    zoom = 3,
-  }: MapProps) => {
+  ({ onGuess, center, zoom = 3 }: MapProps) => {
     const [guess, setGuess] = useState<Position>(null);
     const ref = useRef<GoogleMap>();
     const centerRef = useRef<Position>(center);
-    const zoomRef = useRef<number>(zoom)
+    const zoomRef = useRef<number>(zoom);
 
     const handleMapClick = useCallback(
       (e: any) => {
@@ -49,28 +43,28 @@ export const Map = memo(
 
     return (
       <>
-        <LoadScriptNext googleMapsApiKey={googleMapsApiKey}>
-          <GoogleMap
-            data-testid="gmap-maker"
-            mapContainerStyle={mapContainerStyle}
-            center={centerRef.current}
-            onClick={handleMapClick}
-            zoom={zoomRef.current}
-            clickableIcons={false}
-            options={{
-              disableDefaultUI: true,
-              clickableIcons: false,
-              fullscreenControl: true,
-              fullscreenControlOptions: {
-                position: 5,
-              },
-              zoomControl: true,
-            }}
-            ref={ref}
-          >
-            {guess?.lat && <Marker position={guess} icon='/images/red_point.svg' />}
-          </GoogleMap>
-        </LoadScriptNext>
+        <GoogleMap
+          data-testid="gmap-maker"
+          mapContainerStyle={mapContainerStyle}
+          center={centerRef.current}
+          onClick={handleMapClick}
+          zoom={zoomRef.current}
+          clickableIcons={false}
+          options={{
+            disableDefaultUI: true,
+            clickableIcons: false,
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+              position: 5,
+            },
+            zoomControl: true,
+          }}
+          ref={ref}
+        >
+          {guess?.lat && (
+            <Marker position={guess} icon="/images/red_point.svg" />
+          )}
+        </GoogleMap>
       </>
     );
   },

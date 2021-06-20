@@ -4,6 +4,7 @@ import Router from 'next/router';
 
 import { GetServerSideProps } from 'next';
 import { Box, Flex, Grid, Stack, Text, useDisclosure } from '@chakra-ui/react';
+import { LoadScriptNext } from '@react-google-maps/api';
 
 import { Modal } from '../../../components/Modal';
 import { useGameData } from '../../../hook/useGameData';
@@ -44,23 +45,24 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
       </Head>
       <main>
         <Box w="100%" h="30vh">
-          <DisplayMap
-            googleMapsApiKey={googleMapsApiKey}
-            center={{
-              lat: userGoalPoint?.lat,
-              lng: userGoalPoint?.long,
-            }}
-            zoom={1}
-            goal={{
-              lat: userGoalPoint?.lat,
-              lng: userGoalPoint?.long,
-            }}
-            guess={{
-              lat: userGuessPoint?.lat,
-              lng: userGuessPoint?.long,
-            }}
-            guessIcon={guessIcon}
-          />
+          <LoadScriptNext googleMapsApiKey={googleMapsApiKey}>
+            <DisplayMap
+              center={{
+                lat: userGoalPoint?.lat,
+                lng: userGoalPoint?.long,
+              }}
+              zoom={1}
+              goal={{
+                lat: userGoalPoint?.lat,
+                lng: userGoalPoint?.long,
+              }}
+              guess={{
+                lat: userGuessPoint?.lat,
+                lng: userGuessPoint?.long,
+              }}
+              guessIcon={guessIcon}
+            />
+          </LoadScriptNext>
         </Box>
         <Container mt="4" fontWeight="bold">
           <Grid

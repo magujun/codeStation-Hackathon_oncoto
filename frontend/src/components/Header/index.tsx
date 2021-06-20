@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  Flex,
-  IconButton,
-  Icon,
-  HStack,
-} from '@chakra-ui/react';
+import { Flex, IconButton, Icon, HStack } from '@chakra-ui/react';
 import { useBreakpointValue } from '@chakra-ui/media-query';
+import { useSession } from 'next-auth/client';
+
 import { RiMenuLine } from 'react-icons/ri';
 import { useSidebar } from '../../hook/useSidebar';
 import { Container } from '../Layout/Container';
@@ -14,11 +11,16 @@ import { PagesNav } from './PagesNav';
 import { Profile } from './Profile';
 
 export function Header() {
+  const [session] = useSession();
   const { onOpen } = useSidebar();
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  if (!session?.user?.email) {
+    return (<Flex />);
+  }
 
   return (
     <Flex
@@ -32,11 +34,7 @@ export function Header() {
       bg="white"
     >
       <Container py="0" height="100%">
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          height="100%"
-        >
+        <Flex alignItems="center" justifyContent="space-between" height="100%">
           <HStack spacing="4">
             <Logo />
             {!isWideVersion && (
