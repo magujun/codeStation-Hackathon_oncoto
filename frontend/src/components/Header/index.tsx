@@ -30,7 +30,6 @@ export function Header() {
       mx="auto"
       align="center"
       boxShadow="-webkit-box-shadow: 0px 11px 18px 2px rgba(96,169,236,0.1);box-shadow: 0px 11px 18px 2px rgba(96,169,236,0.1);"
-      mb="4"
       bg="white"
     >
       {!isWideVersion && (

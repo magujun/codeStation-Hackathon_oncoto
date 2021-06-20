@@ -33,7 +33,7 @@ export type OutGetPlayer = {
 
 
 export const getPlayer = async (playerId: string) => {
-  const response = await api.get<OutGetPlayer>(`/players?playerId=${playerId}`);
+  const response = await api.get<OutGetPlayer>(`/players/${playerId}`);
 
   return response;
 };

@@ -24,6 +24,7 @@ export const Card = ({ image, text }: CardProps) => {
           objectFit="cover"
           objectPosition="center"
           bg="blue.200"
+          overflow="hidden"
         />
         <Flex h="100%" w="100%" borderRadius="4px" p="6">
           <Flex w="100%" h="60px" alignItems="center" justifyContent="center">
