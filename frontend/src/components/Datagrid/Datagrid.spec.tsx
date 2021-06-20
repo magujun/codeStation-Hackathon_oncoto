@@ -9,14 +9,14 @@ describe('Datagrid component', () => {
         field: 'id',
         headerName: 'Código',
         align: 'center',
-        headerAligin: 'center',
+        headerAlign: 'center',
         flex: 1,
       },
       {
         field: 'name',
         headerName: 'Nome',
         align: 'center',
-        headerAligin: 'center',
+        headerAlign: 'center',
         flex: 1,
       },
     ];

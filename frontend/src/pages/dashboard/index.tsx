@@ -24,28 +24,28 @@ const columns: DatagridColumn[] = [
     headerName: 'DATA',
     flex: 0.1,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
   },
   {
     field: 'time',
     headerName: 'TEMPO',
     flex: 0.5,
     align: 'left',
-    headerAligin: 'left',
+    headerAlign: 'left',
   },
   {
     field: 'level',
     headerName: 'NÍVEL',
     flex: 0.25,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
   },
   {
     field: 'score',
     headerName: 'PONTUAÇÃO',
     flex: 0.25,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
     color: 'blue.800',
   },
 ];
@@ -87,7 +87,7 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>oncoto | Dashboard</title>
+        <title>oncoto? | Dashboard</title>
       </Head>
       <main>
         <Container>

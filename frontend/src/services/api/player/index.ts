@@ -64,6 +64,11 @@ export const updatePlayer = async (input: InUpdatePlayer) => {
 
 export type OutGameHistory = {
   id: string;
+<<<<<<< Updated upstream:frontend/src/services/api/player/index.ts
+=======
+  date: Date;
+  time: number;
+>>>>>>> Stashed changes:frontend/src/services/player/index.ts
   level: string;
   gameDate: Date;
   score: number;
@@ -80,6 +85,6 @@ export const getGameHistoryPlayer = async (id: string) => {
   } catch (err) {
     console.log('error on get player history', err);
 
-    return { data: [] as OutGameHistory[]};
+    return { data: [] as OutGameHistory[] };
   }
 };
