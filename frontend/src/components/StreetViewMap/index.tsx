@@ -28,7 +28,7 @@ export const StreetViewMap = memo(({ googleMapsApiKey, startPoint }: StreetMapPr
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey}>
       <GoogleMap
-        id="street-view-gmap"
+        data-testid="gmap-street"
         mapContainerStyle={mapContainerStyle}
         center={startPoint}
         zoom={2}

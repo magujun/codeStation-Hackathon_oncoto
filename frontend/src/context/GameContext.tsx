@@ -3,9 +3,10 @@ import Router from 'next/router';
 import { differenceInSeconds } from 'date-fns';
 import { getFormatedElapsedTime } from '../utils/getFormatedElapsedTime';
 import { createContext } from 'use-context-selector';
-import { getDistanceBetweetTwoPoints } from '../utils/getDistanceBetweetTwoPoints';
+import { getDistanceBetweenTwoPoints } from '../utils/getDistanceBetweenTwoPoints';
 import { registerGame } from '../services/game';
 import { useSession } from 'next-auth/client';
+import { getPlayerScore } from '../utils/getPlayerScore';
 
 type GeoPoint = {
   lat: number;
@@ -90,7 +91,7 @@ export function GameProvider({ children }: GameProviderProps) {
         endGameTime,
       );
 
-      const distanceInMeters = guessPoint?.lat ? getDistanceBetweetTwoPoints(
+      const distanceInMeters = guessPoint?.lat ? getDistanceBetweenTwoPoints(
         {
           lat: goalPoint.lat,
           lng: goalPoint.long,
@@ -103,9 +104,12 @@ export function GameProvider({ children }: GameProviderProps) {
 
       setDistance(distanceInMeters);
       setElapsedTime(formatedElapsedTime);
-      setScore(guessPoint ? 4114 : 0);
 
       const elapseTime = differenceInSeconds(endGameTime, startGameTime);
+
+      const guessScore = getPlayerScore(distanceInMeters, difficultyLevel, elapseTime);
+
+      setScore(guessPoint?.lat ? guessScore : 0);
 
       const data = {
         playerId: session?.playerId as string ?? '',
@@ -114,10 +118,8 @@ export function GameProvider({ children }: GameProviderProps) {
         locationOrigin: `${goalPoint?.lat},${goalPoint?.long}`,
         locationMarked: guessPoint?.lat ? `${guessPoint?.lat},${guessPoint?.long}` : '',
         distance: distanceInMeters,
-        score: guessPoint?.lat ? 4114 : 0, // TO-DO
+        score: guessPoint?.lat ? guessScore : 0, // TO-DO
       };
-
-      console.log(data, endGameTime, startTime);
 
       registerGame(data);
 
