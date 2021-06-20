@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { UpdateRankingService } from '../../rankings/UpdateRankingService';
 import { CreateGameService } from './CreateGameService';
-import { UpdateRankingService } from '../rankings/UpdateRankingService';
 
 class CreateGameController {
 	async handle(request: Request, response: Response): Promise<Response> {
@@ -26,12 +26,18 @@ class CreateGameController {
 		});
 		const updateRankingService = container.resolve(UpdateRankingService);
 		await updateRankingService.execute({
+			game_id: null,
 			player_id,
 			level,
-			elapsedTime,
 			score,
+			nick: null,
+			avatar: null,
+			position: null,
 		});
-		return response.status(201).json('New game created!').send();
+		return response
+			.status(201)
+			.json('New game created and rankings updated!')
+			.send();
 	}
 }
 

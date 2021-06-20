@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IRankingsRepository } from '@src/modules/infra/typeorm/repositories/IRankingsRepository';
-import { IUpdateRankingDTO } from '@src/modules/infra/DTOs/IRankingDTO';
+import { IRankingDTO } from '@src/modules/infra/DTOs/IRankingDTO';
 
 @injectable()
 class UpdateRankingService {
@@ -17,7 +17,7 @@ class UpdateRankingService {
 		nick,
 		avatar,
 		position,
-	}: IUpdateRankingDTO): Promise<void> {
+	}: IRankingDTO): Promise<void> {
 		await this.rankingsRepository.update({
 			game_id,
 			player_id,
