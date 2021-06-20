@@ -1,17 +1,41 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	ManyToMany,
+	PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Game } from './Game';
+import { Player } from './Player';
 
 @Entity('ranking')
 class Ranking {
 	@PrimaryColumn()
-	gameId: string;
+	id: string;
 	@Column()
-	playerId: string;
+	game_id: string;
+	@ManyToMany(() => Game)
+	@JoinColumn({ name: 'game_id' })
+	@Column()
+	player_id: string;
+	@ManyToMany(() => Player)
+	@JoinColumn({ name: 'player_id' })
 	@Column()
 	level: string;
 	@Column()
 	score: number;
-	@CreateDateColumn()
-	gameDate: Date;
+	@Column()
+	nick: string;
+	@Column()
+	avatar: string;
+
+	constructor() {
+		if (!this.id) {
+			this.id = uuidv4();
+		}
+	}
 }
+
 export { Ranking };

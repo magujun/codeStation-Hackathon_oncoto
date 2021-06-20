@@ -1,21 +1,21 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IRankingsRepository } from '@src/modules/infra/typeorm/repositories/IRankingsRepository';
-import { ICreateRankingDTO } from '@src/modules/infra/DTOs/ICreateRankingDTO';
+import { IRankingDTO } from '@src/modules/infra/DTOs/IRankingDTO';
 
 @injectable()
-class CreateRankingService {
+class LoadRankingService {
 	constructor(
 		@inject('RankingsRepository')
 		private gamesRepository: IRankingsRepository
 	) {}
 	async execute({
-		  gameId,
-			playerId,
-			level,
-			score,
-	}: ICreateRankingDTO): Promise<void> {
-		await this.gamesRepository.create({
+		gameId,
+		playerId,
+		level,
+		score,
+	}: ILoadRankingDTO): Promise<void> {
+		await this.gamesRepository.load({
 			gameId,
 			playerId,
 			level,
@@ -24,4 +24,4 @@ class CreateRankingService {
 	}
 }
 
-export { CreateRankingService };
+export { LoadRankingService };

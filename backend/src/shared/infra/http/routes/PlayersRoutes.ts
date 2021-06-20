@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import multer from 'multer';
+// import multer from 'multer';
 
 import { authenticate } from '../middlewares/authentication';
 import uploadConfig from '@config/upload';
@@ -15,7 +15,7 @@ import { PlayerGamesController } from '@src/modules/services/players/playerGames
 // import { UpdatePlayerProfileController } from '@src/modules/services/players/updatePlayerAvatar/updatePlayerProfileController';
 
 const playersRoutes = Router();
-const uploadAvatar = multer(uploadConfig);
+// const uploadAvatar = multer(uploadConfig);
 
 const createPlayerController = new CreatePlayerController();
 const playerProfileController = new PlayerProfileController();
