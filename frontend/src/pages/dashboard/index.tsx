@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Box, Spinner, Text } from '@chakra-ui/react';
+import { Box, Spinner, Text, Flex, VStack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/client';
@@ -12,6 +12,7 @@ import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
 import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
 import { useMemo } from 'react';
+import { NewGame } from '../../components/NewGame';
 
 const columns: DatagridColumn[] = [
   {
@@ -77,42 +78,51 @@ const Dashboard = () => {
   );
 
   return (
-    <div>
+    <>
       <Head>
         <title>oncoto | Dashboard</title>
       </Head>
       <main>
         <Container>
-          <Text fontSize="4xl" fontWeight={500}>
-            Histórico de Partidas
-          </Text>
+          <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="4">
 
-          {rows?.length > 0 ? (
-            <Box w="100%">
-              {isLoading ? (
-                <Spinner />
+            <Flex w="100%" alignItems="center" justifyContent="center" >
+              <NewGame />
+            </Flex>
+
+            <VStack w="100%" alignItems="center" justifyContent="center" >
+              <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
+                Histórico de Partidas
+            </Text>
+
+              {rows?.length > 0 ? (
+                <Box w="100%">
+                  {isLoading ? (
+                    <Spinner />
+                  ) : (
+                    <Datagrid
+                      columns={columns}
+                      rows={rows ?? []}
+                      paddingCell={5}
+                      columnId="id"
+                      templateColumns={'0.15fr 0.85fr'}
+                    />
+                  )}
+                  <Pagination
+                    totalCountOfRegisters={data?.data.length ?? 0}
+                    onPageChange={(page: number) => setPage(page)}
+                    currentPage={page}
+                    registersPerPage={pageSize}
+                  />
+                </Box>
               ) : (
-                <Datagrid
-                  columns={columns}
-                  rows={rows ?? []}
-                  paddingCell={5}
-                  columnId="id"
-                  templateColumns={'0.15fr 0.85fr'}
-                />
+                <Text>Nenhuma partida encontrada</Text>
               )}
-              <Pagination
-                totalCountOfRegisters={data?.data.length ?? 0}
-                onPageChange={(page: number) => setPage(page)}
-                currentPage={page}
-                registersPerPage={pageSize}
-              />
-            </Box>
-          ) : (
-            <Text>Nenhuma partida encontrada</Text>
-          )}
+            </VStack>
+          </VStack>
         </Container>
       </main>
-    </div>
+    </>
   );
 };
 
