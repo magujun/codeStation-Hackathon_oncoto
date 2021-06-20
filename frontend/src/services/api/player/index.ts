@@ -64,11 +64,6 @@ export const updatePlayer = async (input: InUpdatePlayer) => {
 
 export type OutGameHistory = {
   id: string;
-<<<<<<< Updated upstream:frontend/src/services/api/player/index.ts
-=======
-  date: Date;
-  time: number;
->>>>>>> Stashed changes:frontend/src/services/player/index.ts
   level: string;
   gameDate: Date;
   score: number;

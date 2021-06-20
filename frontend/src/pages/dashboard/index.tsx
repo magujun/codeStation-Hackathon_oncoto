@@ -17,6 +17,7 @@ import {
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
 import { getFormatedTime } from '../../utils/getFormatedTime';
+import { DataCard } from '../../components/DataCard';
 
 const columns: DatagridColumn[] = [
   {
@@ -66,9 +67,9 @@ const Dashboard = () => {
   const rows = useMemo(
     () =>
       data?.data
-      .sort(function(a,b){
-        return new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime();
-      })
+        .sort(function (a, b) {
+          return new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime();
+        })
         .map((row: OutGameHistory, index) => {
           if (index < page * pageSize && index >= page * pageSize - pageSize) {
             return {
@@ -111,9 +112,35 @@ const Dashboard = () => {
             </Flex>
 
             <VStack w="100%" alignItems="center" justifyContent="center">
-              <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
+              <Text fontSize={{ base: '2xl', md: '4xl' }} fontWeight={500} alignSelf="flex-start">
                 Histórico de Partidas
               </Text>
+              <Box w="100%">
+                <DataCard
+                  rows={[{
+                    date: "20/06/2021",
+                    id: "1",
+                    level: "Dificil",
+                    score: 1000,
+                    time: "01:30",
+                  },
+                  {
+                    date: "20/06/2021",
+                    id: "2",
+                    level: "Dificil",
+                    score: 1000,
+                    time: "01:30",
+                  }]}
+                  columnId="id"
+                  templateColumns={'0.15fr 0.85fr'}
+                />
+                <Pagination
+                  totalCountOfRegisters={data?.data.length ?? 0}
+                  onPageChange={(page: number) => setPage(page)}
+                  currentPage={page}
+                  registersPerPage={pageSize}
+                />
+              </Box>
 
               {rows?.length > 0 ? (
                 <Box w="100%">
