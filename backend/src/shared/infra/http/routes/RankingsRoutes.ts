@@ -3,9 +3,9 @@ import { Router } from 'express';
 const rankingsRoutes = Router();
 
 import { authenticate } from '../middlewares/authentication';
-import { LoadRankingsController } from '@src/modules/services/rankings/LoadRankingsController';
+import { LoadRankingController } from '@src/modules/services/rankings/LoadRankingController';
 
-const loadRankingsController = new LoadRankingsController();
+const loadRankingsController = new LoadRankingController();
 
 rankingsRoutes.get('/', authenticate, loadRankingsController.handle);
 
