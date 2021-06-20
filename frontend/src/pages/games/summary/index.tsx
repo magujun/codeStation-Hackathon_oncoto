@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import { Box, Grid, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Grid, Stack, Text } from '@chakra-ui/react';
 
 import { withSSRAuth } from '../../../utils/withSSRAuth';
 import { useGameData } from '../../../hook/useGameData';
@@ -17,6 +17,9 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
   const { push } = useRouter();
   const { userGoalPoint, userGuessPoint, elapsedTime, distance, score } =
     useGameData();
+
+  const distanceInKM = distance / 1000;
+  const distanceInMi = distanceInKM / 1609.34;
 
   console.log(score, userGoalPoint, userGuessPoint, elapsedTime, distance);
 
@@ -56,7 +59,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
             <Stack display="flex" alignItems="center" justifyContent="center">
               <Text fontSize="1.5rem">Tempo</Text>
               <Text fontSize="6rem" fontWeight="bold">
-                {elapsedTime ?? ""}
+                {elapsedTime ?? ''}
               </Text>
             </Stack>
             <Stack
@@ -66,10 +69,64 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
             >
               <Text fontSize="1.5rem">Distância</Text>
               <Text fontSize="6rem" fontWeight="bold">
-                {distance < 0 ? '' : `${Math.floor(distance / 1000)} km`}
+                {distance < 0
+                  ? ''
+                  : distanceInKM > 1000
+                  ? `${Math.floor(distanceInMi)} mi`
+                  : `${Math.floor(distanceInKM)} km`}
               </Text>
             </Stack>
           </Grid>
+          <Box
+            mt="10"
+            mx="auto"
+            w={{ base: '100%', md: '600px' }}
+            height="250px"
+            display="flex"
+            flexDir="column"
+            alignContent="center"
+            justifyContent="center"
+            bg="white"
+            borderRadius="30px"
+          >
+            <Box p="100px" textAlign="center">
+              <Text fontWeight="bold" fontSize="1.75rem" mb="4">
+                Deseja jogar novamente?
+              </Text>
+              <Box w="100%" display="flex">
+                <Button
+                  size="lg"
+                  flex="1"
+                  m="1"
+                  bg="white.200"
+                  color="blue.900"
+                  border="1px solid"
+                  borderColor="blue.900"
+                  _hover={{
+                    bg: 'blue.900',
+                    color: 'white.200',
+                  }}
+                >
+                  Não
+                </Button>
+                <Button
+                  size="lg"
+                  flex="1"
+                  m="1"
+                  bg="blue.900"
+                  color="white.200"
+                  _hover={{
+                    bg: 'white.200',
+                    color: 'blue.900',
+                    borderColor: 'blue.900',
+                    border: '1px solid',
+                  }}
+                >
+                  Sim
+                </Button>
+              </Box>
+            </Box>
+          </Box>
         </Container>
       </main>
     </div>

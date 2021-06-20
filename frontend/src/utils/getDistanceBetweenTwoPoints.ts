@@ -5,7 +5,7 @@ export type LatLangData = {
   lng: number;
 };
 
-export function getDistanceBetweetTwoPoints(
+export function getDistanceBetweenTwoPoints(
   origin: LatLangData,
   destination: LatLangData
 ): number {

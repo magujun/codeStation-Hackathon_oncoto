@@ -4,6 +4,7 @@ type DifficultyLevel = 'easy' | 'medium' | 'hard';
 export const getPlayerScore = (distance: number, level: DifficultyLevel, elapseTime: number) => {
 
   const totalTime = getLevelTime(level);
+  const distanceInKm = distance / 1000;
   const percentNotUsed = totalTime <= 0 ? 0 : (100 - ((elapseTime * 1000) * 100 / totalTime)) / 100;
 
   const levelBonus = {
@@ -19,28 +20,28 @@ export const getPlayerScore = (distance: number, level: DifficultyLevel, elapseT
   if (distance < 0) return 0;
 
   // 0 a 1KM
-  if (distance > 0 && distance <= 1000) score += 800;
+  if (distanceInKm > 0 && distanceInKm <= 1) score += 800;
 
-  // between 1001 meters and 10000
-  if (distance > 1000 && distance <= 10000) score += 600;
+  // between +1KM meters and 10KM
+  if (distanceInKm > 1 && distanceInKm <= 10) score += 600;
 
-  // between 10.001 meters and 100 KM
-  if (distance > 10000 && distance <= 100000) score += 400;
+  // between +10KM meters and 100 KM
+  if (distanceInKm > 10 && distanceInKm <= 100) score += 400;
 
-  // between 100.001 meters and 1000 KM
-  if (distance > 100000 && distance <= 1000000) score += 200;
+  // between +100KM meters and 1000 KM
+  if (distanceInKm > 100 && distanceInKm <= 1000) score += 200;
 
-  // between 1.000.001 meters and 10.000 KM
-  if (distance > 1000000 && distance <= 10000000) score += 100;
+  // between +1.000KM meters and 10.000 KM
+  if (distanceInKm > 1000 && distanceInKm <= 10000) score += 100;
 
-  // between 10.000.001 meters and 100.000 KM
-  if (distance > 10000000 && distance <= 100000000) score += 50;
+  // between 10.000 KM meters and 100.000 KM
+  if (distanceInKm > 10000 && distanceInKm <= 100000) score += 50;
 
-  // between 100.000.001 meters and 1.000.000 KM
-  if (distance > 100000000 && distance <= 1000000000) score += 25;
+  // between +100.000 KM meters and 1.000.000 KM
+  if (distanceInKm > 100000 && distanceInKm <= 1000000) score += 25;
 
-  // between 1.000.000.001 meters and 10.000.000 KM
-  if (distance > 1000000000 && distance <= 10000000000) score += 15;
+  // between +1.000.000 KM meters and 10.000.000 KM
+  if (distanceInKm > 1000000 && distanceInKm <= 10000000) score += 15;
 
   score += 3;
 

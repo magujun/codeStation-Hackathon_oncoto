@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { differenceInSeconds } from 'date-fns';
 import { getFormatedElapsedTime } from '../utils/getFormatedElapsedTime';
 import { createContext } from 'use-context-selector';
-import { getDistanceBetweetTwoPoints } from '../utils/getDistanceBetweetTwoPoints';
+import { getDistanceBetweenTwoPoints } from '../utils/getDistanceBetweenTwoPoints';
 import { registerGame } from '../services/game';
 import { useSession } from 'next-auth/client';
 import { getPlayerScore } from '../utils/getPlayerScore';
@@ -91,7 +91,7 @@ export function GameProvider({ children }: GameProviderProps) {
         endGameTime,
       );
 
-      const distanceInMeters = guessPoint?.lat ? getDistanceBetweetTwoPoints(
+      const distanceInMeters = guessPoint?.lat ? getDistanceBetweenTwoPoints(
         {
           lat: goalPoint.lat,
           lng: goalPoint.long,
