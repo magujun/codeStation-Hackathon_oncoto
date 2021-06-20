@@ -51,7 +51,7 @@ export function GameProvider({ children }: GameProviderProps) {
 
   const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
     setDifficultyLevel(difficultyLevelInput);
-    Router.push('/games');
+    Router.push('/game');
   }, []);
 
   const handleEndGame = useCallback(async (endGameInput: EndGameInput) => {
