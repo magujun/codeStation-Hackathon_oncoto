@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import Router from 'next/router';
+
 import { GetServerSideProps } from 'next';
 import {
   Box,
-  Button,
   Grid,
   Stack,
   Text,
@@ -17,6 +17,8 @@ import { withSSRAuth } from '../../../utils/withSSRAuth';
 import { NewGame } from '.././../../components/NewGame';
 import { DisplayMap } from '../../../components/DisplayMap';
 import { Container } from '../../../components/Layout/Container';
+import { Button } from '../../../components/Button';
+import { OutlinedButton } from '../../../components/OutlinedButton';
 
 export type SummaryProps = {
   googleMapsApiKey: string;
@@ -24,6 +26,10 @@ export type SummaryProps = {
 
 const Summary = ({ googleMapsApiKey }: SummaryProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleRedirectUserToDashboard = useCallback(() => {
+    Router.push('/dashboard');
+  }, [Router]);
 
   const { userGoalPoint, userGuessPoint, elapsedTime, distance, score } =
     useGameData();
@@ -107,36 +113,16 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                 Deseja jogar novamente?
               </Text>
               <Box w="100%" display="flex">
-                <Link href="/dashboard" passHref>
-                  <Button
-                    as="a"
-                    size="lg"
-                    flex="1"
-                    m="1"
-                    bg="white.200"
-                    color="blue.900"
-                    border="1px solid"
-                    borderColor="blue.900"
-                    _hover={{
-                      bg: 'blue.900',
-                      color: 'white.200',
-                    }}
-                  >
-                    Não
-                  </Button>
-                </Link>
-                <Button
-                  size="lg"
-                  flex="1"
+                <OutlinedButton
                   m="1"
-                  bg="blue.900"
-                  color="white.200"
-                  _hover={{
-                    bg: 'white.200',
-                    color: 'blue.900',
-                    borderColor: 'blue.900',
-                    border: '1px solid',
-                  }}
+                  flex="1"
+                  onClick={handleRedirectUserToDashboard}
+                >
+                  Não
+                </OutlinedButton>
+                <Button
+                  m="1"
+                  flex="1"
                   onClick={onOpen}
                 >
                   Sim
