@@ -155,7 +155,6 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
                 borderTopRightRadius={0}
                 disabled={!guess?.lat}
                 onClick={handleConfirmarClick}
-                isPrimary
               >
                 Confirmar
               </Button>
