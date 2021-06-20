@@ -4,6 +4,7 @@ import { IRankingDTO } from '@src/modules/infra/DTOs/IRankingDTO';
 import { IRankingsRepository } from '@src/modules/infra/typeorm/repositories/IRankingsRepository';
 import { Ranking } from '../entities/Ranking';
 import { Player } from '../entities/Player';
+import { IRankingResponseDTO } from '../../DTOs/IRankingResponseDTO';
 
 interface PlayerData {
 	nick: string;
@@ -45,7 +46,7 @@ class RankingsRepository implements IRankingsRepository {
 			await this.repository.save(ranking);
 		} else {
 			const sortedRanking = currentRanking.sort(
-				(element1, element2) => element1.score - element2.score
+				(element1, element2) => element2.score - element1.score
 			);
 			console.log('Sorted repository ranking: ', sortedRanking);
 			if (sortedRanking.length < 50) {
@@ -73,9 +74,12 @@ class RankingsRepository implements IRankingsRepository {
 		}
 	}
 	// SELECT * FROM rankings
-	async list(): Promise<Ranking[]> {
+	async list(): Promise<IRankingResponseDTO[]> {
 		const rankings = await this.repository.find();
-		return rankings;
+		const sortedRanking = rankings
+			.sort((element1, element2) => element2.score - element1.score)
+			.map((element, index) => Object.assign(element, { position: index + 1 }));
+		return sortedRanking;
 	}
 }
 export { RankingsRepository };
