@@ -8,7 +8,7 @@ export type DatagridColumn = {
   field: string;
   headerName: string;
   align: DatagridColumnAlign;
-  headerAligin: DatagridColumnAlign;
+  headerAlign: DatagridColumnAlign;
   flex: number;
   color?: string;
 };

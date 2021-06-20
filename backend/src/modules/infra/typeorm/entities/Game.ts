@@ -1,5 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Player } from './Player';
 
 @Entity('games')
 class Game {
@@ -7,6 +15,8 @@ class Game {
 	id?: string;
 	@Column()
 	player_id: string;
+	@ManyToOne(() => Player)
+	@JoinColumn({ name: 'player_id' })
 	@Column()
 	level: string;
 	@Column()

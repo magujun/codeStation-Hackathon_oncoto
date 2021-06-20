@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import { session } from 'next-auth/client';
 import Providers from 'next-auth/providers';
-import { createPlayer, getPlayer } from '../../../services/player';
+import { createPlayer, getPlayer } from '../../../services/api/player';
 import { getPlayerNick } from '../../../utils/getPlayerNick';
 import { getPlayerId } from '../../../utils/getPlayerId';
 

@@ -13,6 +13,9 @@ import { RankingsRepository } from '@src/modules/infra/typeorm/repositories/Rank
 import { ILocationsRepository } from '@src/modules/infra/typeorm/repositories/ILocationsRepository';
 import { LocationsRepository } from '@src/modules/infra/typeorm/repositories/LocationsRepository';
 
+import { IPlayerGamesRepository } from '@src/modules/infra/typeorm/repositories/IPlayerGamesRepository';
+import { PlayerGamesRepository } from '@src/modules/infra/typeorm/repositories/PlayerGamesRepository';
+
 // IPlayersRepository
 container.registerSingleton<IPlayersRepository>(
 	'PlayersRepository',
@@ -35,4 +38,10 @@ container.registerSingleton<IRankingsRepository>(
 container.registerSingleton<ILocationsRepository>(
 	'LocationsRepository',
 	LocationsRepository
+);
+
+// IPlayerGamesRepository
+container.registerSingleton<IPlayerGamesRepository>(
+	'PlayerGamesRepository',
+	PlayerGamesRepository
 );

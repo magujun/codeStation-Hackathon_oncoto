@@ -68,7 +68,7 @@ export const Map = memo(
             }}
             ref={ref}
           >
-            {guess?.lat && <Marker position={guess} />}
+            {guess?.lat && <Marker position={guess} icon='/images/red_point.svg' />}
           </GoogleMap>
         </LoadScriptNext>
       </>
