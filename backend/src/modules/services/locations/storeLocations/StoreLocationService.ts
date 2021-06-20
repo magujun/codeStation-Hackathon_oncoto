@@ -1,10 +1,10 @@
-import { ICreateLocationDTO } from '@src/modules/infra/DTOs/ICreateLocationDTO';
+import { IStoreLocationDTO } from '@src/modules/infra/DTOs/IStoreLocationDTO';
 import { ILocationsRepository } from '@src/modules/infra/typeorm/repositories/ILocationsRepository';
 import { AppError } from '@src/shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
-class CreateLocationService {
+class StoreLocationService {
 	constructor(
 		@inject('LocationsRepository')
 		private locationsRepository: ILocationsRepository
@@ -35,7 +35,7 @@ class CreateLocationService {
 		airport,
 		park,
 		point_of_interest,
-	}: ICreateLocationDTO): Promise<void> {
+	}: IStoreLocationDTO): Promise<void> {
 		const locationAlreadyExists = await this.locationsRepository.findByPlusCode(
 			plus_code
 		);
@@ -71,4 +71,4 @@ class CreateLocationService {
 	}
 }
 
-export { CreateLocationService };
+export { StoreLocationService };

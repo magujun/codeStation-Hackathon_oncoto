@@ -1,4 +1,4 @@
-interface ICreateLocationDTO {
+interface IStoreLocationDTO {
 	// indicates an encoded location reference, derived from latitude and longitude.Plus codes can be used as a replacement for street addresses in places where they do not exist(where buildings are not numbered or streets are not named).See https://plus.codes for details.
 	plus_code: string;
 	// indicates a precise street address.
@@ -46,4 +46,4 @@ interface ICreateLocationDTO {
 	// indicates a first-order entity below a named location, usually a singular building within a collection of buildings with a common name
 	subpremise?: string;
 }
-export { ICreateLocationDTO };
+export { IStoreLocationDTO };
