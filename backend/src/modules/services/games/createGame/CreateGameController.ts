@@ -34,7 +34,6 @@ class CreateGameController {
 			score,
 			nick: null,
 			avatar: null,
-			position: null,
 		});
 		return response
 			.status(201)

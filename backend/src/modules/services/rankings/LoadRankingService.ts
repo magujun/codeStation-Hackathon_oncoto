@@ -7,20 +7,11 @@ import { IRankingDTO } from '@src/modules/infra/DTOs/IRankingDTO';
 class LoadRankingService {
 	constructor(
 		@inject('RankingsRepository')
-		private gamesRepository: IRankingsRepository
+		private rankingsRepository: IRankingsRepository
 	) {}
-	async execute({
-		gameId,
-		playerId,
-		level,
-		score,
-	}: ILoadRankingDTO): Promise<void> {
-		await this.gamesRepository.load({
-			gameId,
-			playerId,
-			level,
-			score,
-		});
+	async execute(): Promise<IRankingDTO[]> {
+		const rankings = await this.rankingsRepository.list();
+		return rankings;
 	}
 }
 
