@@ -1,4 +1,4 @@
-import { VStack, Text, Box } from "@chakra-ui/react";
+import { VStack, Text, Box, ResponsiveValue } from "@chakra-ui/react";
 import { Button } from "../Button";
 import { RadioBox } from "../RadioBox";
 import { BiWorld } from 'react-icons/bi';
@@ -8,10 +8,11 @@ import { useGameData } from "../../hook/useGameData";
 type difficultyLevel = "easy" | "medium" | "hard";
 
 interface NewGameProps {
-  alignTitle?: string
+  alignSelfTitle?: string;
+  textAlignTitle?: "start" | "center" | "end";
 }
 
-export function NewGame({ alignTitle = "flex-start" }: NewGameProps) {
+export function NewGame({ alignSelfTitle = "flex-start", textAlignTitle = "start" }: NewGameProps) {
   const [difficultyLevel, setDifficultyLevel] = useState<difficultyLevel>("easy");
 
   const { onStartNewGame } = useGameData();
@@ -22,14 +23,8 @@ export function NewGame({ alignTitle = "flex-start" }: NewGameProps) {
       spacing="8"
       py="8"
       px="10"
-      backgroundColor="rgba(255, 255, 255, 0.85)"
-      borderColor="rgba(159, 209, 255, 0.2);"
-      borderWidth="1px"
-      borderStyle="solid"
-      borderRadius="2rem"
-      boxShadow="4px 10px 30px rgba(159, 209, 255, 0.1);"
     >
-      <Text fontSize={{ base: "md", sm: "lg", md: "2xl" }} fontWeight={700} alignSelf={alignTitle}>
+      <Text fontSize={{ base: "md", sm: "lg", md: "2xl" }} textAlign={textAlignTitle} fontWeight={700} alignSelf={alignSelfTitle}>
         Escolha um nível de dificuldade <br />
         e inicie um novo jogo:
       </Text>
