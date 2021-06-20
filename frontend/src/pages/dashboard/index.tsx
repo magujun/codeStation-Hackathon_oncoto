@@ -10,7 +10,7 @@ import { Datagrid } from '../../components/Datagrid';
 import { DatagridColumn } from '../../components/Datagrid/Types';
 import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
-import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
+import { getGameHistoryPlayer, OutGameHistory } from '../../services/api/player';
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
 

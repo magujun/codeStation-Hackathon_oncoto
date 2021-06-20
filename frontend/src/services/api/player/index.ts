@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { api } from '../api';
+import { api } from '..';
 
 export type InPlayer = {
   playerId: string;

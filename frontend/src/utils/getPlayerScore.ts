@@ -19,6 +19,8 @@ export const getPlayerScore = (distance: number, level: DifficultyLevel, elapseT
 
   if (distance < 0) return 0;
 
+  console.log('get player score', distanceInKm);
+
   // 0 a 1KM
   if (distanceInKm > 0 && distanceInKm <= 1) score += 800;
 
@@ -26,13 +28,13 @@ export const getPlayerScore = (distance: number, level: DifficultyLevel, elapseT
   if (distanceInKm > 1 && distanceInKm <= 10) score += 600;
 
   // between +10KM meters and 100 KM
-  if (distanceInKm > 10 && distanceInKm <= 100) score += 400;
+  if (distanceInKm > 10 && distanceInKm <= 100) score += 500;
 
   // between +100KM meters and 1000 KM
-  if (distanceInKm > 100 && distanceInKm <= 1000) score += 200;
+  if (distanceInKm > 100 && distanceInKm <= 1000) score += 400;
 
   // between +1.000KM meters and 10.000 KM
-  if (distanceInKm > 1000 && distanceInKm <= 10000) score += 100;
+  if (distanceInKm > 1000 && distanceInKm <= 10000) score += 300;
 
   // between 10.000 KM meters and 100.000 KM
   if (distanceInKm > 10000 && distanceInKm <= 100000) score += 50;

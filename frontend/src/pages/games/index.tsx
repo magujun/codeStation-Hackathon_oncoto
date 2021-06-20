@@ -11,7 +11,7 @@ import { Map } from '../../components/Map';
 import { StreetViewMap } from '../../components/StreetViewMap';
 import { Button } from '../../components/Button';
 import { useGameData } from '../../hook/useGameData';
-import { getRandomLocation } from '../../services/locations';
+import { getRandomLocation } from '../../services/api/locations';
 import { Timer } from '../../components/Timer';
 import { getLevelTime } from '../../utils/getLevelTime';
 

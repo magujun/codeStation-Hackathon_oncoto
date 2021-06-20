@@ -4,7 +4,7 @@ import { differenceInSeconds } from 'date-fns';
 import { getFormatedElapsedTime } from '../utils/getFormatedElapsedTime';
 import { createContext } from 'use-context-selector';
 import { getDistanceBetweenTwoPoints } from '../utils/getDistanceBetweenTwoPoints';
-import { registerGame } from '../services/game';
+import { registerGame } from '../services/api/game';
 import { useSession } from 'next-auth/client';
 import { getPlayerScore } from '../utils/getPlayerScore';
 
