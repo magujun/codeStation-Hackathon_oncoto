@@ -17,6 +17,7 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@prismicio/client": "^5.1.0",
     "@react-google-maps/api": "^2.2.0",
     "axios": "^0.21.1",
     "date-fns": "2.22.1",
