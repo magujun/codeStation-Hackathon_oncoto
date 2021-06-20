@@ -27,6 +27,13 @@
       "provider": "google",
       "nick": "Marcelo",
       "id": 4
+    },
+    {
+      "avatar": "https://lh3.googleusercontent.com/a/AATXAJxHFkkWkwgiUl2pVibzCNZkx3Fh6CzjMdmv6mPI=s96-c",
+      "playerId": "oncoto.dev",
+      "provider": "google",
+      "nick": "Oncoto D.",
+      "id": 5
     }
   ],
   "pastgames": [

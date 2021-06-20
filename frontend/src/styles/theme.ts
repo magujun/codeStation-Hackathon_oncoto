@@ -35,7 +35,20 @@ const config = {
       ".mask": {
         webkitMaskImage: 'url("/avatarMask.svg")',
         maskImage: 'url("/avatarMask.svg")',
-      }
+      },
+      ".instructionsContent p, ul": {
+        margin: '1.5rem 0',
+      },
+      ".instructionsContent p.block-img img": {
+        maxWidth: '90%',
+        margin: '0 auto',
+      },
+      ".instructionsContent ul": {
+        paddingLeft: '1.5rem',
+      },
+      ".instructionsContent ul li": {
+        margin: '0.5rem 0',
+      },
     }),
   },
 };
