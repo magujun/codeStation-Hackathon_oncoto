@@ -5,13 +5,15 @@ interface ButtonProps extends ChakraUIButtonProps {
   children: ReactNode;
 }
 
-export const Button = memo(({ children, ...rest }: ButtonProps) => {
+export const OutlinedButton = memo(({ children, ...rest }: ButtonProps) => {
   return (
     <ChakraUIButton
-      variant="solid"
-      bg="blue.900"
-      color="white"
-      _hover={{ filter: 'brightness(1.1)' }}
+      variant="outline"
+      bg="transparent"
+      color="blue.900"
+      borderColor="blue.900"
+      borderWidth={1}
+      _hover={{ backgroundColor: 'blue.900', color: 'white' }}
       w={{ base: "12.5rem", lg: "15.625rem" }}
       h="3.375rem"
       fontSize="1.25rem"

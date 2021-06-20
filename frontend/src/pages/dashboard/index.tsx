@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Box, Spinner, Text } from '@chakra-ui/react';
+import { Box, Spinner, Text, Flex, VStack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/client';
@@ -12,8 +12,7 @@ import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
 import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
 import { useMemo } from 'react';
-import { Button } from '../../components/Button';
-import { useGameData } from '../../hook/useGameData';
+import { NewGame } from '../../components/NewGame';
 
 const columns: DatagridColumn[] = [
   {
@@ -51,7 +50,6 @@ const Dashboard = () => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const [session] = useSession();
-  const { onStartNewGame } = useGameData();
 
   const { data, isLoading } = useQuery(
     ['select-history', session?.playerId],
@@ -80,57 +78,51 @@ const Dashboard = () => {
   );
 
   return (
-    <div>
+    <>
       <Head>
         <title>oncoto | Dashboard</title>
       </Head>
       <main>
-        <Container mt="4">
-          <Text fontSize="4xl" fontWeight={500} mb="4">
-            Jogar
-          </Text>
-          <Box mb="4" display="flex" justifyContent="space-between">
-            <Button mb="8" onClick={() => onStartNewGame('easy')}>
-              Fácil
-            </Button>
-            <Button mb="8" onClick={() => onStartNewGame('medium')}>
-              Médio
-            </Button>
-            <Button mb="8" onClick={() => onStartNewGame('hard')}>
-              Difícil
-            </Button>
-          </Box>
+        <Container>
+          <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="8">
 
-          <Text fontSize="4xl" fontWeight={500} mb="4">
-            Histórico de Partidas
-          </Text>
+            <Flex w="100%" alignItems="center" justifyContent="center" >
+              <NewGame />
+            </Flex>
 
-          {rows?.length > 0 ? (
-            <Box w="100%">
-              {isLoading ? (
-                <Spinner />
+            <VStack w="100%" alignItems="center" justifyContent="center" >
+              <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
+                Histórico de Partidas
+            </Text>
+
+              {rows?.length > 0 ? (
+                <Box w="100%">
+                  {isLoading ? (
+                    <Spinner />
+                  ) : (
+                    <Datagrid
+                      columns={columns}
+                      rows={rows ?? []}
+                      paddingCell={5}
+                      columnId="id"
+                      templateColumns={'0.15fr 0.85fr'}
+                    />
+                  )}
+                  <Pagination
+                    totalCountOfRegisters={data?.data.length ?? 0}
+                    onPageChange={(page: number) => setPage(page)}
+                    currentPage={page}
+                    registersPerPage={pageSize}
+                  />
+                </Box>
               ) : (
-                <Datagrid
-                  columns={columns}
-                  rows={rows ?? []}
-                  paddingCell={5}
-                  columnId="id"
-                  templateColumns={'0.15fr 0.85fr'}
-                />
+                <Text>Nenhuma partida encontrada</Text>
               )}
-              <Pagination
-                totalCountOfRegisters={data?.data.length ?? 0}
-                onPageChange={(page: number) => setPage(page)}
-                currentPage={page}
-                registersPerPage={pageSize}
-              />
-            </Box>
-          ) : (
-            <Text>Nenhuma partida encontrada</Text>
-          )}
+            </VStack>
+          </VStack>
         </Container>
       </main>
-    </div>
+    </>
   );
 };
 
