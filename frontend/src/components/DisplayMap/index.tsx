@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useRef, useState } from 'react';
 import { GoogleMap, Marker, LoadScriptNext } from '@react-google-maps/api';
 
-const mapContainerStyle: React.CSSProperties = {
+const displayMapContainerStyle: React.CSSProperties = {
   width: '100%',
   height: '100%',
   top: 0,
@@ -13,62 +13,41 @@ type Position = {
   lng: number;
 };
 
-type MapProps = {
+type DisplayMapProps = {
   googleMapsApiKey: string;
+  goal?: Position;
+  guess?: Position;
   center: Position;
   zoom?: number;
-  onGuess?: (guess: Position) => void;
 };
 
-export const Map = memo(
+export const DisplayMap = memo(
   ({
     googleMapsApiKey,
-    onGuess,
+    guess,
+    goal,
     center,
     zoom = 3,
-  }: MapProps) => {
-    const [guess, setGuess] = useState<Position>(null);
-    const ref = useRef<GoogleMap>();
+  }: DisplayMapProps) => {
     const centerRef = useRef<Position>(center);
     const zoomRef = useRef<number>(zoom)
-
-    const handleMapClick = useCallback(
-      (e: any) => {
-        const { latLng } = e;
-
-        const destination = {
-          lat: latLng.lat() as number,
-          lng: latLng.lng() as number,
-        };
-
-        setGuess(destination);
-        if (onGuess) onGuess(destination);
-      },
-      [onGuess],
-    );
 
     return (
       <>
         <LoadScriptNext googleMapsApiKey={googleMapsApiKey}>
           <GoogleMap
-            data-testid="gmap-maker"
-            mapContainerStyle={mapContainerStyle}
+            data-testid="gmap-display-makers"
+            mapContainerStyle={displayMapContainerStyle}
             center={centerRef.current}
-            onClick={handleMapClick}
             zoom={zoomRef.current}
             clickableIcons={false}
             options={{
               disableDefaultUI: true,
               clickableIcons: false,
-              fullscreenControl: true,
-              fullscreenControlOptions: {
-                position: 5,
-              },
-              zoomControl: true,
             }}
-            ref={ref}
           >
             {guess?.lat && <Marker position={guess} />}
+            {goal?.lat && <Marker position={goal} icon="/images/top1.svg" />}
           </GoogleMap>
         </LoadScriptNext>
       </>

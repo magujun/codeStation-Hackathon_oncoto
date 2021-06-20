@@ -5,9 +5,9 @@ export type LatLangData = {
   lng: number;
 };
 
-export function getDistanceBetweetTwoPoints(
+export function getDistanceBetweenTwoPoints(
   origin: LatLangData,
   destination: LatLangData
 ): number {
-  return origin && destination ? haversineDistance(origin, destination) : 0;
+  return origin?.lat && destination?.lat ? haversineDistance(origin, destination) : -1;
 }

@@ -17,7 +17,7 @@ export default function Home() {
         <Box
           width="100%"
           height="50vh"
-          bg="linear-gradient(180deg, #ffffffdc 0%, #4996deef 60%)"
+          bg="blue.900"
           display="flex"
           alignItems="center"
           justifyContent="center"
