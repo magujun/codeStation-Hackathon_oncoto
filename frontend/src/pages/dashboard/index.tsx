@@ -130,9 +130,6 @@ export default Dashboard;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
-    // const session = await getSession(context);
-    // console.log(session);
-
     return {
       props: {},
     };

@@ -30,8 +30,21 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
 
   const distanceInKM = distance / 1000;
   const distanceInMi = distanceInKM / 1609.34;
+  const guessIcon =
+    distanceInKM <= 10
+      ? '/images/green_point.svg'
+      : distanceInKM <= 100
+      ? '/images/yellow_point.svg'
+      : '';
 
-  console.log(score, userGoalPoint, userGuessPoint, elapsedTime, distance);
+  console.log(
+    'summary values',
+    score,
+    userGoalPoint,
+    userGuessPoint,
+    elapsedTime,
+    distance,
+  );
 
   return (
     <div>
@@ -39,7 +52,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
         <title>oncoto | History</title>
       </Head>
       <main>
-        <Box w="100%" h="300px">
+        <Box w="100%" h="30vh">
           <DisplayMap
             googleMapsApiKey={googleMapsApiKey}
             center={{
@@ -55,6 +68,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               lat: userGuessPoint?.lat,
               lng: userGuessPoint?.long,
             }}
+            guessIcon={guessIcon}
           />
         </Box>
         <Container mt="4" fontWeight="bold">
@@ -113,13 +127,13 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                     size="lg"
                     flex="1"
                     m="1"
-                    bg="white.200"
+                    bg="white"
                     color="blue.900"
                     border="1px solid"
                     borderColor="blue.900"
                     _hover={{
                       bg: 'blue.900',
-                      color: 'white.200',
+                      color: 'white',
                     }}
                   >
                     Não
@@ -130,9 +144,9 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                   flex="1"
                   m="1"
                   bg="blue.900"
-                  color="white.200"
+                  color="white"
                   _hover={{
-                    bg: 'white.200',
+                    bg: 'white',
                     color: 'blue.900',
                     borderColor: 'blue.900',
                     border: '1px solid',
