@@ -1,20 +1,30 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { GetServerSideProps } from 'next';
-import { Box, Button, Grid, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Grid,
+  Stack,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 
-import { withSSRAuth } from '../../../utils/withSSRAuth';
+import { Modal } from '../../../components/Modal';
 import { useGameData } from '../../../hook/useGameData';
-import { Container } from '../../../components/Layout/Container';
+import { withSSRAuth } from '../../../utils/withSSRAuth';
+import { NewGame } from '.././../../components/NewGame';
 import { DisplayMap } from '../../../components/DisplayMap';
+import { Container } from '../../../components/Layout/Container';
 
 export type SummaryProps = {
   googleMapsApiKey: string;
 };
 
 const Summary = ({ googleMapsApiKey }: SummaryProps) => {
-  const { push } = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { userGoalPoint, userGuessPoint, elapsedTime, distance, score } =
     useGameData();
 
@@ -32,8 +42,11 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
         <Box w="100%" h="300px">
           <DisplayMap
             googleMapsApiKey={googleMapsApiKey}
-            center={{ lat: 0, lng: 0 }}
-            zoom={2}
+            center={{
+              lat: userGoalPoint?.lat,
+              lng: userGoalPoint?.long,
+            }}
+            zoom={1}
             goal={{
               lat: userGoalPoint?.lat,
               lng: userGoalPoint?.long,
@@ -71,7 +84,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               <Text fontSize="6rem" fontWeight="bold">
                 {distance < 0
                   ? ''
-                  : distanceInKM > 1000
+                  : distanceInKM > 1800
                   ? `${Math.floor(distanceInMi)} mi`
                   : `${Math.floor(distanceInKM)} km`}
               </Text>
@@ -94,21 +107,24 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                 Deseja jogar novamente?
               </Text>
               <Box w="100%" display="flex">
-                <Button
-                  size="lg"
-                  flex="1"
-                  m="1"
-                  bg="white.200"
-                  color="blue.900"
-                  border="1px solid"
-                  borderColor="blue.900"
-                  _hover={{
-                    bg: 'blue.900',
-                    color: 'white.200',
-                  }}
-                >
-                  Não
-                </Button>
+                <Link href="/dashboard" passHref>
+                  <Button
+                    as="a"
+                    size="lg"
+                    flex="1"
+                    m="1"
+                    bg="white.200"
+                    color="blue.900"
+                    border="1px solid"
+                    borderColor="blue.900"
+                    _hover={{
+                      bg: 'blue.900',
+                      color: 'white.200',
+                    }}
+                  >
+                    Não
+                  </Button>
+                </Link>
                 <Button
                   size="lg"
                   flex="1"
@@ -121,6 +137,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                     borderColor: 'blue.900',
                     border: '1px solid',
                   }}
+                  onClick={onOpen}
                 >
                   Sim
                 </Button>
@@ -129,6 +146,9 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
           </Box>
         </Container>
       </main>
+      <Modal open={isOpen} onClose={onClose}>
+        <NewGame alignTitle="center" />
+      </Modal>
     </div>
   );
 };
