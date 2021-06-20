@@ -25,16 +25,15 @@ const Instructions = ({ guide }: InstructionsProps) => {
         <Container mt="4">
           <Box
             as="article"
-            maxWidth="45rem"
-            margin="5rem auto 0"
           >
             <Text fontSize="4xl" fontWeight={500}>
-              Instructions
+              Instruções
             </Text>
             <Box
               className="instructionsContent"
               lineHeight="2rem"
               fontSize="1.125rem"
+              margin="2rem auto 0"
               dangerouslySetInnerHTML={{ __html: guide.content }}
             />
           </Box>
@@ -48,9 +47,11 @@ export default Instructions;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
-    const prismic = getPrismicClient();
+    const { req } = context;
 
-    const response = await prismic.getByUID('content', 'instructions', {});
+    const prismic = getPrismicClient(req);
+
+    const response = await prismic.getByUID('instructions', 'guide', {});
 
     const guide = {
       content: RichText.asHtml(response.data.content)
