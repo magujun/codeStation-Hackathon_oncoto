@@ -63,18 +63,17 @@ export const updatePlayer = async (input: InUpdatePlayer) => {
 };
 
 export type OutGameHistory = {
-  id: number;
-  date: Date;
-  time: string;
+  id: string;
   level: string;
+  gameDate: Date;
   score: number;
+  elapsedTime: number;
 };
 
-// TODO: tipar o retorno
 export const getGameHistoryPlayer = async (id: string) => {
   try {
     const response = await api.get<OutGameHistory[]>(
-      `/players/${id}/pastgames`,
+      `/players/${id}/games`,
     );
 
     return response;
