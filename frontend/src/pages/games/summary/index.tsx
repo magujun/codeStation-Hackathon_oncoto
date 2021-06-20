@@ -37,15 +37,6 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
       ? '/images/yellow_point.svg'
       : '';
 
-  console.log(
-    'summary values',
-    score,
-    userGoalPoint,
-    userGuessPoint,
-    elapsedTime,
-    distance,
-  );
-
   return (
     <div>
       <Head>

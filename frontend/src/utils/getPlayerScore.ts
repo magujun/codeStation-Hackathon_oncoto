@@ -23,8 +23,6 @@ export const getPlayerScore = (
 
   if (distance < 0) return 0;
 
-  console.log('get player score', distanceInKm);
-
   if (distance <= 100) {
     score = 1000;
   } else if (distanceInKm <= 1) {

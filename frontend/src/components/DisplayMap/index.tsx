@@ -53,11 +53,11 @@ export const DisplayMap = memo(
             {guess?.lat && (
               <Marker
                 position={guess}
-                icon={guessIcon ? guessIcon : '/images/blue_point.svg'}
+                icon={guessIcon ? guessIcon : '/images/red_point.svg'}
               />
             )}
             {goal?.lat && (
-              <Marker position={goal} icon="/images/red_point.svg" />
+              <Marker position={goal} icon="/images/blue_point.svg" />
             )}
           </GoogleMap>
         </LoadScriptNext>
