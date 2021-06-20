@@ -98,7 +98,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               <Text fontSize="6rem" fontWeight="bold">
                 {distance < 0
                   ? ''
-                  : distanceInKM > 1800
+                  : distanceInKM > 9999
                   ? `${Math.floor(distanceInMi)} mi`
                   : `${Math.floor(distanceInKM)} km`}
               </Text>
