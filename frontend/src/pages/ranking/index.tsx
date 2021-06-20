@@ -92,7 +92,7 @@ const Ranking = ({ data } : RankingProps) => {
         <title>oncoto | Ranking</title>
       </Head>
       <main>
-        <Container>
+        <Container mt="4">
           <Text fontSize="4xl" fontWeight={500}>
             Ranking
           </Text>

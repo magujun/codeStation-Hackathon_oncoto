@@ -29,7 +29,7 @@ export const ActiveLink = ({ href, text }: ActiveLinkProps) => {
             transition: 'color 0.5s',
           }}
           as="a"
-          fontWeight={isActive ? '800' : '500'}
+          fontWeight={isActive ? '750' : '500'}
           color={isActive && 'blue.800'}
         >
           {text}

@@ -57,8 +57,13 @@ export const Map = memo(
             zoom={zoomRef.current}
             clickableIcons={false}
             options={{
-              clickableIcons: false,
               disableDefaultUI: true,
+              clickableIcons: false,
+              fullscreenControl: true,
+              fullscreenControlOptions: {
+                position: 5,
+              },
+              zoomControl: true,
             }}
             ref={ref}
           >

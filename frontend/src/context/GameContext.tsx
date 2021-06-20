@@ -1,19 +1,23 @@
 import { ReactNode, useCallback, useState } from 'react';
 import Router from 'next/router';
+import { differenceInSeconds } from 'date-fns';
 import { getFormatedElapsedTime } from '../utils/getFormatedElapsedTime';
 import { createContext } from 'use-context-selector';
-// import { api } from '../services/api';
+import { getDistanceBetweetTwoPoints } from '../utils/getDistanceBetweetTwoPoints';
+import { registerGame } from '../services/game';
+import { useSession } from 'next-auth/client';
 
 type GeoPoint = {
   lat: number;
   long: number;
-}
+};
 
 type EndGameInput = {
   goalPoint: GeoPoint;
   guessPoint: GeoPoint | undefined;
+  startGameTime: Date;
   endGameTime: Date;
-}
+};
 
 type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
@@ -25,6 +29,7 @@ export interface GameContextData {
   difficultyLevel: DifficultyLevel;
   elapsedTime: string;
   distance: number;
+  score: number;
   handleStartNewGame: (difficultyLevelInput: DifficultyLevel) => void;
   handleEndGame: (endGameInput: EndGameInput) => void;
   handleStartTime: (time: Date) => void;
@@ -34,70 +39,113 @@ interface GameProviderProps {
   children: ReactNode;
 }
 
-export const GameContext = createContext<GameContextData>({} as GameContextData);
+export const GameContext = createContext<GameContextData>(
+  {} as GameContextData,
+);
 
 export function GameProvider({ children }: GameProviderProps) {
+  const [session] = useSession();
   const [userGuessPoint, setUserGuessPoint] = useState<GeoPoint>(null);
   const [userGoalPoint, setUserGoalPoint] = useState<GeoPoint>(null);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState('');
   const [distance, setDistance] = useState(0);
-  const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>('easy');
+  const [difficultyLevel, setDifficultyLevel] = useState<DifficultyLevel>(null);
+  const [score, setScore] = useState<number>(null);
 
   const handleStartTime = useCallback((time: Date) => {
     setStartTime(time);
   }, []);
 
-  const handleStartNewGame = useCallback((difficultyLevelInput: DifficultyLevel) => {
-    setDifficultyLevel(difficultyLevelInput);
-    Router.push('/game');
-  }, []);
+  const handleStartNewGame = useCallback(
+    (difficultyLevelInput: DifficultyLevel) => {
+      setDifficultyLevel(difficultyLevelInput);
+      // reset values
+      setEndTime(null);
+      setUserGoalPoint(null);
+      setUserGuessPoint(null);
+      setScore(null);
 
-  const handleEndGame = useCallback(async (endGameInput: EndGameInput) => {
-    const { endGameTime, guessPoint, goalPoint } = endGameInput;
 
-    setEndTime(endGameTime);
-    setUserGoalPoint(goalPoint);
+      Router.push('/games');
+    },
+    [],
+  );
 
-    if (guessPoint) {
-      setUserGuessPoint(guessPoint);
-    }
+  const handleEndGame = useCallback(
+    async (endGameInput: EndGameInput) => {
+      const { endGameTime, startGameTime, guessPoint, goalPoint } = endGameInput;
 
-    const formatedElapsedTime = getFormatedElapsedTime(startTime, endGameTime);
+      setEndTime(endGameTime);
+      setStartTime(startGameTime);
+      setUserGoalPoint(goalPoint);
 
-    setElapsedTime(formatedElapsedTime);
+      if (guessPoint) {
+        setUserGuessPoint(guessPoint);
+      }
 
-    const data = {
-      playerId: '', // TO-DO
-      level: difficultyLevel,
-      elapsedTime: formatedElapsedTime,
-      locationOrigin: String(goalPoint),
-      locationMarked: guessPoint ? String(guessPoint) : '',
-      distance: '', // TO-DO
-      score: '' // TO-DO
-    }
+      const formatedElapsedTime = getFormatedElapsedTime(
+        startGameTime,
+        endGameTime,
+      );
 
-    // await api.post('/games', data);
+      const distanceInMeters = guessPoint?.lat ? getDistanceBetweetTwoPoints(
+        {
+          lat: goalPoint.lat,
+          lng: goalPoint.long,
+        },
+        {
+          lat: guessPoint.lat,
+          lng: guessPoint.long,
+        },
+      ) : -1;
 
-    Router.push('/game-summary');
-  }, [startTime, difficultyLevel]);
+      setDistance(distanceInMeters);
+      setElapsedTime(formatedElapsedTime);
+      setScore(guessPoint ? 4114 : 0);
+
+      const elapseTime = differenceInSeconds(endGameTime, startGameTime);
+
+      const data = {
+        playerId: session?.playerId as string ?? '',
+        level: difficultyLevel ?? 'easy',
+        elapsedTime: !isNaN(elapseTime) ? elapseTime : -1,
+        locationOrigin: `${goalPoint?.lat},${goalPoint?.long}`,
+        locationMarked: guessPoint?.lat ? `${guessPoint?.lat},${guessPoint?.long}` : '',
+        distance: distanceInMeters,
+        score: guessPoint?.lat ? 4114 : 0, // TO-DO
+      };
+
+      console.log(data, endGameTime, startTime);
+
+      // registerGame(data);
+
+      // limpando dificuldade
+      setDifficultyLevel(null);
+
+      Router.push('/games/summary');
+    },
+    [startTime, difficultyLevel],
+  );
 
   return (
-    <GameContext.Provider value={{
-      distance,
-      elapsedTime,
-      userGoalPoint,
-      userGuessPoint,
-      difficultyLevel,
-      endTime,
-      startTime,
-      handleStartTime,
-      handleStartNewGame,
-      handleEndGame
-    }}>
+    <GameContext.Provider
+      value={{
+        distance,
+        elapsedTime,
+        userGoalPoint,
+        userGuessPoint,
+        difficultyLevel,
+        endTime,
+        startTime,
+        score,
+        handleStartTime,
+        handleStartNewGame,
+        handleEndGame,
+      }}
+    >
       {children}
     </GameContext.Provider>
   );
 }
-

@@ -17,7 +17,7 @@ export default function Home() {
         <Box
           width="100%"
           height="50vh"
-          bgColor="blue.200"
+          bg="linear-gradient(180deg, #ffffffdc 0%, #4996deef 60%)"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -29,7 +29,7 @@ export default function Home() {
             justifyContent="center"
             flexDir="column"
           >
-            <Stack spacing="20" alignItems="center" justifyContent="center">
+            <Stack spacing="10" alignItems="center" justifyContent="center">
               <Logo />
               <Text fontWeight="bold" fontSize="1.5rem" color="white.200">
                 Explore o mundo
@@ -48,19 +48,19 @@ export default function Home() {
                 onClick={() => signIn('google')}
                 rightIcon={<FaGoogle />}
               >
-                Entre para jogar
+                ENTRE PARA JOGAR
               </Button>
             </Stack>
           </Box>
         </Box>
         <Stack
           direction={['column', 'column', 'column', 'row']}
-          mt={100}
+          mt={50}
           spacing={20}
         >
-          <Card text="Escolha um nível" image="" />
-          <Card text="Viaje pelo mundo" image="" />
-          <Card text="Esteja entre os 50 melhores" image="" />
+          <Card text="Escolha um nível" image="/images/level.jpg" />
+          <Card text="Viaje pelo mundo" image="/images/world.jpg" />
+          <Card text="Esteja entre os 50 melhores" image="/images/winner.jpg" />
         </Stack>
       </main>
     </div>
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
         destination: '/dashboard',
         permanent: false,
       },
-    }
+    };
   }
 
   return {
