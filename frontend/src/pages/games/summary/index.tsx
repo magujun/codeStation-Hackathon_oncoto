@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
@@ -85,8 +85,8 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                 {distance < 0
                   ? ''
                   : distanceInKM > 1800
-                  ? `${Math.floor(distanceInMi)} mi`
-                  : `${Math.floor(distanceInKM)} km`}
+                    ? `${Math.floor(distanceInMi)} mi`
+                    : `${Math.floor(distanceInKM)} km`}
               </Text>
             </Stack>
           </Grid>
@@ -147,7 +147,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
         </Container>
       </main>
       <Modal open={isOpen} onClose={onClose}>
-        <NewGame alignTitle="center" />
+        <NewGame alignSelfTitle="center" textAlignTitle="center" />
       </Modal>
     </div>
   );
