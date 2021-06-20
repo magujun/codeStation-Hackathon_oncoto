@@ -119,10 +119,10 @@ export function GameProvider({ children }: GameProviderProps) {
 
       console.log(data, endGameTime, startTime);
 
-      // registerGame(data);
+      registerGame(data);
 
       // limpando dificuldade
-      setDifficultyLevel(null);
+      setDifficultyLevel("easy");
 
       Router.push('/games/summary');
     },
