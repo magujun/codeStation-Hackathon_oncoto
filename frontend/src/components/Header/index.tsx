@@ -1,11 +1,11 @@
+import React from 'react';
 import {
   Flex,
   IconButton,
   Icon,
-  Box,
+  HStack,
 } from '@chakra-ui/react';
 import { useBreakpointValue } from '@chakra-ui/media-query';
-import React from 'react';
 import { RiMenuLine } from 'react-icons/ri';
 import { useSidebar } from '../../hook/useSidebar';
 import { Container } from '../Layout/Container';
@@ -21,7 +21,6 @@ export function Header() {
   });
 
   return (
-    // numero em string fica no formato de espaçamento
     <Flex
       w="100%"
       as="header"
@@ -32,27 +31,27 @@ export function Header() {
       boxShadow="-webkit-box-shadow: 0px 11px 18px 2px rgba(96,169,236,0.1);box-shadow: 0px 11px 18px 2px rgba(96,169,236,0.1);"
       bg="white"
     >
-      {!isWideVersion && (
-        <IconButton
-          aria-label="Open navigation"
-          icon={<Icon as={RiMenuLine} />}
-          fontSize="24"
-          variant="unstyled"
-          onClick={onOpen}
-          mr="2"
-        />
-      )}
       <Container py="0" height="100%">
-        <Box
-          display="flex"
+        <Flex
           alignItems="center"
           justifyContent="space-between"
           height="100%"
         >
-          <Logo />
+          <HStack spacing="4">
+            <Logo />
+            {!isWideVersion && (
+              <IconButton
+                aria-label="Open navigation"
+                icon={<Icon as={RiMenuLine} />}
+                fontSize="24"
+                variant="unstyled"
+                onClick={onOpen}
+              />
+            )}
+          </HStack>
           {isWideVersion && <PagesNav />}
           <Profile showProfileData={isWideVersion} />
-        </Box>
+        </Flex>
       </Container>
     </Flex>
   );
