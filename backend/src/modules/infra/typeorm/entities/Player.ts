@@ -1,6 +1,13 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryColumn,
+	Column,
+	CreateDateColumn,
+	OneToMany,
+} from 'typeorm';
 import { Expose } from 'class-transformer';
 import { v4 as uuidv4 } from 'uuid';
+import { Game } from './Game';
 
 @Entity('players')
 class Player {

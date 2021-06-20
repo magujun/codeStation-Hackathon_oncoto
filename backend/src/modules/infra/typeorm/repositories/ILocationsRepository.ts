@@ -1,4 +1,4 @@
-import { ICreateLocationDTO } from '../../DTOs/ICreateLocationDTO';
+import { IStoreLocationDTO } from '../../DTOs/IStoreLocationDTO';
 import { Location } from '../entities/Location';
 
 interface ILocationsRepository {
@@ -27,8 +27,9 @@ interface ILocationsRepository {
 		airport,
 		park,
 		point_of_interest,
-	}: ICreateLocationDTO): Promise<void>;
+	}: IStoreLocationDTO): Promise<void>;
 	findByPlusCode(locationId: string): Promise<Location>;
+	findRandomLocation(): Promise<Location>;
 	list(): Promise<Location[]>;
 }
 

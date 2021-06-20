@@ -5,8 +5,9 @@ import { authenticate } from '../middlewares/authentication';
 import uploadConfig from '@config/upload';
 
 import { CreatePlayerController } from '@src/modules/services/players/createPlayer/CreatePlayerController';
-import { PlayerProfileController } from '@src/modules/services/players/playerProfile/playerProfileController';
-import { UpdatePlayerAvatarController } from '@src/modules/services/players/updatePlayerAvatar/updatePlayerAvatarController';
+
+import { UpdatePlayerAvatarController } from '@src/modules/services/players/updatePlayerAvatar/UpdatePlayerAvatarController';
+import { PlayerProfileController } from '@src/modules/services/players/playerProfile/PlayerProfileController';
 // import { UpdatePlayerProfileController } from '@src/modules/services/players/updatePlayerAvatar/updatePlayerProfileController';
 
 const playersRoutes = Router();

@@ -1,8 +1,10 @@
+import 'dotenv/config';
+import { app } from './app';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
-import 'dotenv/config';
-import { app } from './app';
+
+import LoadLocations from '@src/shared/utils/location/loadLocations';
 
 dayjs.extend(weekOfYear);
 dayjs.extend(advancedFormat);
@@ -18,3 +20,5 @@ app.listen(PORT, () =>
 		'\n'
 	)
 );
+
+// LoadLocations(1);

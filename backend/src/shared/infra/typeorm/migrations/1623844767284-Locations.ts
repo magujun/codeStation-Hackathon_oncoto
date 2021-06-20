@@ -23,6 +23,7 @@ export class Locations1623844767284 implements MigrationInterface {
 					{
 						name: 'country',
 						type: 'varchar',
+						isNullable: true,
 					},
 					{
 						name: 'street_address',

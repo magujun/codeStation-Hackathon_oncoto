@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreateLocationDTO } from '@src/modules/infra/DTOs/ICreateLocationDTO';
+import { IStoreLocationDTO } from '@src/modules/infra/DTOs/IStoreLocationDTO';
 import { ILocationsRepository } from '@src/modules/infra/typeorm/repositories/ILocationsRepository';
 import { Location } from '@src/modules/infra/typeorm/entities/Location';
 
@@ -35,7 +35,7 @@ class LocationsRepository implements ILocationsRepository {
 		airport,
 		park,
 		point_of_interest,
-	}: ICreateLocationDTO): Promise<void> {
+	}: IStoreLocationDTO): Promise<void> {
 		const location = this.repository.create({
 			plus_code,
 			coordinates,
@@ -68,7 +68,18 @@ class LocationsRepository implements ILocationsRepository {
 		const location = await this.repository.findOne({ plus_code });
 		return location;
 	}
-	list(): Promise<Location[]> {
+
+	async findRandomLocation(): Promise<Location> {
+		const [randomLocation] = await this.repository.query(
+			`SELECT coordinates FROM locations ORDER BY RANDOM() ASC LIMIT 1`
+		);
+		// const location = await this.repository.queryRunner. getTable('games').
+		// 	.orderBy('RAND()')
+		// 	.getOne();
+		return randomLocation;
+	}
+
+	async list(): Promise<Location[]> {
 		throw new Error('Method not implemented.');
 	}
 }

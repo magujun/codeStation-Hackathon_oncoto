@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { PlayerProfileService } from './playerProfileService';
+import { PlayerProfileService } from './PlayerProfileService';
 
 class PlayerProfileController {
 	async handle(request: Request, response: Response): Promise<Response> {

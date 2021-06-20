@@ -1,16 +1,16 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 import OpenLocationCode from '@src/shared/utils/location/plusCode';
 
-@Entity('location')
+@Entity('locations')
 class Location {
 	@PrimaryColumn()
 	plus_code: string;
 	@Column()
 	coordinates: string;
 	@Column()
-	countryCode: string;
+	countryCode?: string;
 	@Column()
-	country: string;
+	country?: string;
 	@Column()
 	street_address?: string;
 	@Column()
