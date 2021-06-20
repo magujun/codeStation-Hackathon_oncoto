@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>oncoto</title>
+        <title>oncoto? </title>
       </Head>
       <main>
         <Box

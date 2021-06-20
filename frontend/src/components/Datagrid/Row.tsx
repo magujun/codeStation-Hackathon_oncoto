@@ -26,7 +26,7 @@ export const Row = memo(
       <GridItem colSpan={2} {...props} display="flex">
         <Grid templateColumns={templateColumns} gap={1} display="flex" w="100%">
           <Cell
-            alignCell={isHeader ? columns[0].headerAligin : columns[0].align}
+            alignCell={isHeader ? columns[0].headerAlign : columns[0].align}
             padding={isHeader ? paddingCell : paddingCell + 1}
             value={isHeader ? columns[0].headerName : row[columns[0].field]}
             fontWeight={500}
@@ -56,7 +56,7 @@ export const Row = memo(
               return (
                 <Cell
                   key={cellKey}
-                  alignCell={isHeader ? column.headerAligin : column.align}
+                  alignCell={isHeader ? column.headerAlign : column.align}
                   padding={isHeader ? paddingCell : paddingCell + 1}
                   value={isHeader ? column.headerName : row[column.field]}
                   fontWeight={500}

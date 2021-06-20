@@ -32,7 +32,7 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
   const [showGuessMap, setShowGuessMap] = useState(false);
   const [guess, setGuess] = useState<Position>(null);
   const time = useRef<number>(getLevelTime(difficultyLevel ?? 'easy'));
-  const startDate = useRef<number>(Date.now())
+  const startDate = useRef<number>(Date.now());
   const finishDate = useRef<number>(startDate.current + time.current);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
   return (
     <div>
       <Head>
-        <title>oncoto | Game</title>
+        <title>oncoto? | Game</title>
       </Head>
       <main>
         <Box display="flex" alignItems="center">

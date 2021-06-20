@@ -7,13 +7,17 @@ export class Rankings1623844758128 implements MigrationInterface {
 				name: 'rankings',
 				columns: [
 					{
-						name: 'gameId',
+						name: 'id',
 						type: 'uuid',
 						isPrimary: true,
 					},
 					{
-						name: 'playerId',
-						type: 'varchar',
+						name: 'game_id',
+						type: 'uuid',
+					},
+					{
+						name: 'player_id',
+						type: 'uuid',
 					},
 					{
 						name: 'level',
@@ -24,8 +28,30 @@ export class Rankings1623844758128 implements MigrationInterface {
 						type: 'varchar',
 					},
 					{
-						name: 'gameDate',
-						type: 'timestamp',
+						name: 'nick',
+						type: 'varchar',
+					},
+					{
+						name: 'avatar',
+						type: 'varchar',
+					},
+				],
+				foreignKeys: [
+					{
+						name: 'FKPlayerRanking',
+						referencedTableName: 'players',
+						referencedColumnNames: ['id'],
+						columnNames: ['player_id'],
+						onDelete: 'SET NULL',
+						onUpdate: 'SET NULL',
+					},
+					{
+						name: 'FKGameRanking',
+						referencedTableName: 'games',
+						referencedColumnNames: ['id'],
+						columnNames: ['game_id'],
+						onDelete: 'SET NULL',
+						onUpdate: 'SET NULL',
 					},
 				],
 			})

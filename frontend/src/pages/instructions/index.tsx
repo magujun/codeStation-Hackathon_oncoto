@@ -4,12 +4,12 @@ import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { Container } from '../../components/Layout/Container';
 import { getPrismicClient } from '../../services/prismic';
-import { RichText } from "prismic-dom";
+import { RichText } from 'prismic-dom';
 import { Text, Box } from '@chakra-ui/react';
 
 type Guide = {
   content: string;
-}
+};
 
 interface InstructionsProps {
   guide: Guide;
@@ -19,13 +19,11 @@ const Instructions = ({ guide }: InstructionsProps) => {
   return (
     <div>
       <Head>
-        <title>oncoto | Instruções</title>
+        <title>oncoto? | Instruções</title>
       </Head>
       <main>
         <Container mt="4">
-          <Box
-            as="article"
-          >
+          <Box as="article">
             <Text fontSize="4xl" fontWeight={500}>
               Instruções
             </Text>
@@ -54,12 +52,12 @@ export const getServerSideProps: GetServerSideProps = withSSRAuth(
     const response = await prismic.getByUID('instructions', 'guide', {});
 
     const guide = {
-      content: RichText.asHtml(response.data.content)
-    }
+      content: RichText.asHtml(response.data.content),
+    };
 
     return {
       props: {
-        guide
+        guide,
       },
     };
   },

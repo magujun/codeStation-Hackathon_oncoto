@@ -18,28 +18,28 @@ const columns: DatagridColumn[] = [
     headerName: 'POSIÇÃO',
     flex: 0.05,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
   },
   {
     field: 'user',
     headerName: 'USUÁRIO',
     flex: 0.5,
     align: 'left',
-    headerAligin: 'left',
+    headerAlign: 'left',
   },
   {
     field: 'level',
     headerName: 'NÍVEL',
     flex: 0.25,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
   },
   {
     field: 'score',
     headerName: 'PONTUAÇÃO',
     flex: 0.25,
     align: 'center',
-    headerAligin: 'center',
+    headerAlign: 'center',
     color: 'blue.800',
   },
 ];
@@ -48,48 +48,51 @@ type RankingProps = {
   data: OutRanking[];
 };
 
-const Ranking = ({ data } : RankingProps) => {
+const Ranking = ({ data }: RankingProps) => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
 
-  const rows = useMemo(() =>
-    data
-      .map((row: OutRanking, index) => {
-        if (index < page * pageSize && index >= page * pageSize - pageSize) {
-          return {
-            positionIcon:
-              row.position >= 1 && row.position <= 3 ? (
-                <Image
-                  src={`/images/top${row.position}.svg`}
-                  alt={`top${row.position}`}
-                  width="40px"
-                  height="40px"
-                />
-              ) : (
-                row.position
+  const rows = useMemo(
+    () =>
+      data
+        .map((row: OutRanking, index) => {
+          if (index < page * pageSize && index >= page * pageSize - pageSize) {
+            return {
+              positionIcon:
+                row.position >= 1 && row.position <= 3 ? (
+                  <Image
+                    src={`/images/top${row.position}.svg`}
+                    alt={`top${row.position}`}
+                    width="40px"
+                    height="40px"
+                  />
+                ) : (
+                  row.position
+                ),
+              position: row.position,
+              user: (
+                <Box display="flex" alignItems="center">
+                  <Avatar
+                    altText={row.nick}
+                    firstNameInitialLetter={row.nick[0]}
+                    imgUrl={row.avatar}
+                  />
+                  <Text ml="8">{row.nick}</Text>
+                </Box>
               ),
-            position: row.position,
-            user: (
-              <Box display="flex" alignItems="center">
-                <Avatar
-                  altText={row.nick}
-                  firstNameInitialLetter={row.nick[0]}
-                  imgUrl={row.avatar}
-                />
-                <Text ml="8">{row.nick}</Text>
-              </Box>
-            ),
-            level: row.level,
-            score: row.score,
-          };
-        }
-      })
-      .filter(row => !!row) ?? [], [data, page]);
+              level: row.level,
+              score: row.score,
+            };
+          }
+        })
+        .filter(row => !!row) ?? [],
+    [data, page],
+  );
 
   return (
     <div>
       <Head>
-        <title>oncoto | Ranking</title>
+        <title>oncoto? | Ranking</title>
       </Head>
       <main>
         <Container mt="4">

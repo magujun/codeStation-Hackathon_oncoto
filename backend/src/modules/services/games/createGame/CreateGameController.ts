@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { UpdateRankingService } from '../../rankings/UpdateRankingService';
 import { CreateGameService } from './CreateGameService';
 
 class CreateGameController {
@@ -23,7 +24,20 @@ class CreateGameController {
 			distance,
 			score,
 		});
-		return response.status(201).json('New game created!').send();
+		const updateRankingService = container.resolve(UpdateRankingService);
+		await updateRankingService.execute({
+			game_id: null,
+			player_id,
+			level,
+			score,
+			nick: null,
+			avatar: null,
+			position: null,
+		});
+		return response
+			.status(201)
+			.json('New game created and rankings updated!')
+			.send();
 	}
 }
 

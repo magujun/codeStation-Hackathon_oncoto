@@ -3,14 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 
 import { GetServerSideProps } from 'next';
-import {
-  Box,
-  Flex,
-  Grid,
-  Stack,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, Flex, Grid, Stack, Text, useDisclosure } from '@chakra-ui/react';
 
 import { Modal } from '../../../components/Modal';
 import { useGameData } from '../../../hook/useGameData';
@@ -44,19 +37,10 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
       ? '/images/yellow_point.svg'
       : '';
 
-  console.log(
-    'summary values',
-    score,
-    userGoalPoint,
-    userGuessPoint,
-    elapsedTime,
-    distance,
-  );
-
   return (
     <div>
       <Head>
-        <title>oncoto | History</title>
+        <title>oncoto? | History</title>
       </Head>
       <main>
         <Box w="100%" h="30vh">
@@ -86,13 +70,13 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
           >
             <Stack display="flex" alignItems="center" justifyContent="center">
               <Text fontSize="1.5rem">Sua pontuação</Text>
-              <Text fontSize={{ base: "4rem", md: "5rem" }} fontWeight="bold">
+              <Text fontSize={{ base: '4rem', md: '5rem' }} fontWeight="bold">
                 {score < 0 ? 0 : score}
               </Text>
             </Stack>
             <Stack display="flex" alignItems="center" justifyContent="center">
               <Text fontSize="1.5rem">Tempo</Text>
-              <Text fontSize={{ base: "4rem", md: "5rem" }} fontWeight="bold">
+              <Text fontSize={{ base: '4rem', md: '5rem' }} fontWeight="bold">
                 {elapsedTime ?? ''}
               </Text>
             </Stack>
@@ -102,7 +86,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               justifyContent="space-between"
             >
               <Text fontSize="1.5rem">Distância</Text>
-              <Text fontSize={{ base: "4rem", md: "5rem" }} fontWeight="bold">
+              <Text fontSize={{ base: '4rem', md: '5rem' }} fontWeight="bold">
                 {distance < 0
                   ? ''
                   : distanceInKM > 9999
@@ -124,12 +108,20 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
             backgroundColor="rgba(255, 255, 255, 0.85)"
             boxShadow="4px 10px 30px rgba(159, 209, 255, 0.1);"
           >
-            <Box p={{ base: "2.25rem", md: "6.25rem" }} textAlign="center">
-              <Text fontWeight="bold" fontSize={{ base: "lg", sm: "xl", md: "2xl" }} mb="4">
+            <Box p={{ base: '2.25rem', md: '6.25rem' }} textAlign="center">
+              <Text
+                fontWeight="bold"
+                fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
+                mb="4"
+              >
                 Deseja jogar novamente?
               </Text>
 
-              <Flex w="100%" alignItems="center" flexDirection={{ base: 'column', md: 'row' }}>
+              <Flex
+                w="100%"
+                alignItems="center"
+                flexDirection={{ base: 'column', md: 'row' }}
+              >
                 <OutlinedButton
                   mr={{ base: '0', md: '1' }}
                   mb={{ base: '2', md: '0' }}
@@ -138,10 +130,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
                 >
                   Não
                 </OutlinedButton>
-                <Button
-                  w="100%"
-                  onClick={onOpen}
-                >
+                <Button w="100%" onClick={onOpen}>
                   Sim
                 </Button>
               </Flex>
