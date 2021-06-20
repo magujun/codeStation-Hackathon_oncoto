@@ -13,6 +13,7 @@ import { Button } from '../../components/Button';
 import { useGameData } from '../../hook/useGameData';
 import { getRandomLocation } from '../../services/locations';
 import { Timer } from '../../components/Timer';
+import { getLevelTime } from '../../utils/getLevelTime';
 
 type Position = {
   lat: number;
@@ -24,19 +25,13 @@ type GameProps = {
   startPoint: Position;
 };
 
-const levelTime = {
-  easy: 1000 * 60 * 5, // 5 minutos
-  medium: 1000 * 60 * 3, // 3 minutos
-  hard: 1000 * 10 * 2, // 2 minutos
-};
-
 const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
   const route = useRouter();
   const { difficultyLevel, onEndGame, onStartTime } = useGameData();
 
   const [showGuessMap, setShowGuessMap] = useState(false);
   const [guess, setGuess] = useState<Position>(null);
-  const time = useRef<number>(levelTime[difficultyLevel ?? 'easy']);
+  const time = useRef<number>(getLevelTime(difficultyLevel ?? 'easy'));
   const startDate = useRef<number>(Date.now())
   const finishDate = useRef<number>(startDate.current + time.current);
 

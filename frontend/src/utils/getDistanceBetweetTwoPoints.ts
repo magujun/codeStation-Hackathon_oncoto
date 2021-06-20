@@ -9,5 +9,5 @@ export function getDistanceBetweetTwoPoints(
   origin: LatLangData,
   destination: LatLangData
 ): number {
-  return origin && destination ? haversineDistance(origin, destination) : 0;
+  return origin?.lat && destination?.lat ? haversineDistance(origin, destination) : -1;
 }
