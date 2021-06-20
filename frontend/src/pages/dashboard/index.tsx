@@ -12,6 +12,8 @@ import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
 import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
 import { useMemo } from 'react';
+import { Button } from '../../components/Button';
+import { useGameData } from '../../hook/useGameData';
 
 const columns: DatagridColumn[] = [
   {
@@ -49,6 +51,7 @@ const Dashboard = () => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const [session] = useSession();
+  const { onStartNewGame } = useGameData();
 
   const { data, isLoading } = useQuery(
     ['select-history', session?.playerId],
@@ -83,6 +86,16 @@ const Dashboard = () => {
       </Head>
       <main>
         <Container>
+          <Button mb="8" onClick={() => onStartNewGame('easy')}>
+            Fácil
+          </Button>
+          <Button mb="8" onClick={() => onStartNewGame('medium')}>
+            Médio
+          </Button>
+          <Button mb="8" onClick={() => onStartNewGame('hard')}>
+            Difícil
+          </Button>
+
           <Text fontSize="4xl" fontWeight={500}>
             Histórico de Partidas
           </Text>

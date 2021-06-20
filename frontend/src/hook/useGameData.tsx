@@ -2,6 +2,7 @@ import { useContextSelector } from 'use-context-selector';
 import { GameContext } from "../context/GameContext";
 
 export function useGameData() {
+  const score = useContextSelector(GameContext, gamedata => gamedata.score);
   const difficultyLevel = useContextSelector(GameContext, gamedata => gamedata.difficultyLevel);
   const distance = useContextSelector(GameContext, gamedata => gamedata.distance);
   const endTime = useContextSelector(GameContext, gamedata => gamedata.endTime);
@@ -23,6 +24,7 @@ export function useGameData() {
     elapsedTime,
     onStartTime,
     onStartNewGame,
-    onEndGame
+    onEndGame,
+    score
   };
 }

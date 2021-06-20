@@ -29,7 +29,7 @@ export default function Home() {
             justifyContent="center"
             flexDir="column"
           >
-            <Stack spacing="20" alignItems="center" justifyContent="center">
+            <Stack spacing="10" alignItems="center" justifyContent="center">
               <Logo />
               <Text fontWeight="bold" fontSize="1.5rem" color="white.200">
                 Explore o mundo
@@ -55,7 +55,7 @@ export default function Home() {
         </Box>
         <Stack
           direction={['column', 'column', 'column', 'row']}
-          mt={100}
+          mt={50}
           spacing={20}
         >
           <Card text="Escolha um nível" image="" />

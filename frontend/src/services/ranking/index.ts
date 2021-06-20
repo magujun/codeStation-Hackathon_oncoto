@@ -10,7 +10,7 @@ export type OutRanking = {
 
 export const getRanking = async () => {
 
-  const response = await api.get<OutRanking[]>('/ranking');
+  const response = await api.get<OutRanking[]>('/rankings');
 
   return response;
 }

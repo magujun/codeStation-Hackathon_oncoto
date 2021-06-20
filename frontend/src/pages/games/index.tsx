@@ -1,14 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { BiWorld } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { Map } from '../../components/Map';
 import { StreetViewMap } from '../../components/StreetViewMap';
 import { Button } from '../../components/Button';
 import { useGameData } from '../../hook/useGameData';
+import { getRandomLocation } from '../../services/locations';
+import { Timer } from '../../components/Timer';
 
 type Position = {
   lat: number;
@@ -20,13 +24,27 @@ type GameProps = {
   startPoint: Position;
 };
 
+const levelTime = {
+  easy: 1000 * 60 * 5, // 5 minutos
+  medium: 1000 * 60 * 3, // 3 minutos
+  hard: 1000 * 10 * 2, // 2 minutos
+};
+
 const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
-  // TODO: Verificar se ao entrar o jogo foi iniciado, caso contrário usar um navigate(-1);
-  const { userGuessPoint } = useGameData();
+  const route = useRouter();
+  const { difficultyLevel, onEndGame, onStartTime } = useGameData();
+
   const [showGuessMap, setShowGuessMap] = useState(false);
   const [guess, setGuess] = useState<Position>(null);
+  const time = useRef<number>(levelTime[difficultyLevel ?? 'easy']);
+  const startDate = useRef<number>(Date.now())
+  const finishDate = useRef<number>(startDate.current + time.current);
 
-  const variant = useBreakpointValue({
+  useEffect(() => {
+    onStartTime(new Date(startDate.current));
+  }, []);
+
+  const streetMapHeight = useBreakpointValue({
     base: 'outline',
     sm: '80vh',
     md: '80vh',
@@ -61,8 +79,34 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
   };
 
   const handleConfirmarClick = useCallback(() => {
-    console.log(guess);
-  }, [guess])
+    onEndGame({
+      goalPoint: {
+        lat: startPoint.lat,
+        long: startPoint.lng,
+      },
+      endGameTime: new Date(),
+      startGameTime: new Date(startDate.current),
+      guessPoint: {
+        lat: guess.lat,
+        long: guess.lng,
+      },
+    });
+  }, [guess, startPoint]);
+
+  const handleTimeout = useCallback(() => {
+    onEndGame({
+      goalPoint: {
+        lat: startPoint.lat,
+        long: startPoint.lng,
+      },
+      endGameTime: new Date(),
+      startGameTime: new Date(startDate.current),
+      guessPoint: {
+        lat: guess?.lat,
+        long: guess?.lng,
+      },
+    });
+  }, [guess, startPoint]);
 
   return (
     <div>
@@ -71,7 +115,8 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
       </Head>
       <main>
         <Box display="flex" alignItems="center">
-          <Box w="100%" height={variant}>
+          <Box w="100%" height={streetMapHeight}>
+            <Timer finishDate={finishDate.current} onTimeout={handleTimeout} />
             <StreetViewMap
               googleMapsApiKey={googleMapsApiKey}
               startPoint={startPoint}
@@ -105,7 +150,8 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
               />
               <Map
                 googleMapsApiKey={googleMapsApiKey}
-                center={startPoint}
+                center={{ lat: 0, lng: 0 }}
+                zoom={1}
                 onGuess={handleGuess}
               />
               <Button
@@ -142,6 +188,8 @@ export default Game;
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
     // TODO: Pegar ponto da api
+    //const reponse = getRandomLocation();
+
     return {
       props: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
