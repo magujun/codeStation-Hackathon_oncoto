@@ -1,17 +1,13 @@
-import { Box, useRadio, RadioProps, Text, useBreakpointValue } from "@chakra-ui/react";
+import { memo } from 'react';
+import { Box, useRadio, RadioProps, Text } from "@chakra-ui/react";
 import Image from 'next/image';
 
 interface RadioCardProps extends RadioProps {
   children: string;
 }
 
-export function RadioCard(props: RadioCardProps) {
+function RadioCardComponent(props: RadioCardProps) {
   const { getInputProps, getCheckboxProps } = useRadio(props);
-
-  const isTabletOrWiderScreen = useBreakpointValue({
-    base: false,
-    md: true,
-  })
 
   const input = getInputProps();
   const checkbox = getCheckboxProps();
@@ -22,26 +18,22 @@ export function RadioCard(props: RadioCardProps) {
       <Box
         {...checkbox}
         cursor="pointer"
-        width={{ base: "auto", sm: "40" }}
-        height={{ base: "4.5rem", sm: "9.7rem" }}
-        borderWidth="1px"
-        borderRadius="40px"
+        width="40"
+        height="9.7rem"
+        borderWidth="3px"
+        borderRadius="42px"
         boxShadow="md"
         position="relative"
         _checked={{
-          color: "white",
-          borderColor: "teal.600",
+          borderColor: "red.500"
         }}
         _focus={{
           boxShadow: "outline",
         }}
         tabIndex={0}
       >
-        {isTabletOrWiderScreen ? (
-          <Image src={`/images/${props.children}.svg`} width={480} height={465} objectFit="fill" />
-        ) : (
-          <Image src={`/images/${props.children}.svg`} width={480} height={465} objectFit="fill" />
-        )}
+
+        <Image src={`/images/${props.children}.svg`} width={480} height={465} objectFit="fill" />
 
         <Box
           position="absolute"
@@ -64,3 +56,5 @@ export function RadioCard(props: RadioCardProps) {
     </Box>
   );
 }
+
+export const RadioCard = memo(RadioCardComponent);
