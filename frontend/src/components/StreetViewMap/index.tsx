@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState, memo } from 'react';
 import {
   GoogleMap,
-  LoadScript,
   StreetViewPanorama,
 } from '@react-google-maps/api';
 
@@ -18,15 +17,14 @@ type Position = {
 };
 
 type StreetMapProps = {
-  googleMapsApiKey: string;
   startPoint: Position;
 };
 
-export const StreetViewMap = memo(({ googleMapsApiKey, startPoint }: StreetMapProps) => {
-  // const ref = React.useRef<StreetViewPanorama>();
+export const StreetViewMap = memo(
+  ({ startPoint }: StreetMapProps) => {
+    // const ref = React.useRef<StreetViewPanorama>();
 
-  return (
-    <LoadScript googleMapsApiKey={googleMapsApiKey}>
+    return (
       <GoogleMap
         data-testid="gmap-street"
         mapContainerStyle={mapContainerStyle}
@@ -52,6 +50,6 @@ export const StreetViewMap = memo(({ googleMapsApiKey, startPoint }: StreetMapPr
           }}
         />
       </GoogleMap>
-    </LoadScript>
-  );
-});
+    );
+  },
+);
