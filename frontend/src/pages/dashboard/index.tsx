@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Box, Spinner, Text, Flex, VStack } from '@chakra-ui/react';
+import { Box, Spinner, Text, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/client';
@@ -17,7 +17,7 @@ import {
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
 import { getFormatedTime } from '../../utils/getFormatedTime';
-import { DataCard } from '../../components/DataCard';
+import { GameHistoryDataCard } from '../../components/DataCard/GameHistoryDataCard';
 
 const columns: DatagridColumn[] = [
   {
@@ -52,6 +52,11 @@ const columns: DatagridColumn[] = [
 ];
 
 const Dashboard = () => {
+  const isTabletOrWider = useBreakpointValue({
+    base: false,
+    sm: true,
+  });
+
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const [session] = useSession();
@@ -115,45 +120,29 @@ const Dashboard = () => {
               <Text fontSize={{ base: '2xl', md: '4xl' }} fontWeight={500} alignSelf="flex-start">
                 Histórico de Partidas
               </Text>
-              <Box w="100%">
-                <DataCard
-                  rows={[{
-                    date: "20/06/2021",
-                    id: "1",
-                    level: "Dificil",
-                    score: 1000,
-                    time: "01:30",
-                  },
-                  {
-                    date: "20/06/2021",
-                    id: "2",
-                    level: "Dificil",
-                    score: 1000,
-                    time: "01:30",
-                  }]}
-                  columnId="id"
-                  templateColumns={'0.15fr 0.85fr'}
-                />
-                <Pagination
-                  totalCountOfRegisters={data?.data.length ?? 0}
-                  onPageChange={(page: number) => setPage(page)}
-                  currentPage={page}
-                  registersPerPage={pageSize}
-                />
-              </Box>
 
               {rows?.length > 0 ? (
-                <Box w="100%">
+                <Box w="100%" pt={{ base: '4', sm: "0" }}>
                   {isLoading ? (
                     <Spinner />
                   ) : (
-                    <Datagrid
-                      columns={columns}
-                      rows={rows ?? []}
-                      paddingCell={5}
-                      columnId="id"
-                      templateColumns={'0.15fr 0.85fr'}
-                    />
+                    <>
+                      {isTabletOrWider ? (
+                        <Datagrid
+                          columns={columns}
+                          rows={rows ?? []}
+                          paddingCell={5}
+                          columnId="id"
+                          templateColumns={'0.15fr 0.85fr'}
+                        />
+                      ) : (
+                        <GameHistoryDataCard
+                          rows={rows ?? []}
+                          columnId="id"
+                          templateColumns={'1fr'}
+                        />
+                      )}
+                    </>
                   )}
                   <Pagination
                     totalCountOfRegisters={data?.data.length ?? 0}

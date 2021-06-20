@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { getRanking, OutRanking } from '../../services/api/ranking';
@@ -50,6 +50,11 @@ type RankingProps = {
 };
 
 const Ranking = ({ data }: RankingProps) => {
+  const isTabletOrWider = useBreakpointValue({
+    base: false,
+    sm: true,
+  });
+
   const pageSize = 5;
   const [page, setPage] = useState(1);
 
@@ -100,52 +105,23 @@ const Ranking = ({ data }: RankingProps) => {
           <Text fontSize="4xl" fontWeight={500}>
             Ranking
           </Text>
-          <Box w="100%">
-            <RankingDataCard
-              rows={[{
-                positionIcon: (<Image
-                  src='/images/top1.svg'
-                  alt='top1'
-                  width="40px"
-                  height="40px"
-                />),
-                position: 1,
-                level: 1,
-                score: 1000,
-                user: (<Text ml="8">Oncoto</Text>),
-              },
-              {
-                positionIcon: (<Image
-                  src='/images/top2.svg'
-                  alt='top2'
-                  width="40px"
-                  height="40px"
-                />),
-                position: 2,
-                level: 2,
-                score: 1000,
-                user: (<Text ml="8">Oncoto</Text>),
-              }]}
-              paddingCell={5}
-              columnId="position"
-              templateColumns={'0.10fr 0.90fr'}
-            />
-            <Pagination
-              totalCountOfRegisters={data.length ?? 0}
-              onPageChange={(page: number) => setPage(page)}
-              currentPage={page}
-              registersPerPage={pageSize}
-            />
-          </Box>
           {rows?.length > 0 ? (
-            <Box w="100%">
-              <Datagrid
-                columns={columns}
-                rows={rows ?? []}
-                paddingCell={5}
-                columnId="position"
-                templateColumns={'0.10fr 0.90fr'}
-              />
+            <Box w="100%" pt={{ base: '4', md: "0" }}>
+              {isTabletOrWider ? (
+                <Datagrid
+                  columns={columns}
+                  rows={rows ?? []}
+                  paddingCell={5}
+                  columnId="position"
+                  templateColumns={'0.10fr 0.90fr'}
+                />
+              ) : (
+                <RankingDataCard
+                  rows={rows ?? []}
+                  columnId="position"
+                  templateColumns={'1fr'}
+                />
+              )}
               <Pagination
                 totalCountOfRegisters={data.length ?? 0}
                 onPageChange={(page: number) => setPage(page)}
