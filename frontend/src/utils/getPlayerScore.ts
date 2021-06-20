@@ -47,6 +47,8 @@ export const getPlayerScore = (distance: number, level: DifficultyLevel, elapseT
 
   score *= bonus;
 
+  if (isNaN(Math.floor(score))) return 50;
+
   if (score > 1000) return 1000;
 
   return Math.floor(score);

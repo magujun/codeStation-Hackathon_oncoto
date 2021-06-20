@@ -1,12 +1,15 @@
-import { api } from "../api";
+import { api } from '../api';
 
 type OutLocation = {
-  lat: number;
-  lng: number;
-}
+  coordinates: string;
+};
 
 export const getRandomLocation = async () => {
-  const response = await api.get<OutLocation>('/locations');
+  try {
+    const response = await api.get<OutLocation>('/locations');
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error get random location', err);
+  }
 };

@@ -19,11 +19,17 @@ export type OutPlayer = {
 };
 
 export const createPlayer = async (input: InPlayer) => {
-  const response = await api.post<InPlayer, AxiosResponse<OutPlayer>>('/players', input);
+  try {
+    const response = await api.post<InPlayer, AxiosResponse<OutPlayer>>(
+      '/players',
+      input,
+    );
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error on create player', err);
+  }
 };
-
 
 export type OutGetPlayer = {
   id: string;
@@ -31,19 +37,29 @@ export type OutGetPlayer = {
   avatar: string;
 };
 
-
 export const getPlayer = async (playerId: string) => {
-  const response = await api.get<OutGetPlayer>(`/players/${playerId}`);
+  try {
+    const response = await api.get<OutGetPlayer>(`/players/${playerId}`);
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error on get player by playerId', err);
+  }
 };
 
 type InUpdatePlayer = { id: string; playerId: string; nick: string };
 
 export const updatePlayer = async (input: InUpdatePlayer) => {
-  const response = await api.post<InUpdatePlayer, null>(`/players/${input.id}`, input);
+  try {
+    const response = await api.post<InUpdatePlayer, null>(
+      `/players/${input.id}`,
+      input,
+    );
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error on update player by playerId', err);
+  }
 };
 
 export type OutGameHistory = {
@@ -52,11 +68,19 @@ export type OutGameHistory = {
   time: string;
   level: string;
   score: number;
-}
+};
 
 // TODO: tipar o retorno
 export const getGameHistoryPlayer = async (id: string) => {
-  const response = await api.get<OutGameHistory[]>(`/players/${id}/pastgames`);
+  try {
+    const response = await api.get<OutGameHistory[]>(
+      `/players/${id}/pastgames`,
+    );
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error on get player history', err);
+
+    return { data: [] as OutGameHistory[]};
+  }
 };

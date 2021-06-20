@@ -180,13 +180,17 @@ export default Game;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
-    // TODO: Pegar ponto da api
-    //const reponse = getRandomLocation();
+    const { data } = await getRandomLocation();
+
+    const startPoint = {
+      lat: parseFloat(data.coordinates?.split(',')[0]) ?? 52.47876324394502,
+      lng: parseFloat(data.coordinates?.split(',')[1]) ?? -1.913465674644272,
+    };
 
     return {
       props: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-        startPoint: { lat: 52.47876324394502, lng: -1.913465674644272 },
+        startPoint,
       },
     };
   },

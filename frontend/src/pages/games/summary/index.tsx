@@ -37,8 +37,21 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
 
   const distanceInKM = distance / 1000;
   const distanceInMi = distanceInKM / 1609.34;
+  const guessIcon =
+    distanceInKM <= 10
+      ? '/images/green_point.svg'
+      : distanceInKM <= 100
+      ? '/images/yellow_point.svg'
+      : '';
 
-  console.log(score, userGoalPoint, userGuessPoint, elapsedTime, distance);
+  console.log(
+    'summary values',
+    score,
+    userGoalPoint,
+    userGuessPoint,
+    elapsedTime,
+    distance,
+  );
 
   return (
     <div>
@@ -46,7 +59,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
         <title>oncoto | History</title>
       </Head>
       <main>
-        <Box w="100%" h="300px">
+        <Box w="100%" h="30vh">
           <DisplayMap
             googleMapsApiKey={googleMapsApiKey}
             center={{
@@ -62,6 +75,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               lat: userGuessPoint?.lat,
               lng: userGuessPoint?.long,
             }}
+            guessIcon={guessIcon}
           />
         </Box>
         <Container mt="4" fontWeight="bold">
@@ -91,9 +105,9 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               <Text fontSize={{ base: "4rem", md: "5rem" }} fontWeight="bold">
                 {distance < 0
                   ? ''
-                  : distanceInKM > 1800
-                    ? `${Math.floor(distanceInMi)} mi`
-                    : `${Math.floor(distanceInKM)} km`}
+                  : distanceInKM > 9999
+                  ? `${Math.floor(distanceInMi)} mi`
+                  : `${Math.floor(distanceInKM)} km`}
               </Text>
             </Stack>
           </Grid>
@@ -114,6 +128,7 @@ const Summary = ({ googleMapsApiKey }: SummaryProps) => {
               <Text fontWeight="bold" fontSize={{ base: "lg", sm: "xl", md: "2xl" }} mb="4">
                 Deseja jogar novamente?
               </Text>
+
               <Flex w="100%" alignItems="center" flexDirection={{ base: 'column', md: 'row' }}>
                 <OutlinedButton
                   mr={{ base: '0', md: '1' }}

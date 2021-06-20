@@ -19,6 +19,7 @@ type DisplayMapProps = {
   guess?: Position;
   center: Position;
   zoom?: number;
+  guessIcon?: string;
 };
 
 export const DisplayMap = memo(
@@ -27,10 +28,13 @@ export const DisplayMap = memo(
     guess,
     goal,
     center,
+    guessIcon,
     zoom = 3,
   }: DisplayMapProps) => {
-    const centerRef = useRef<Position>(center);
-    const zoomRef = useRef<number>(zoom)
+    const centerRef = useRef<Position>(
+      center?.lat ? center : { lat: 1, lng: 0 },
+    );
+    const zoomRef = useRef<number>(zoom);
 
     return (
       <>
@@ -46,8 +50,15 @@ export const DisplayMap = memo(
               clickableIcons: false,
             }}
           >
-            {guess?.lat && <Marker position={guess} />}
-            {goal?.lat && <Marker position={goal} icon="/images/top1.svg" />}
+            {guess?.lat && (
+              <Marker
+                position={guess}
+                icon={guessIcon ? guessIcon : '/images/blue_point.svg'}
+              />
+            )}
+            {goal?.lat && (
+              <Marker position={goal} icon="/images/red_point.svg" />
+            )}
           </GoogleMap>
         </LoadScriptNext>
       </>

@@ -33,15 +33,19 @@ export const registerGame = async ({
   distance,
   score,
 }: InGame) => {
-  const response = await api.post<InPostGame>('/games', {
-    player_id,
-    level,
-    elapsedTime,
-    locationOrigin,
-    locationMarked,
-    distance,
-    score,
-  });
+  try {
+    const response = await api.post<InPostGame>('/games', {
+      player_id,
+      level,
+      elapsedTime,
+      locationOrigin,
+      locationMarked,
+      distance,
+      score,
+    });
 
-  return response;
+    return response;
+  } catch (err) {
+    console.log('error on register game', err);
+  }
 };
