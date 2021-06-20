@@ -23,7 +23,7 @@ export default async function getRandomStreetView() {
 		]}&key=${api_key}&radius=50000&source=outdoor`
 	);
 	const response = res.data;
-	console.log('StreetView results: ', response);
+	// console.log('StreetView results: ', response);
 	if (response.status === 'OK') {
 		if (response.copyright.includes('Google')) {
 			return response.location;

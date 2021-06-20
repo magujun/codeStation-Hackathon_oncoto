@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "clean": "rm -rf .next",
+    "dev:clean": "yarn clean && yarn && yarn dev",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

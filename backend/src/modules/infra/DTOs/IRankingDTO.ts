@@ -5,6 +5,5 @@ interface IRankingDTO {
 	score: number;
 	avatar: string;
 	nick: string;
-	position: number;
 }
 export { IRankingDTO };

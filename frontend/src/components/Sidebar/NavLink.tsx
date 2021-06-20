@@ -19,7 +19,7 @@ export function NavLink({ children, href, ...props }: NavLinkProps) {
   return (
     <Link href={href} passHref>
       <ChakraLink {...props} display="flex" align="center">
-        <Text fontWeight="medium" textDecoration={isActive ? 'underline' : ''}>
+        <Text fontWeight={isActive ? "bold" : "medium"} textDecoration={isActive ? 'underline' : ''} color={isActive && 'blue.800'}>
           {children}
         </Text>
       </ChakraLink>

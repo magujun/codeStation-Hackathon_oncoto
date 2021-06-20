@@ -9,7 +9,7 @@ export const Button = memo(({ children, ...rest }: ButtonProps) => {
   return (
     <ChakraUIButton
       variant="solid"
-      bg="blue.900"
+      bg="blue.800"
       color="white"
       _hover={{ filter: 'brightness(1.1)' }}
       w={{ base: "12.5rem", lg: "15.625rem" }}

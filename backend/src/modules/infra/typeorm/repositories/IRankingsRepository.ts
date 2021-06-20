@@ -1,5 +1,5 @@
 import { IRankingDTO } from '../../DTOs/IRankingDTO';
-import { Ranking } from '../entities/Ranking';
+import { IRankingResponseDTO } from '../../DTOs/IRankingResponseDTO';
 
 interface IRankingsRepository {
 	update({
@@ -10,7 +10,7 @@ interface IRankingsRepository {
 		nick,
 		avatar,
 	}: IRankingDTO): Promise<void>;
-	list(): Promise<Ranking[]>;
+	list(): Promise<IRankingResponseDTO[]>;
 }
 
 export { IRankingsRepository };

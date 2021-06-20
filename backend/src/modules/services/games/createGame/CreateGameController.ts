@@ -15,7 +15,7 @@ class CreateGameController {
 			score,
 		} = request.body;
 		const createGameService = container.resolve(CreateGameService);
-		await createGameService.execute({
+		const game = await createGameService.execute({
 			player_id,
 			level,
 			elapsedTime,
@@ -24,15 +24,16 @@ class CreateGameController {
 			distance,
 			score,
 		});
+		console.log('Game created: ', game);
+
 		const updateRankingService = container.resolve(UpdateRankingService);
 		await updateRankingService.execute({
-			game_id: null,
+			game_id: game.id,
 			player_id,
 			level,
 			score,
 			nick: null,
 			avatar: null,
-			position: null,
 		});
 		return response
 			.status(201)

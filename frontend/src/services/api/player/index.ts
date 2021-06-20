@@ -72,9 +72,7 @@ export type OutGameHistory = {
 
 export const getGameHistoryPlayer = async (id: string) => {
   try {
-    const response = await api.get<OutGameHistory[]>(
-      `/players/${id}/games`,
-    );
+    const response = await api.get<OutGameHistory[]>(`/players/${id}/games`);
 
     return response;
   } catch (err) {

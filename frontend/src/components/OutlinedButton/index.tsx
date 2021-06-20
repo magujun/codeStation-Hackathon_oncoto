@@ -10,10 +10,10 @@ export const OutlinedButton = memo(({ children, ...rest }: ButtonProps) => {
     <ChakraUIButton
       variant="outline"
       bg="transparent"
-      color="blue.900"
-      borderColor="blue.900"
+      color="blue.800"
+      borderColor="blue.800"
       borderWidth={1}
-      _hover={{ backgroundColor: 'blue.900', color: 'white' }}
+      _hover={{ backgroundColor: 'blue.800', color: 'white' }}
       w={{ base: "12.5rem", lg: "15.625rem" }}
       h="3.375rem"
       fontSize="1.25rem"
