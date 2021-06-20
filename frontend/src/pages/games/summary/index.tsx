@@ -5,6 +5,7 @@ import { Sidebar } from '../../../components/Sidebar';
 import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../../utils/withSSRAuth';
 import { useGameData } from '../../../hook/useGameData';
+import { Container } from '../../../components/Layout/Container';
 
 const History = () => {
   const { push } = useRouter();
@@ -12,7 +13,6 @@ const History = () => {
     useGameData();
 
   useEffect(() => {
-
     if (!score) {
       push('/dashboard');
     }
@@ -26,9 +26,10 @@ const History = () => {
         <title>oncoto | History</title>
       </Head>
       <main>
-        History
-        {score}
-        <Sidebar />
+        <Container mt="4">
+          History
+          {score}
+        </Container>
       </main>
     </div>
   );

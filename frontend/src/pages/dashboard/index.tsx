@@ -85,7 +85,7 @@ const Dashboard = () => {
         <title>oncoto | Dashboard</title>
       </Head>
       <main>
-        <Container>
+        <Container mt="4">
           <Button mb="8" onClick={() => onStartNewGame('easy')}>
             Fácil
           </Button>

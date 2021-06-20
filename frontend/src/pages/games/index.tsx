@@ -115,7 +115,7 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
       </Head>
       <main>
         <Box display="flex" alignItems="center">
-          <Box w="100%" height={streetMapHeight}>
+          <Box w="100%" height="calc(100vh - 80px)">
             <Timer finishDate={finishDate.current} onTimeout={handleTimeout} />
             <StreetViewMap
               googleMapsApiKey={googleMapsApiKey}
