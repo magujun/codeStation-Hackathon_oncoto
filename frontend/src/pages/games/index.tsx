@@ -11,7 +11,7 @@ import { Map } from '../../components/Map';
 import { StreetViewMap } from '../../components/StreetViewMap';
 import { Button } from '../../components/Button';
 import { useGameData } from '../../hook/useGameData';
-import { getRandomLocation } from '../../services/locations';
+import { getRandomLocation } from '../../services/api/locations';
 import { Timer } from '../../components/Timer';
 import { getLevelTime } from '../../utils/getLevelTime';
 
@@ -166,9 +166,6 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
               left="6"
               zIndex="10"
               onClick={handleGuessButtonClick}
-              iconSpacing="2"
-              display="flex"
-              alignItems="center"
             >
               Já sei o lugar
             </Button>
@@ -183,13 +180,17 @@ export default Game;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
-    // TODO: Pegar ponto da api
-    //const reponse = getRandomLocation();
+    const { data } = await getRandomLocation();
+
+    const startPoint = {
+      lat: parseFloat(data.coordinates?.split(',')[0]) ?? 52.47876324394502,
+      lng: parseFloat(data.coordinates?.split(',')[1]) ?? -1.913465674644272,
+    };
 
     return {
       props: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-        startPoint: { lat: 52.47876324394502, lng: -1.913465674644272 },
+        startPoint,
       },
     };
   },

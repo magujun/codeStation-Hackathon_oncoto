@@ -1,6 +1,7 @@
 import { useDisclosure, UseDisclosureReturn } from "@chakra-ui/hooks";
 import { useRouter } from "next/dist/client/router";
-import React, { createContext, useEffect } from "react";
+import React, { useEffect } from "react";
+import { createContext } from 'use-context-selector';
 
 interface SidebarProps {
   children: React.ReactNode;

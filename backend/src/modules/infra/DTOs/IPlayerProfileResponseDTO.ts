@@ -3,7 +3,6 @@ interface IPlayerProfileResponseDTO {
 	playerId: string;
 	nick: string;
 	avatar: string;
-	avatar_url(): string;
 	createDate: Date;
 }
 

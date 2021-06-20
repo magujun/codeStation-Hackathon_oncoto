@@ -11,7 +11,12 @@ class CreatePlayerService {
 		@inject('PlayersRepository')
 		private playersRepository: IPlayersRepository
 	) {}
-	async execute({ playerId, provider }: ICreatePlayerDTO): Promise<Player> {
+	async execute({
+		playerId,
+		provider,
+		nick,
+		avatar,
+	}: ICreatePlayerDTO): Promise<Player> {
 		const playerAlreadyExists = await this.playersRepository.findByPlayerId(
 			playerId
 		);
@@ -21,7 +26,8 @@ class CreatePlayerService {
 		await this.playersRepository.create({
 			playerId,
 			provider,
-			nick: playerId,
+			nick,
+			avatar,
 		});
 		return await this.playersRepository.findByPlayerId(playerId);
 	}

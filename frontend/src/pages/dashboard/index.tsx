@@ -10,9 +10,13 @@ import { Datagrid } from '../../components/Datagrid';
 import { DatagridColumn } from '../../components/Datagrid/Types';
 import { Container } from '../../components/Layout/Container';
 import { Pagination } from '../../components/Pagination';
-import { getGameHistoryPlayer, OutGameHistory } from '../../services/player';
+import {
+  getGameHistoryPlayer,
+  OutGameHistory,
+} from '../../services/api/player';
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
+import { getFormatedTime } from '../../utils/getFormatedTime';
 
 const columns: DatagridColumn[] = [
   {
@@ -62,14 +66,17 @@ const Dashboard = () => {
   const rows = useMemo(
     () =>
       data?.data
+      .sort(function(a,b){
+        return new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime();
+      })
         .map((row: OutGameHistory, index) => {
           if (index < page * pageSize && index >= page * pageSize - pageSize) {
             return {
-              date: format(new Date(row.date), 'dd/MM/yyyy'),
+              date: format(new Date(row.gameDate), 'dd/MM/yyyy'),
               id: row.id,
-              level: row.level,
+              level: row.level.charAt(0).toUpperCase() + row.level.slice(1),
               score: row.score,
-              time: format(new Date(row.time), 'hh:mm:ss'),
+              time: getFormatedTime(row.elapsedTime),
             };
           }
         })
@@ -84,16 +91,29 @@ const Dashboard = () => {
       </Head>
       <main>
         <Container>
-          <VStack spacing={{ base: '6', lg: '8' }} height="calc(100vh-5rem)" py="8">
-
-            <Flex w="100%" alignItems="center" justifyContent="center" >
-              <NewGame />
+          <VStack
+            spacing={{ base: '6', lg: '8' }}
+            height="calc(100vh-5rem)"
+            py="8"
+          >
+            <Flex w="100%" alignItems="center" justifyContent="center">
+              <Box
+                width="100%"
+                backgroundColor="rgba(255, 255, 255, 0.85)"
+                borderColor="rgba(159, 209, 255, 0.2);"
+                borderWidth="1px"
+                borderStyle="solid"
+                borderRadius="2rem"
+                boxShadow="4px 10px 30px rgba(159, 209, 255, 0.1);"
+              >
+                <NewGame />
+              </Box>
             </Flex>
 
-            <VStack w="100%" alignItems="center" justifyContent="center" >
+            <VStack w="100%" alignItems="center" justifyContent="center">
               <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
                 Histórico de Partidas
-            </Text>
+              </Text>
 
               {rows?.length > 0 ? (
                 <Box w="100%">
@@ -130,9 +150,6 @@ export default Dashboard;
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(
   async context => {
-    // const session = await getSession(context);
-    // console.log(session);
-
     return {
       props: {},
     };

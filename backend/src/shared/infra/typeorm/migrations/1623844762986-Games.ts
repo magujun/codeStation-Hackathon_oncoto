@@ -13,7 +13,7 @@ export class Games1623844762986 implements MigrationInterface {
 					},
 					{
 						name: 'player_id',
-						type: 'varchar',
+						type: 'uuid',
 					},
 					{
 						name: 'level',
@@ -43,6 +43,16 @@ export class Games1623844762986 implements MigrationInterface {
 						name: 'gameDate',
 						type: 'timestamp',
 						default: 'now()',
+					},
+				],
+				foreignKeys: [
+					{
+						name: 'FKPlayerGame',
+						referencedTableName: 'players',
+						referencedColumnNames: ['id'],
+						columnNames: ['player_id'],
+						onDelete: 'SET NULL',
+						onUpdate: 'SET NULL',
 					},
 				],
 			})
