@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
 import { Box, Spinner, Text } from '@chakra-ui/react';
