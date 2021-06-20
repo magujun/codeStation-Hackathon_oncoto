@@ -11,9 +11,9 @@ class PlayerGamesRepository implements IPlayerGamesRepository {
 	}
 	// SELECT * FROM games WHERE playerId = {playerId}
 	async listByPlayerId(player_id: string): Promise<Game[]> {
-		console.log('Repository player_id: ', player_id);
+		// console.log('Repository player_id: ', player_id);
 		const playerGames = await this.repository.find({ player_id });
-		console.log('Repository: ', playerGames);
+		// console.log('Repository: ', playerGames);
 		if (playerGames.length === 0) {
 			throw new AppError('No games found for this player', 404);
 		}
