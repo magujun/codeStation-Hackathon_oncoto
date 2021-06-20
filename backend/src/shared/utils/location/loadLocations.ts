@@ -13,7 +13,7 @@ export async function LoadLocationData(plusCode: string) {
 	const code = encodeURIComponent(plusCode);
 	const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${code}&key=${api_key}`;
 	const response: any = await axios.get(url);
-	console.log('Geocode search response:', response.data.results[0]);
+	// console.log('Geocode search response:', response.data.results[0]);
 	const findIf = (array: any[], search: string, query: string) => {
 		if (!array) return null;
 		const match = array.find((element) => element.types.includes(search));
@@ -100,9 +100,9 @@ export async function LoadLocationData(plusCode: string) {
 }
 
 export default async function LoadLocations(recordsNumber: number) {
-	console.log('StreetView search results:', FindLocation());
+	// console.log('StreetView search results:', FindLocation());
 	const { lat, lng } = await FindLocation();
-	console.log('StreetView search coordinates:', lat, lng);
+	// console.log('StreetView search coordinates:', lat, lng);
 	const result = await LoadLocationData(OpenLocationCode.encode(lat, lng));
 	const {
 		plus_code,
@@ -130,7 +130,7 @@ export default async function LoadLocations(recordsNumber: number) {
 		park,
 		point_of_interest,
 	} = result;
-	console.log('Storing location: ', result);
+	// console.log('Storing location: ', result);
 	const storeLocationService = container.resolve(StoreLocationService);
 	await storeLocationService.execute({
 		plus_code,

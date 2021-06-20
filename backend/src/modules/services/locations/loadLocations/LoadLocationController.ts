@@ -6,7 +6,7 @@ class LoadLocationController {
 	async handle(request: Request, response: Response): Promise<Response> {
 		const loadLocationService = container.resolve(LoadLocationService);
 		const location = await loadLocationService.execute();
-		console.log(location);
+		// console.log(location);
 		return response.json(location);
 	}
 }

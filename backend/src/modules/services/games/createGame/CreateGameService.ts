@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IGamesRepository } from '@src/modules/infra/typeorm/repositories/IGamesRepository';
 import { ICreateGameDTO } from '@src/modules/infra/DTOs/ICreateGameDTO';
+import { Game } from '@src/modules/infra/typeorm/entities/Game';
 
 @injectable()
 class CreateGameService {
@@ -17,8 +18,8 @@ class CreateGameService {
 		locationMarked,
 		distance,
 		score,
-	}: ICreateGameDTO): Promise<void> {
-		await this.gamesRepository.create({
+	}: ICreateGameDTO): Promise<Game> {
+		return await this.gamesRepository.create({
 			player_id,
 			level,
 			elapsedTime,

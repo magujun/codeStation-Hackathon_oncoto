@@ -10,7 +10,7 @@ interface IGamesRepository {
 		locationMarked,
 		distance,
 		score,
-	}: ICreateGameDTO): Promise<void>;
+	}: ICreateGameDTO): Promise<Game>;
 	findGameById(id: string): Promise<Game>;
 	list(): Promise<Game[]>;
 }

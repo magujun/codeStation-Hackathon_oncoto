@@ -22,7 +22,7 @@ class GamesRepository implements IGamesRepository {
 		locationMarked,
 		distance,
 		score,
-	}: ICreateGameDTO): Promise<void> {
+	}: ICreateGameDTO): Promise<Game> {
 		const game = this.repository.create({
 			player_id,
 			level,
@@ -32,7 +32,7 @@ class GamesRepository implements IGamesRepository {
 			distance,
 			score,
 		});
-		await this.repository.save(game);
+		return await this.repository.save(game);
 	}
 
 	// SELECT * FROM games

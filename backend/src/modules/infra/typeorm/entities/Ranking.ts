@@ -1,25 +1,19 @@
-import {
-	Column,
-	Entity,
-	JoinColumn,
-	ManyToMany,
-	PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { Game } from './Game';
 import { Player } from './Player';
 
-@Entity('ranking')
+@Entity('rankings')
 class Ranking {
 	@PrimaryColumn()
 	id: string;
 	@Column()
 	game_id: string;
-	@ManyToMany(() => Game)
+	@OneToOne(() => Game)
 	@JoinColumn({ name: 'game_id' })
 	@Column()
 	player_id: string;
-	@ManyToMany(() => Player)
+	@ManyToOne(() => Player)
 	@JoinColumn({ name: 'player_id' })
 	@Column()
 	level: string;
