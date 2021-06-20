@@ -5,7 +5,6 @@ import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { getRanking, OutRanking } from '../../services/api/ranking';
-import { useQuery } from 'react-query';
 import { Container } from '../../components/Layout/Container';
 import { Datagrid } from '../../components/Datagrid';
 import { DatagridColumn } from '../../components/Datagrid/Types';
@@ -86,7 +85,7 @@ const Ranking = ({ data }: RankingProps) => {
                   <Text ml="8">{row.nick}</Text>
                 </Box>
               ),
-              level: row.level,
+              level: <Text textTransform="capitalize">{row.level}</Text>,
               score: row.score,
             };
           }

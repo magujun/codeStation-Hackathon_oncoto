@@ -7,6 +7,7 @@ import { getDistanceBetweenTwoPoints } from '../utils/getDistanceBetweenTwoPoint
 import { registerGame } from '../services/api/game';
 import { useSession } from 'next-auth/client';
 import { getPlayerScore } from '../utils/getPlayerScore';
+import { getLevelTime } from '../utils/getLevelTime';
 
 type GeoPoint = {
   lat: number;
@@ -105,7 +106,7 @@ export function GameProvider({ children }: GameProviderProps) {
       setDistance(distanceInMeters);
       setElapsedTime(formatedElapsedTime);
 
-      const elapseTime = differenceInSeconds(endGameTime, startGameTime);
+      const elapseTime = guessPoint?.lat ? differenceInSeconds(endGameTime, startGameTime) : getLevelTime(difficultyLevel);
 
       const guessScore = getPlayerScore(distanceInMeters, difficultyLevel, elapseTime);
 

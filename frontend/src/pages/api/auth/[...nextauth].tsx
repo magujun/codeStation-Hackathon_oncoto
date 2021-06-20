@@ -25,7 +25,7 @@ export default NextAuth({
           getPlayerId(session.user.email, 'google'),
         );
 
-        return { ...session, playerId: player.data.id };
+        return { ...session, playerId: player?.data.id };
       } catch {
         return { ...session, playerId: null };
       }
