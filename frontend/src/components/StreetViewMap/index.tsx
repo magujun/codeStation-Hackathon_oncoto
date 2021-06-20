@@ -37,7 +37,6 @@ export const StreetViewMap = memo(({ googleMapsApiKey, startPoint }: StreetMapPr
           clickableIcons: false,
           disableDefaultUI: true,
         }}
-        onClick={e => console.log(e)}
       >
         <StreetViewPanorama
           options={{

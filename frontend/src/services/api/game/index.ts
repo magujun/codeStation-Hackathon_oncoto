@@ -1,4 +1,4 @@
-import { api } from '../api';
+import { api } from '..';
 
 type DifficultyLevel = 'easy' | 'medium' | 'hard';
 

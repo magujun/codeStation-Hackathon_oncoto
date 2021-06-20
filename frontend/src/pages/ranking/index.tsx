@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Box, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../utils/withSSRAuth';
-import { getRanking, OutRanking } from '../../services/ranking';
+import { getRanking, OutRanking } from '../../services/api/ranking';
 import { useQuery } from 'react-query';
 import { Container } from '../../components/Layout/Container';
 import { Datagrid } from '../../components/Datagrid';
