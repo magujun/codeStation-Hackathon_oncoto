@@ -160,6 +160,7 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
                 borderTopRightRadius={0}
                 disabled={!guess?.lat}
                 onClick={handleConfirmarClick}
+                isPrimary
               >
                 Confirmar
               </Button>
@@ -172,9 +173,10 @@ const Game = ({ googleMapsApiKey, startPoint }: GameProps) => {
               zIndex="10"
               onClick={handleGuessButtonClick}
               iconSpacing="2"
+              display="flex"
               alignItems="center"
             >
-              Advinhar
+              Já sei o lugar
             </Button>
           </Box>
         </Box>

@@ -86,17 +86,22 @@ const Dashboard = () => {
       </Head>
       <main>
         <Container mt="4">
-          <Button mb="8" onClick={() => onStartNewGame('easy')}>
-            Fácil
-          </Button>
-          <Button mb="8" onClick={() => onStartNewGame('medium')}>
-            Médio
-          </Button>
-          <Button mb="8" onClick={() => onStartNewGame('hard')}>
-            Difícil
-          </Button>
+          <Text fontSize="4xl" fontWeight={500} mb="4">
+            Jogar
+          </Text>
+          <Box mb="4" display="flex" justifyContent="space-between">
+            <Button mb="8" onClick={() => onStartNewGame('easy')}>
+              Fácil
+            </Button>
+            <Button mb="8" onClick={() => onStartNewGame('medium')}>
+              Médio
+            </Button>
+            <Button mb="8" onClick={() => onStartNewGame('hard')}>
+              Difícil
+            </Button>
+          </Box>
 
-          <Text fontSize="4xl" fontWeight={500}>
+          <Text fontSize="4xl" fontWeight={500} mb="4">
             Histórico de Partidas
           </Text>
 
