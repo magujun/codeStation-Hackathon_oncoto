@@ -122,7 +122,7 @@ export function GameProvider({ children }: GameProviderProps) {
       registerGame(data);
 
       // limpando dificuldade
-      setDifficultyLevel(null);
+      setDifficultyLevel("easy");
 
       Router.push('/games/summary');
     },
