@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Box, Text, Flex, VStack } from '@chakra-ui/react';
+import { Box, Text, Flex, VStack, useBreakpointValue } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 import { withSSRAuth } from '../../utils/withSSRAuth';
@@ -16,6 +16,7 @@ import {
 import { useMemo } from 'react';
 import { NewGame } from '../../components/NewGame';
 import { getFormatedTime } from '../../utils/getFormatedTime';
+import { GameHistoryDataCard } from '../../components/DataCard/GameHistoryDataCard';
 
 const columns: DatagridColumn[] = [
   {
@@ -54,6 +55,10 @@ type DashboardProps = {
 };
 
 const Dashboard = ({ data }: DashboardProps) => {
+  const isTabletOrWider = useBreakpointValue({
+    base: false,
+    sm: true,
+  });
   const pageSize = 5;
   const [page, setPage] = useState(1);
 
@@ -116,19 +121,27 @@ const Dashboard = ({ data }: DashboardProps) => {
             </Flex>
 
             <VStack w="100%" alignItems="center" justifyContent="center">
-              <Text fontSize="4xl" fontWeight={500} alignSelf="flex-start">
+              <Text fontSize={{ base: '2xl', md: '4xl' }} fontWeight={500} alignSelf="flex-start">
                 Histórico de Partidas
               </Text>
 
               {rows?.length > 0 ? (
                 <Box w="100%">
-                  <Datagrid
-                    columns={columns}
-                    rows={rows ?? []}
-                    paddingCell={5}
-                    columnId="id"
-                    templateColumns={'0.15fr 0.85fr'}
-                  />
+                  {isTabletOrWider ? (
+                    <Datagrid
+                      columns={columns}
+                      rows={rows ?? []}
+                      paddingCell={5}
+                      columnId="id"
+                      templateColumns={'0.15fr 0.85fr'}
+                    />
+                  ) : (
+                    <GameHistoryDataCard
+                      rows={rows ?? []}
+                      columnId="id"
+                      templateColumns={'1fr'}
+                    />
+                  )}
                   <Pagination
                     totalCountOfRegisters={data?.length ?? 0}
                     onPageChange={(page: number) => setPage(page)}
