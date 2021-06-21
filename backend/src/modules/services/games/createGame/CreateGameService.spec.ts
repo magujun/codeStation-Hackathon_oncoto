@@ -6,28 +6,21 @@ import { AppResponse } from '@src/shared/responses/AppResponse';
 let createGameService: CreateGameService;
 let gamesRepositoryInMemory: GamesRepositoryInMemory;
 
-describe('Create Game', () => {
+describe('Create a game record', () => {
 	beforeEach(() => {
 		gamesRepositoryInMemory = new GamesRepositoryInMemory();
 		createGameService = new CreateGameService(gamesRepositoryInMemory);
 	});
-	it('Should be able to create a new game', async () => {
+	it('Should be able to create a new game record', async () => {
 		const game = await createGameService.execute({
-			gameId: 'testGame',
-			provider: 'testProvider',
+			player_id: 'testPlayer',
+			level: 'testLevel',
+			elapsedTime: 0,
+			locationOrigin: '1,1',
+			locationMarked: '2,1',
+			distance: 0,
+			score: 0,
 		});
 		expect(game).toHaveProperty('id');
-	});
-	it('Should not be able to create a game if gameId already exists', () => {
-		expect(async () => {
-			await createGameService.execute({
-				gameId: 'testGame',
-				provider: 'testProvider',
-			});
-			await createGameService.execute({
-				gameId: 'testGame',
-				provider: 'testProvider',
-			});
-		}).rejects.toBeInstanceOf(AppResponse);
 	});
 });
