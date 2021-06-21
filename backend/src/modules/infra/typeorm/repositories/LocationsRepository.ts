@@ -10,6 +10,7 @@ class LocationsRepository implements ILocationsRepository {
 	constructor() {
 		this.repository = getRepository(Location);
 	}
+
 	async create({
 		plus_code,
 		coordinates,

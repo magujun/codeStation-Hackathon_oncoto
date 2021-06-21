@@ -7,7 +7,7 @@ let createPlayerService: CreatePlayerService;
 let playersRepositoryInMemory: PlayersRepositoryInMemory;
 
 describe('Create Player', () => {
-	beforeEach(() => {
+	beforeEach(async () => {
 		playersRepositoryInMemory = new PlayersRepositoryInMemory();
 		createPlayerService = new CreatePlayerService(playersRepositoryInMemory);
 	});

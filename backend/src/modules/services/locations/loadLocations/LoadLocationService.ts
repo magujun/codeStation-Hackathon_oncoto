@@ -1,4 +1,4 @@
-import { ILoadLocationResponseDTO } from '@src/modules/infra/DTOs/ILoadLocationDTO';
+import { ILoadLocationResponseDTO } from '@src/modules/infra/DTOs/ILoadLocationResponseDTO';
 import { LoadLocationMap } from '@src/modules/infra/mapper/loadLocationMap';
 import { ILocationsRepository } from '@src/modules/infra/typeorm/repositories/ILocationsRepository';
 import { inject, injectable } from 'tsyringe';

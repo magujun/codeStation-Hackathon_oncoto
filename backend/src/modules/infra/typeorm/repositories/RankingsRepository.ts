@@ -29,11 +29,11 @@ class RankingsRepository implements IRankingsRepository {
 		avatar,
 	}: IRankingDTO): Promise<void> {
 		const currentRanking = await this.repository.find();
-		console.log('Current repository ranking: ', currentRanking);
+		// console.log('Current repository ranking: ', currentRanking);
 		const [playerData] = await this.playerRepository.findByIds([player_id], {
 			select: ['avatar', 'nick'],
 		});
-		console.log('playerData repository ranking: ', playerData);
+		// console.log('playerData repository ranking: ', playerData);
 		if (currentRanking.length < 2) {
 			const ranking = this.repository.create({
 				game_id,
@@ -48,7 +48,7 @@ class RankingsRepository implements IRankingsRepository {
 			const sortedRanking = currentRanking.sort(
 				(element1, element2) => element2.score - element1.score
 			);
-			console.log('Sorted repository ranking: ', sortedRanking);
+			// console.log('Sorted repository ranking: ', sortedRanking);
 			if (sortedRanking.length < 50) {
 				const ranking = this.repository.create({
 					game_id,

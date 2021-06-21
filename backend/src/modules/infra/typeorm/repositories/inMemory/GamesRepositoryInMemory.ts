@@ -2,14 +2,10 @@ import { getRepository, Repository } from 'typeorm';
 
 import { ICreateGameDTO } from '@src/modules/infra/DTOs/ICreateGameDTO';
 import { IGamesRepository } from '@src/modules/infra/typeorm/repositories/IGamesRepository';
-import { Game } from '../entities/Game';
+import { Game } from '../../entities/Game';
 
-class GamesRepository implements IGamesRepository {
-	private repository: Repository<Game>;
-
-	constructor() {
-		this.repository = getRepository(Game);
-	}
+class GamesRepositoryInMemory implements IGamesRepository {
+	games: Game[] = [];
 
 	async create({
 		player_id,
@@ -20,7 +16,8 @@ class GamesRepository implements IGamesRepository {
 		distance,
 		score,
 	}: ICreateGameDTO): Promise<Game> {
-		const game = this.repository.create({
+		const game = new Game();
+		Object.assign(game, {
 			player_id,
 			level,
 			elapsedTime,
@@ -29,18 +26,16 @@ class GamesRepository implements IGamesRepository {
 			distance,
 			score,
 		});
-		return await this.repository.save(game);
-	}
-
-	async findGameById(id: string): Promise<Game> {
-		const game = await this.repository.findOne(id);
+		this.games.push(game);
 		return game;
 	}
 
-	// SELECT * FROM games
+	async findGameById(id: string): Promise<Game> {
+		return this.games.find((game) => game.id === id);
+	}
+
 	async list(): Promise<Game[]> {
-		const games = await this.repository.find();
-		return games;
+		return this.games;
 	}
 }
-export { GamesRepository };
+export { GamesRepositoryInMemory };

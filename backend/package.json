@@ -14,7 +14,7 @@
 		"docker:stop": "docker compose stop",
 		"typeorm": "tsnd -r --notify tsconfig-paths/register ./node_modules/typeorm/cli",
 		"typeorm:migration": "yarn typeorm migration:run ",
-		"test": "NODE_ENV=test jest -i --detectOpenHandles --forceExit -runInBand"
+		"test": "NODE_ENV=test jest -i --verbose --detectOpenHandles --forceExit -runInBand"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
