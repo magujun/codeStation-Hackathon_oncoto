@@ -39,12 +39,6 @@ export default function Home() {
                 bg="white.200"
                 w="100%"
                 color="blue.800"
-                _hover={{
-                  color: 'white.200',
-                  bg: 'blue.800',
-                  borderColor: 'white.200',
-                  border: '1px solid',
-                }}
                 onClick={() => signIn('google')}
                 rightIcon={<FaGoogle />}
               >

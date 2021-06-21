@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@chakra-ui/react';
-import { Cell } from './Cell';
+import { Grid } from '@chakra-ui/react';
 import { DatagridColumn, DatagridRow } from './Types';
 import { Row } from './Row';
 

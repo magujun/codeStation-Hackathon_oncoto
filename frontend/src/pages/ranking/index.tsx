@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useBreakpointValue } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { getRanking, OutRanking } from '../../services/api/ranking';
@@ -10,6 +10,7 @@ import { Datagrid } from '../../components/Datagrid';
 import { DatagridColumn } from '../../components/Datagrid/Types';
 import { Pagination } from '../../components/Pagination';
 import { Avatar } from '../../components/Avatar';
+import { RankingDataCard } from '../../components/DataCard/RankingDataCard';
 
 const columns: DatagridColumn[] = [
   {
@@ -48,6 +49,11 @@ type RankingProps = {
 };
 
 const Ranking = ({ data }: RankingProps) => {
+  const isTabletOrWider = useBreakpointValue({
+    base: false,
+    sm: true,
+  });
+
   const pageSize = 5;
   const [page, setPage] = useState(1);
 
@@ -99,14 +105,22 @@ const Ranking = ({ data }: RankingProps) => {
             Ranking
           </Text>
           {rows?.length > 0 ? (
-            <Box w="100%">
-              <Datagrid
-                columns={columns}
-                rows={rows ?? []}
-                paddingCell={5}
-                columnId="position"
-                templateColumns={'0.10fr 0.90fr'}
-              />
+            <Box w="100%" pt={{ base: '4', md: "0" }}>
+              {isTabletOrWider ? (
+                <Datagrid
+                  columns={columns}
+                  rows={rows ?? []}
+                  paddingCell={5}
+                  columnId="position"
+                  templateColumns={'0.10fr 0.90fr'}
+                />
+              ) : (
+                <RankingDataCard
+                  rows={rows ?? []}
+                  columnId="position"
+                  templateColumns={'1fr'}
+                />
+              )}
               <Pagination
                 totalCountOfRegisters={data.length ?? 0}
                 onPageChange={(page: number) => setPage(page)}
