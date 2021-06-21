@@ -16,7 +16,6 @@ class UpdateRankingService {
 		score,
 		nick,
 		avatar,
-		position,
 	}: IRankingDTO): Promise<void> {
 		await this.rankingsRepository.update({
 			game_id,
@@ -25,7 +24,6 @@ class UpdateRankingService {
 			score,
 			nick,
 			avatar,
-			position,
 		});
 	}
 }

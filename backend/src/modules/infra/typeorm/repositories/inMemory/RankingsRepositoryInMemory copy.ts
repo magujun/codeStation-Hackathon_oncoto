@@ -11,14 +11,9 @@ interface PlayerData {
 	avatar: string;
 }
 
-class RankingsRepository implements IRankingsRepository {
-	private repository: Repository<Ranking>;
-	private playerRepository: Repository<Player>;
-
-	constructor() {
-		this.repository = getRepository(Ranking);
-		this.playerRepository = getRepository(Player);
-	}
+class RankingsRepositoryInMemory implements IRankingsRepository {
+	rankings: Ranking[] = [];
+	rankings: Ranking[] = [];
 
 	async update({
 		game_id,
@@ -30,12 +25,15 @@ class RankingsRepository implements IRankingsRepository {
 	}: IRankingDTO): Promise<void> {
 		const currentRanking = await this.repository.find();
 		// console.log('Current repository ranking: ', currentRanking);
-		const [playerData] = await this.playerRepository.findByIds([player_id], {
-			select: ['avatar', 'nick'],
-		});
-		// console.log('playerData repository ranking: ', playerData);
+		const [playerData] = await this.playerRepositoryInMemory.findByIds(
+			[player_id],
+			{
+				select: ['avatar', 'nick'],
+			}
+		);
+		// console.log('playerData repositoryInMemory ranking: ', playerData);
 		if (currentRanking.length < 2) {
-			const ranking = this.repository.create({
+			const ranking = this.repositoryInMemory.create({
 				game_id,
 				player_id,
 				level,
@@ -43,14 +41,14 @@ class RankingsRepository implements IRankingsRepository {
 				nick: playerData.nick,
 				avatar: playerData.avatar,
 			});
-			await this.repository.save(ranking);
+			await this.repositoryInMemory.save(ranking);
 		} else {
 			const sortedRanking = currentRanking.sort(
 				(element1, element2) => element2.score - element1.score
 			);
-			// console.log('Sorted repository ranking: ', sortedRanking);
+			console.log('Sorted repositoryInMemory ranking: ', sortedRanking);
 			if (sortedRanking.length < 50) {
-				const ranking = this.repository.create({
+				const ranking = this.repositoryInMemory.create({
 					game_id,
 					player_id,
 					level,
@@ -58,10 +56,10 @@ class RankingsRepository implements IRankingsRepository {
 					nick: playerData.nick,
 					avatar: playerData.avatar,
 				});
-				await this.repository.save(ranking);
+				await this.repositoryInMemory.save(ranking);
 			} else if (score > sortedRanking[-1].score) {
-				this.repository.delete(sortedRanking[-1].id);
-				const ranking = this.repository.create({
+				this.repositoryInMemory.delete(sortedRanking[-1].id);
+				const ranking = this.repositoryInMemory.create({
 					game_id,
 					player_id,
 					level,
@@ -69,17 +67,17 @@ class RankingsRepository implements IRankingsRepository {
 					nick: playerData.nick,
 					avatar: playerData.avatar,
 				});
-				await this.repository.save(ranking);
+				await this.repositoryInMemory.save(ranking);
 			}
 		}
 	}
 	// SELECT * FROM rankings
 	async list(): Promise<IRankingResponseDTO[]> {
-		const rankings = await this.repository.find();
+		const rankings = await this.repositoryInMemory.find();
 		const sortedRanking = rankings
 			.sort((element1, element2) => element2.score - element1.score)
 			.map((element, index) => Object.assign(element, { position: index + 1 }));
 		return sortedRanking;
 	}
 }
-export { RankingsRepository };
+export { RankingsRepositoryInMemory };
